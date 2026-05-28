@@ -1,6 +1,6 @@
 {
   "name": "@bwo-ui/svelte",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Svelte actions for GSAP-powered motion: splitReveal, magnetic, marquee, flipList.",
   "license": "MIT",
   "author": "BOOGIE WOOGIE S.R.L. <contact@boogie.ro>",

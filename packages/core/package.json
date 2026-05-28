@@ -1,6 +1,6 @@
 {
   "name": "@bwo-ui/core",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Framework-agnostic GSAP motion factories used by @bwo-ui/{react,vue,svelte}.",
   "license": "MIT",
   "author": "BOOGIE WOOGIE S.R.L. <contact@boogie.ro>",
