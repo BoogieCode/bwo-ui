@@ -1,0 +1,24 @@
+# deps
+node_modules/
+.pnpm-store/
+
+# build
+dist/
+.turbo/
+.next/
+out/
+
+# tooling
+*.log
+.DS_Store
+.env
+.env.local
+.env.*.local
+
+# editor
+.vscode/
+.idea/
+
+# tests
+coverage/
+.npmrc-publish

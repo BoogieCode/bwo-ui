@@ -1,0 +1,31 @@
+import { defineConfig } from 'tsup';
+
+export default defineConfig({
+  entry: ['src/index.ts'],
+  format: ['esm', 'cjs'],
+  dts: true,
+  clean: true,
+  sourcemap: true,
+  treeshake: true,
+  target: 'es2022',
+  external: [
+    'react',
+    'react-dom',
+    'gsap',
+    '@bwo-ui/core',
+    '@radix-ui/react-accordion',
+    '@radix-ui/react-avatar',
+    '@radix-ui/react-checkbox',
+    '@radix-ui/react-dialog',
+    '@radix-ui/react-popover',
+    '@radix-ui/react-progress',
+    '@radix-ui/react-radio-group',
+    '@radix-ui/react-select',
+    '@radix-ui/react-slider',
+    '@radix-ui/react-switch',
+    '@radix-ui/react-tabs',
+    '@radix-ui/react-toast',
+    '@radix-ui/react-tooltip',
+  ],
+  banner: { js: "'use client';" },
+});
