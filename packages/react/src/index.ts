@@ -21,6 +21,18 @@ export { Blur, type BlurProps } from './Blur';
 export { Pin, type PinProps } from './Pin';
 export { useMotion } from './use-motion';
 export { type Radius } from './utils';
+export { Glow, type GlowProps } from './Glow';
+export { Lean, type LeanProps } from './Lean';
+export { MediaZoom, type MediaZoomProps } from './MediaZoom';
+export { BootScreen, type BootScreenProps } from './BootScreen';
+export {
+  PreanimateProvider,
+  Preanimate,
+  usePreanimate,
+  type PreanimateProviderProps,
+  type PreanimateProps,
+} from './Preanimate';
+export { Typewriter, type TypewriterProps, type TypewriterLine } from './Typewriter';
 
 // Layout / helpers
 export {
@@ -66,8 +78,16 @@ export {
   CardTitle,
   CardDescription,
   CardFooter,
+  CardMedia,
+  CardTab,
+  CardEyebrow,
+  CardName,
+  CardCaption,
   type CardProps,
+  type CardMediaProps,
 } from './Card';
+export { AppShell, BrandMark, type AppShellProps, type BrandMarkProps } from './AppShell';
+export { Spin, Pulse, type SpinProps, type PulseProps } from './Motion';
 export { Avatar, type AvatarProps, type AvatarSize } from './Avatar';
 export { Skeleton, type SkeletonProps } from './Skeleton';
 export { Progress, type ProgressProps } from './Progress';

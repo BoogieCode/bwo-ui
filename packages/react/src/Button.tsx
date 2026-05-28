@@ -8,7 +8,14 @@ import {
 } from 'react';
 import { cn, type Radius } from './utils';
 
-export type ButtonVariant = 'primary' | 'green' | 'yellow' | 'ghost' | 'outline' | 'solid';
+export type ButtonVariant =
+  | 'primary'
+  | 'green'
+  | 'yellow'
+  | 'ghost'
+  | 'outline'
+  | 'solid'
+  | 'cta';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -22,6 +29,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   leftIcon?: ReactNode;
   /** Icon (or any node) placed after the label. */
   rightIcon?: ReactNode;
+  /**
+   * When true, wraps `leftIcon` / `rightIcon` in a circular badge (matches
+   * the boogie.ro CTA style — a small pill on the left of the label).
+   */
+  iconBadge?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
@@ -32,6 +44,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     loading,
     leftIcon,
     rightIcon,
+    iconBadge,
     disabled,
     className,
     children,
@@ -39,6 +52,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   },
   ref,
 ) {
+  const iconClass = iconBadge ? 'bwo-btn-icon-badge' : 'bwo-btn-icon';
   return (
     <button
       ref={ref}
@@ -53,9 +67,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       )}
       {...props}
     >
-      {leftIcon && <span className="bwo-btn-icon">{leftIcon}</span>}
+      {leftIcon && <span className={iconClass}>{leftIcon}</span>}
       {children}
-      {rightIcon && <span className="bwo-btn-icon">{rightIcon}</span>}
+      {rightIcon && <span className={iconClass}>{rightIcon}</span>}
     </button>
   );
 });

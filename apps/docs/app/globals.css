@@ -119,9 +119,10 @@
   --bwo-radius-lg: 20px;       /* badges */
   --bwo-radius-xl: 40px;       /* rounded solids */
 
-  /* Fonts — Inter is the default everywhere; ClashDisplay & MangoGrotesque are opt-in. */
+  /* Fonts — Inter is the default everywhere; the rest are opt-in display faces. */
   --bwo-font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --bwo-font-display: var(--bwo-font-sans);
+  --bwo-font-grotesk: var(--bwo-font-grotesk-loaded), 'Space Grotesk', var(--bwo-font-sans);
   --bwo-font-clash: 'ClashDisplay', var(--bwo-font-sans);
   --bwo-font-mango: 'MangoGrotesque', var(--bwo-font-sans);
   --bwo-font-mono: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
@@ -726,3 +727,574 @@ footer {
   font-size: 18px;
   color: var(--bwo-red);
 }
+
+/* ====== Playground workspace ====== */
+
+.playground-shell {
+  width: 100%;
+  min-height: calc(100vh - 68px);
+}
+.playground-split {
+  display: grid;
+  grid-template-columns: minmax(360px, 460px) 1fr;
+  gap: 0;
+  min-height: calc(100vh - 68px);
+}
+@media (max-width: 960px) {
+  .playground-split { grid-template-columns: 1fr; }
+}
+
+.playground-inventory {
+  border-right: 1px solid var(--bwo-border);
+  padding: 32px 28px 60px;
+  overflow-y: auto;
+  background: var(--bwo-white);
+}
+:root.boo-dark .playground-inventory { background: var(--bwo-black-7); }
+
+.playground-eyebrow {
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bwo-text-body);
+  margin-bottom: 10px;
+  opacity: 0.75;
+}
+.playground-inventory-header h1 {
+  font-size: 32px;
+  margin-bottom: 12px;
+  font-family: var(--bwo-font-display);
+}
+.playground-lead {
+  font-size: 14.5px;
+  color: var(--bwo-text-body);
+  margin-bottom: 18px;
+}
+
+.playground-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--bwo-text-body);
+  margin-bottom: 28px;
+}
+.playground-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--bwo-grey-4);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.playground-progress-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--bwo-red);
+  transition: width 0.3s ease;
+}
+
+.playground-section-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.playground-section {
+  border: 1px solid var(--bwo-border);
+  border-radius: var(--bwo-radius-current);
+  background: var(--bwo-white);
+  transition: var(--bwo-transition);
+}
+:root.boo-dark .playground-section { background: var(--bwo-surface); }
+.playground-section.is-active {
+  border-color: var(--bwo-black);
+  box-shadow: var(--bwo-shadow-sm);
+}
+:root.boo-dark .playground-section.is-active { border-color: var(--bwo-white); }
+.playground-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+.playground-section-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--bwo-black);
+}
+:root.boo-dark .playground-section-label { color: var(--bwo-white); }
+
+.playground-status {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+.playground-status--todo {
+  background: var(--bwo-grey-4);
+  color: var(--bwo-text-body);
+}
+.playground-status--building {
+  background: rgba(255, 196, 70, 0.2);
+  color: #946c0d;
+}
+.playground-status--done {
+  background: rgba(160, 255, 39, 0.25);
+  color: #4d7a00;
+}
+
+.playground-item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.playground-item-list li {
+  display: grid;
+  grid-template-columns: 10px auto 1fr;
+  align-items: baseline;
+  column-gap: 8px;
+  row-gap: 2px;
+  font-size: 12.5px;
+}
+.playground-item-list code {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--bwo-black);
+}
+:root.boo-dark .playground-item-list code { color: var(--bwo-white); }
+.playground-item-list p {
+  grid-column: 2 / -1;
+  margin: 0;
+  color: var(--bwo-text-body);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.playground-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  margin-top: 6px;
+}
+
+.playground-legend {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--bwo-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--bwo-text-body);
+}
+.playground-legend i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.playground-preview {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--bwo-white);
+}
+:root.boo-dark .playground-preview { background: var(--bwo-black-7); }
+.playground-preview-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  font-size: 13px;
+  color: var(--bwo-text-body);
+  background: var(--bwo-grey-4);
+  border-bottom: 1px solid var(--bwo-border);
+}
+:root.boo-dark .playground-preview-toolbar { background: var(--bwo-surface); }
+.playground-preview-toolbar a { font-size: 12.5px; color: var(--bwo-red); }
+.playground-preview-frame {
+  flex: 1;
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+
+/* === boogie.ro rebuild (scoped to .brr) =================================== */
+
+/* Positioned stage so <Glow> can sit behind the AppShell */
+.brr-stage {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 68px);
+  overflow: hidden;
+}
+
+/* Match boogie.ro's typography inside the rebuild: Space Grotesk for chrome
+   + headlines, exact .RO 30%-black colour on the brand mark. */
+.brr-stage .bwo-brandmark {
+  font-family: var(--bwo-font-grotesk);
+}
+.brr-stage .bwo-brandmark-tld {
+  color: rgba(0, 0, 0, 0.3);
+  opacity: 1;
+}
+:root.boo-dark .brr-stage .bwo-brandmark-tld {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Match boogie.ro's exact card border + shadow values (the library defaults
+   are subtler; boogie.ro tiles use a slightly darker 1px border and a more
+   visible drop shadow that pops on hover). */
+.brr-stage .bwo-card {
+  border-color: rgba(0, 0, 0, 0.10);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.brr-stage .bwo-card--interactive:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+  transform: translateY(-2px);
+}
+:root.boo-dark .brr-stage .bwo-card {
+  border-color: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.brr-stage .bwo-app-shell {
+  background: transparent;
+  height: calc(100vh - 68px);
+}
+.brr-stage > .bwo-glow {
+  /* Force the gradient backdrop to fill the entire playground viewport. */
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.brr-stage > .bwo-app-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.brr {
+  margin: 0 auto;
+  padding: 28px 32px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+.brr-section { scroll-margin-top: 12px; }
+
+/* Inline skeleton placeholders (Preanimate swap) — must match the real
+   content's layout dimensions so the handoff is seamless. */
+.brr-title-stage { position: relative; min-height: clamp(180px, 21vw, 232px); }
+.brr-title-skel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.brr-showcase-skel {
+  /* inherits .brr-grid layout: 2 cols, 10px gap, align: start */
+}
+.brr-showcase-skel-card {
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bwo-white);
+  border: 1px solid var(--bwo-border);
+  box-shadow: var(--bwo-shadow-sm);
+}
+.brr-showcase-skel-tab {
+  background: var(--bwo-white);
+  padding: 10px 10px 12px;
+  border-top: 1px solid var(--bwo-border);
+}
+:root.boo-dark .brr-showcase-skel-card,
+:root.boo-dark .brr-showcase-skel-tab { background: var(--bwo-surface); }
+
+/* Boot screen content (skeleton scaffold) — kept for the standalone
+   BootScreen primitive used outside this rebuild. */
+.brr-boot-top {
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 32px 22px;
+  border-bottom: 1px solid var(--bwo-border);
+  flex-shrink: 0;
+}
+.brr-boot-content { flex: 1; overflow: hidden; padding: 25px 32px 32px; }
+.brr-boot-title { width: min(620px, 100%); }
+.brr-boot-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 28px;
+  padding-bottom: 16px;
+}
+.brr-boot-card {
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bwo-white);
+  border: 1px solid var(--bwo-border);
+  box-shadow: var(--bwo-shadow-sm);
+}
+.brr-boot-card-tab {
+  background: var(--bwo-white);
+  padding: 10px 10px 12px;
+  border-top: 1px solid var(--bwo-border);
+}
+@media (max-width: 767px) {
+  .brr-boot-top, .brr-boot-content { padding-left: 16px; padding-right: 16px; }
+}
+
+.brr-eyebrow {
+  font-size: 14px;
+  color: var(--bwo-text-body);
+  margin-bottom: 14px;
+  opacity: 0.7;
+}
+.brr-hero-title {
+  font-family: var(--bwo-font-display);
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.015em;
+  color: var(--bwo-black);
+  margin: 0 0 18px;
+}
+:root.boo-dark .brr-hero-title { color: var(--bwo-white); }
+.brr-line { display: inline-block; position: relative; }
+.brr-line--accent { color: var(--bwo-red); }
+.brr-sub {
+  font-size: 16px;
+  color: var(--bwo-text-body);
+  margin-bottom: 22px;
+}
+.brr-ctas { display: inline-flex; flex-wrap: wrap; gap: 10px; }
+
+.brr-h2 {
+  font-family: var(--bwo-font-display);
+  font-size: clamp(24px, 3.4vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 22px;
+  color: var(--bwo-black);
+}
+:root.boo-dark .brr-h2 { color: var(--bwo-white); }
+
+/* Showcase grid — fixed 2 columns to match boogie.ro */
+.brr-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+.brr-tile-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, rgba(20, 20, 20, 0.18), rgba(20, 20, 20, 0.42));
+}
+.brr-soon-pill {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: var(--bwo-black) !important;
+  border-color: rgba(255, 255, 255, 0.92) !important;
+  padding: 5px 12px 5px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Promo tile (dark variant) */
+.brr-tile--promo { background: #0c0c12 !important; color: var(--bwo-white); border-color: rgba(255, 255, 255, 0.06) !important; }
+.brr-tile--promo .bwo-card-media { background: transparent !important; }
+.brr-tile-swatch--dark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: transparent;
+}
+.brr-sparkle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: rgba(255, 255, 255, 0.18);
+  animation: brrSparkle 9s linear infinite;
+}
+@keyframes brrSparkle { to { transform: rotate(360deg); } }
+.brr-promo-dots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  flex: 1;
+  align-content: start;
+}
+.brr-promo-dots span {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  opacity: 0.25;
+}
+.brr-promo-body { margin-top: auto; }
+.brr-promo-num {
+  font-family: var(--bwo-font-display);
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--bwo-white);
+  line-height: 1;
+  margin: 0 0 4px;
+}
+.brr-promo-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.35;
+  margin: 0;
+}
+.brr-promo-sub {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  margin-top: 6px;
+}
+.brr-tile-tab--dark { background: #0c0c12; border-top-color: rgba(255, 255, 255, 0.06); }
+.brr-tile-tab--dark .bwo-card-eyebrow { color: rgba(255, 255, 255, 0.25); }
+.brr-tile-tab--dark .bwo-card-name { color: rgba(255, 255, 255, 0.6); }
+.brr-tile-tab--dark .bwo-card-caption { color: rgba(255, 255, 255, 0.25); }
+
+.brr-more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  align-self: flex-start;
+  text-decoration: none;
+  font-family: var(--bwo-font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bwo-text-body);
+  transition: color 0.2s;
+}
+.brr-more-link:hover { color: var(--bwo-red); }
+.brr-more-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--bwo-border);
+  display: grid;
+  place-items: center;
+  transition: var(--bwo-transition);
+}
+.brr-more-link:hover .brr-more-circle {
+  border-color: var(--bwo-red);
+  background: var(--bwo-red);
+  color: var(--bwo-white);
+}
+
+/* Services */
+.brr-services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.brr-service {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px !important;
+}
+.brr-service h3 {
+  font-family: var(--bwo-font-display);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 4px 0 0;
+  color: var(--bwo-black);
+}
+:root.boo-dark .brr-service h3 { color: var(--bwo-white); }
+.brr-service p {
+  font-size: 13.5px;
+  color: var(--bwo-text-body);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Logos */
+.brr-tiny {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bwo-text-body);
+  margin-bottom: 14px;
+  opacity: 0.6;
+}
+.brr-logos { display: flex; gap: 12px; flex-wrap: wrap; }
+.brr-logo-pill {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border: 1px solid var(--bwo-border);
+  border-radius: 9999px;
+  color: var(--bwo-text-body);
+  background: var(--bwo-white);
+}
+:root.boo-dark .brr-logo-pill { background: var(--bwo-surface); color: var(--bwo-text-body); }
+
+/* CTA band */
+.brr-cta {
+  text-align: center;
+  padding: 60px 24px;
+  background: var(--bwo-grey-4);
+  border-radius: var(--bwo-radius-current);
+}
+:root.boo-dark .brr-cta { background: var(--bwo-surface); }
+.brr-cta-title {
+  font-family: var(--bwo-font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 auto 14px;
+  max-width: 22ch;
+  color: var(--bwo-black);
+}
+:root.boo-dark .brr-cta-title { color: var(--bwo-white); }
+.brr-cta-sub {
+  font-size: 15px;
+  color: var(--bwo-text-body);
+  max-width: 52ch;
+  margin: 0 auto 22px;
+}
+
+/* Footer */
+.brr-foot {
+  border-top: 1px solid var(--bwo-border);
+  padding-top: 28px;
+  font-size: 13px;
+  color: var(--bwo-text-body);
+}
+.brr-foot-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.brr-foot-fine { font-size: 12px; opacity: 0.6; margin: 0; }

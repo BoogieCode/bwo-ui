@@ -18,6 +18,8 @@ const ITEMS: Item[] = [
       {
         title: 'Layout',
         links: [
+          { href: '/docs/components/app-shell', label: 'AppShell' },
+          { href: '/docs/components/glow', label: 'Glow' },
           { href: '/docs/components/button', label: 'Button' },
           { href: '/docs/components/icon-button', label: 'IconButton' },
           { href: '/docs/components/card', label: 'Card' },
@@ -64,11 +66,14 @@ const ITEMS: Item[] = [
           { href: '/docs/components/stagger', label: 'Stagger' },
           { href: '/docs/components/scroll-progress', label: 'ScrollProgress' },
           { href: '/docs/components/pin', label: 'Pin' },
+          { href: '/docs/components/preanimate', label: 'Preanimate' },
+          { href: '/docs/components/boot-screen', label: 'BootScreen' },
         ],
       },
       {
         title: 'Text',
         links: [
+          { href: '/docs/components/typewriter', label: 'Typewriter' },
           { href: '/docs/components/scramble-text', label: 'ScrambleText' },
           { href: '/docs/components/text-glitch', label: 'TextGlitch' },
           { href: '/docs/components/gradient-text', label: 'GradientText' },
@@ -81,8 +86,12 @@ const ITEMS: Item[] = [
           { href: '/docs/components/magnetic', label: 'Magnetic' },
           { href: '/docs/components/magnetic-cursor', label: 'MagneticCursor' },
           { href: '/docs/components/tilt', label: 'Tilt' },
+          { href: '/docs/components/lean', label: 'Lean' },
           { href: '/docs/components/spotlight', label: 'Spotlight' },
           { href: '/docs/components/ripple', label: 'Ripple' },
+          { href: '/docs/components/media-zoom', label: 'MediaZoom' },
+          { href: '/docs/components/spin', label: 'Spin' },
+          { href: '/docs/components/pulse', label: 'Pulse' },
           { href: '/docs/components/marquee', label: 'Marquee' },
           { href: '/docs/components/flip-list', label: 'FlipList' },
         ],
@@ -92,6 +101,7 @@ const ITEMS: Item[] = [
   { kind: 'link', href: '/docs/introduction', label: 'Docs' },
   { kind: 'link', href: '/docs/theming', label: 'Theming' },
   { kind: 'link', href: '/docs/typography', label: 'Typography' },
+  { kind: 'link', href: '/playground/boogie-ro', label: 'Playground' },
 ];
 
 export function TopNav() {
