@@ -6,7 +6,16 @@ export { FlipList } from './FlipList';
 export { Parallax } from './Parallax';
 export { ScrambleText } from './ScrambleText';
 export { MagneticCursor } from './MagneticCursor';
+export { Tilt } from './Tilt';
+export { Spotlight } from './Spotlight';
+export { ScrollProgress } from './ScrollProgress';
+export { Stagger } from './Stagger';
+export { GradientText } from './GradientText';
+export { Ripple } from './Ripple';
+export { Blur } from './Blur';
+export { Pin } from './Pin';
 export { useMotion } from './use-motion';
+export { type Radius } from './utils';
 
 // UI components
 export { Button, type ButtonVariant, type ButtonSize } from './Button';
@@ -40,4 +49,12 @@ export type {
   ParallaxOptions,
   ScrambleTextOptions,
   MagneticCursorOptions,
+  TiltOptions,
+  SpotlightOptions,
+  ScrollProgressOptions,
+  StaggerOptions,
+  GradientTextOptions,
+  RippleOptions,
+  BlurOptions,
+  PinOptions,
 } from '@bwo-ui/core';

@@ -1,5 +1,5 @@
 import { defineComponent, h, type PropType } from 'vue';
-import { cn } from './utils';
+import { cn, type Radius } from './utils';
 
 export type BadgeVariant = 'default' | 'solid' | 'green' | 'yellow' | 'red' | 'soft';
 
@@ -8,6 +8,7 @@ export const Badge = defineComponent({
   inheritAttrs: true,
   props: {
     variant: { type: String as PropType<BadgeVariant>, default: 'default' },
+    radius: { type: String as PropType<Radius>, default: undefined },
   },
   setup(props, { slots, attrs }) {
     return () =>
@@ -15,6 +16,7 @@ export const Badge = defineComponent({
         'span',
         {
           ...attrs,
+          'data-radius': props.radius,
           class: cn(
             'bwo-badge',
             props.variant !== 'default' && `bwo-badge--${props.variant}`,

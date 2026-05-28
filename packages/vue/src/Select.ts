@@ -12,7 +12,7 @@ import {
   SelectViewport as RekaSelectViewport,
 } from 'reka-ui';
 import { defineComponent, h, type PropType } from 'vue';
-import { cn } from './utils';
+import { cn, type Radius } from './utils';
 
 type SelectPosition = 'popper' | 'item-aligned';
 
@@ -33,11 +33,18 @@ export const SelectValue = RekaSelectValue;
 export const SelectTrigger = defineComponent({
   name: 'SelectTrigger',
   inheritAttrs: true,
-  setup(_, { slots, attrs }) {
+  props: {
+    radius: { type: String as PropType<Radius>, default: undefined },
+  },
+  setup(props, { slots, attrs }) {
     return () =>
       h(
         RekaSelectTrigger,
-        { ...attrs, class: cn('bwo-select-trigger', attrs.class as string | undefined) },
+        {
+          ...attrs,
+          'data-radius': props.radius,
+          class: cn('bwo-select-trigger', attrs.class as string | undefined),
+        },
         () => [
           slots.default?.(),
           h(RekaSelectIcon, { class: 'bwo-select-icon' }, () =>

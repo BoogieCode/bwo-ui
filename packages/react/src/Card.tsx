@@ -1,19 +1,22 @@
 'use client';
 
 import { forwardRef, type HTMLAttributes } from 'react';
-import { cn } from './utils';
+import { cn, type Radius } from './utils';
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   interactive?: boolean;
+  /** Corner radius preset. Omit to inherit the global default (6px). */
+  radius?: Radius;
 }
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { interactive, className, ...props },
+  { interactive, radius, className, ...props },
   ref,
 ) {
   return (
     <div
       ref={ref}
+      data-radius={radius}
       className={cn('bwo-card', interactive && 'bwo-card--interactive', className)}
       {...props}
     />

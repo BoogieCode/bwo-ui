@@ -1,5 +1,5 @@
 import { defineComponent, h, type PropType } from 'vue';
-import { cn } from './utils';
+import { cn, type Radius } from './utils';
 
 export type ButtonVariant = 'primary' | 'green' | 'yellow' | 'ghost' | 'outline' | 'solid';
 export type ButtonSize = 'sm' | 'md' | 'lg';
@@ -10,6 +10,7 @@ export const Button = defineComponent({
   props: {
     variant: { type: String as PropType<ButtonVariant>, default: 'primary' },
     size: { type: String as PropType<ButtonSize>, default: 'md' },
+    radius: { type: String as PropType<Radius>, default: undefined },
     type: { type: String, default: 'button' },
   },
   setup(props, { slots, attrs }) {
@@ -19,6 +20,7 @@ export const Button = defineComponent({
         {
           ...attrs,
           type: props.type,
+          'data-radius': props.radius,
           class: cn(
             'bwo-btn',
             props.variant !== 'primary' && `bwo-btn--${props.variant}`,

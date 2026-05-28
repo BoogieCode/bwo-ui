@@ -8,8 +8,10 @@ const groups = [
   {
     title: 'Getting started',
     links: [
+      { href: '/docs/introduction', label: 'Introduction' },
       { href: '/docs/installation', label: 'Installation' },
       { href: '/docs/theming', label: 'Theming' },
+      { href: '/docs/typography', label: 'Typography' },
     ],
   },
   {
@@ -22,6 +24,9 @@ const groups = [
       { href: '/docs/components/avatar', label: 'Avatar' },
       { href: '/docs/components/skeleton', label: 'Skeleton' },
       { href: '/docs/components/progress', label: 'Progress' },
+      { href: '/docs/components/alert', label: 'Alert' },
+      { href: '/docs/components/stat', label: 'Stat' },
+      { href: '/docs/components/separator', label: 'Separator' },
     ],
   },
   {
@@ -56,12 +61,28 @@ const groups = [
     title: 'Motion',
     links: [
       { href: '/docs/components/split-reveal', label: 'SplitReveal' },
+      { href: '/docs/components/reveal', label: 'Reveal' },
+      { href: '/docs/components/parallax', label: 'Parallax' },
+      { href: '/docs/components/blur', label: 'Blur' },
+      { href: '/docs/components/stagger', label: 'Stagger' },
+      { href: '/docs/components/scroll-progress', label: 'ScrollProgress' },
+      { href: '/docs/components/pin', label: 'Pin' },
+      { href: '/docs/components/scramble-text', label: 'ScrambleText' },
+      { href: '/docs/components/text-glitch', label: 'TextGlitch' },
+      { href: '/docs/components/gradient-text', label: 'GradientText' },
+      { href: '/docs/components/count-up', label: 'CountUp' },
+    ],
+  },
+  {
+    title: 'Interaction',
+    links: [
       { href: '/docs/components/magnetic', label: 'Magnetic' },
+      { href: '/docs/components/magnetic-cursor', label: 'MagneticCursor' },
+      { href: '/docs/components/tilt', label: 'Tilt' },
+      { href: '/docs/components/spotlight', label: 'Spotlight' },
+      { href: '/docs/components/ripple', label: 'Ripple' },
       { href: '/docs/components/marquee', label: 'Marquee' },
       { href: '/docs/components/flip-list', label: 'FlipList' },
-      { href: '/docs/components/parallax', label: 'Parallax' },
-      { href: '/docs/components/scramble-text', label: 'ScrambleText' },
-      { href: '/docs/components/magnetic-cursor', label: 'MagneticCursor' },
     ],
   },
 ];

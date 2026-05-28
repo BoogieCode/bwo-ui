@@ -74,4 +74,4 @@ export function ThemeToggle() {
  * Inline script that runs BEFORE the React tree hydrates, so the saved theme
  * is applied before first paint (no flash). Drop this in <head>.
  */
-export const NO_FLASH_THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('bwo-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.classList.add('boo-dark');}}catch(e){}})();`;
+export const NO_FLASH_THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('bwo-theme')||'light';if(t==='dark'){document.documentElement.classList.add('boo-dark');}}catch(e){}})();`;

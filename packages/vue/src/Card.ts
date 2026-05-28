@@ -1,16 +1,20 @@
-import { defineComponent, h } from 'vue';
-import { cn } from './utils';
+import { defineComponent, h, type PropType } from 'vue';
+import { cn, type Radius } from './utils';
 
 export const Card = defineComponent({
   name: 'Card',
   inheritAttrs: true,
-  props: { interactive: { type: Boolean, default: false } },
+  props: {
+    interactive: { type: Boolean, default: false },
+    radius: { type: String as PropType<Radius>, default: undefined },
+  },
   setup(props, { slots, attrs }) {
     return () =>
       h(
         'div',
         {
           ...attrs,
+          'data-radius': props.radius,
           class: cn(
             'bwo-card',
             props.interactive && 'bwo-card--interactive',

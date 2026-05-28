@@ -6,6 +6,14 @@ export {
   parallax,
   scrambleText,
   magneticCursor,
+  tilt,
+  spotlight,
+  scrollProgress,
+  stagger,
+  gradientText,
+  ripple,
+  blur,
+  pin,
 } from './actions';
 export type { FlipListActionParams } from './actions';
 
@@ -22,4 +30,12 @@ export type {
   ParallaxOptions,
   ScrambleTextOptions,
   MagneticCursorOptions,
+  TiltOptions,
+  SpotlightOptions,
+  ScrollProgressOptions,
+  StaggerOptions,
+  GradientTextOptions,
+  RippleOptions,
+  BlurOptions,
+  PinOptions,
 } from '@bwo-ui/core';

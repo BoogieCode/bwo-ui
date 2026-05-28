@@ -1,5 +1,5 @@
-import { defineComponent, h } from 'vue';
-import { cn } from './utils';
+import { defineComponent, h, type PropType } from 'vue';
+import { cn, type Radius } from './utils';
 
 export const Input = defineComponent({
   name: 'Input',
@@ -7,6 +7,7 @@ export const Input = defineComponent({
   props: {
     modelValue: { type: [String, Number], default: '' },
     invalid: { type: Boolean, default: false },
+    radius: { type: String as PropType<Radius>, default: undefined },
   },
   emits: ['update:modelValue'],
   setup(props, { attrs, emit }) {
@@ -16,6 +17,7 @@ export const Input = defineComponent({
         class: cn('bwo-input', attrs.class as string | undefined),
         value: props.modelValue,
         'aria-invalid': props.invalid || undefined,
+        'data-radius': props.radius,
         onInput: (e: Event) =>
           emit('update:modelValue', (e.target as HTMLInputElement).value),
       });

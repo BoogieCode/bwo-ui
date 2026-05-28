@@ -5,7 +5,22 @@ export { SplitReveal, type SplitRevealProps } from './SplitReveal';
 export { Magnetic, type MagneticProps } from './Magnetic';
 export { Marquee, type MarqueeProps } from './Marquee';
 export { FlipList, type FlipListProps, type FlipListHandle } from './FlipList';
+export { Parallax, type ParallaxProps } from './Parallax';
+export { Reveal, type RevealProps } from './Reveal';
+export { CountUp, type CountUpProps } from './CountUp';
+export { ScrambleText, type ScrambleTextProps } from './ScrambleText';
+export { TextGlitch, type TextGlitchProps } from './TextGlitch';
+export { MagneticCursor, type MagneticCursorProps } from './MagneticCursor';
+export { Tilt, type TiltProps } from './Tilt';
+export { Spotlight, type SpotlightProps } from './Spotlight';
+export { ScrollProgress, type ScrollProgressProps } from './ScrollProgress';
+export { Stagger, type StaggerProps } from './Stagger';
+export { GradientText, type GradientTextProps } from './GradientText';
+export { Ripple, type RippleProps } from './Ripple';
+export { Blur, type BlurProps } from './Blur';
+export { Pin, type PinProps } from './Pin';
 export { useMotion } from './use-motion';
+export { type Radius } from './utils';
 
 // Layout / helpers
 export {
@@ -34,6 +49,7 @@ export {
   SelectContent,
   SelectItem,
   type SelectItemProps,
+  type SelectTriggerProps,
 } from './Select';
 export { Checkbox, type CheckboxProps } from './Checkbox';
 export { Switch, type SwitchProps } from './Switch';
@@ -55,6 +71,9 @@ export {
 export { Avatar, type AvatarProps, type AvatarSize } from './Avatar';
 export { Skeleton, type SkeletonProps } from './Skeleton';
 export { Progress, type ProgressProps } from './Progress';
+export { Separator, type SeparatorProps } from './Separator';
+export { Alert, type AlertProps, type AlertVariant } from './Alert';
+export { Stat, type StatProps } from './Stat';
 
 // Overlays
 export {
@@ -122,11 +141,18 @@ export type {
   FlipListOptions,
   FlipListInstance,
   ParallaxOptions,
+  RevealOptions,
+  RevealDirection,
+  CountUpOptions,
   ScrambleTextOptions,
+  TextGlitchOptions,
   MagneticCursorOptions,
+  TiltOptions,
+  SpotlightOptions,
+  ScrollProgressOptions,
+  StaggerOptions,
+  GradientTextOptions,
+  RippleOptions,
+  BlurOptions,
+  PinOptions,
 } from '@bwo-ui/core';
-
-// Re-export new motion components (defined below in motion section)
-export { Parallax, type ParallaxProps } from './Parallax';
-export { ScrambleText, type ScrambleTextProps } from './ScrambleText';
-export { MagneticCursor, type MagneticCursorProps } from './MagneticCursor';

@@ -7,19 +7,26 @@ import {
   type ElementRef,
   type ReactNode,
 } from 'react';
-import { cn } from './utils';
+import { cn, type Radius } from './utils';
 
 export const SelectRoot = RadixSelect.Root;
 export const SelectGroup = RadixSelect.Group;
 export const SelectValue = RadixSelect.Value;
 
+export interface SelectTriggerProps
+  extends ComponentPropsWithoutRef<typeof RadixSelect.Trigger> {
+  /** Corner radius preset. Omit to inherit the global default (6px). */
+  radius?: Radius;
+}
+
 export const SelectTrigger = forwardRef<
   ElementRef<typeof RadixSelect.Trigger>,
-  ComponentPropsWithoutRef<typeof RadixSelect.Trigger>
->(function SelectTrigger({ className, children, ...props }, ref) {
+  SelectTriggerProps
+>(function SelectTrigger({ className, children, radius, ...props }, ref) {
   return (
     <RadixSelect.Trigger
       ref={ref}
+      data-radius={radius}
       className={cn('bwo-select-trigger', className)}
       {...props}
     >

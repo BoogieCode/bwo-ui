@@ -62,7 +62,7 @@ export function HeroDemo() {
       </div>
 
       <div style={{ marginTop: 56, marginInline: 'calc(50% - 50vw)' }}>
-        <Marquee speed={70} draggable={false}>
+        <Marquee speed={28} draggable={false}>
           {PILLS.map((p) => (
             <span key={p} className="marquee-pill">
               {p}
