@@ -14,7 +14,7 @@ export function ScrambleTextDemo() {
         duration={1.6}
         style={{ fontSize: 32, letterSpacing: '-0.02em', textAlign: 'center' }}
       >
-        Motion that reads as craft.
+        Your shortcut to a beautiful UI.
       </ScrambleText>
       <ScrambleText
         trigger="hover"

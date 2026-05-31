@@ -148,6 +148,150 @@ export {
   AccordionTrigger,
   AccordionContent,
 } from './Accordion';
+export {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  type BreadcrumbProps,
+  type BreadcrumbItemProps,
+  type BreadcrumbLinkProps,
+  type BreadcrumbSeparatorProps,
+} from './Breadcrumb';
+export { Pagination, type PaginationProps } from './Pagination';
+
+// Multi-step forms
+export {
+  Stepper,
+  Step,
+  StepConnector,
+  type StepperProps,
+  type StepProps,
+  type StepConnectorProps,
+  type StepperOrientation,
+  type StepStatus,
+} from './Stepper';
+
+// Overlays — Sheet (drawer)
+export {
+  Sheet,
+  SheetRoot,
+  SheetTrigger,
+  SheetClose,
+  SheetOverlay,
+  SheetContent,
+  SheetTitle,
+  SheetDescription,
+  SheetHeader,
+  SheetFooter,
+  type SheetContentProps,
+  type SheetSide,
+} from './Sheet';
+
+// Menus
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
+  type DropdownMenuProps,
+  type DropdownMenuTriggerProps,
+  type DropdownMenuContentProps,
+  type DropdownMenuItemProps,
+} from './DropdownMenu';
+export {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuLabel,
+  type ContextMenuProps,
+  type ContextMenuTriggerProps,
+  type ContextMenuContentProps,
+  type ContextMenuItemProps,
+} from './ContextMenu';
+
+// Search / autocomplete
+export { Combobox, type ComboboxProps, type ComboboxOption } from './Combobox';
+export {
+  Command,
+  CommandDialog,
+  type CommandProps,
+  type CommandItemEntry,
+  type CommandDialogProps,
+} from './Command';
+
+// Date / calendar
+export {
+  Calendar,
+  type CalendarProps,
+  type CalendarMode,
+  type DateRange,
+} from './Calendar';
+export { DatePicker, type DatePickerProps } from './DatePicker';
+
+// Data display
+export {
+  DataTable,
+  type DataTableProps,
+  type DataTableColumn,
+  type SortDirection,
+  type SortState,
+} from './DataTable';
+
+// Timeline
+export {
+  Timeline,
+  TimelineItem,
+  type TimelineProps,
+  type TimelineItemProps,
+  type TimelineOrientation,
+  type TimelineItemStatus,
+} from './Timeline';
+
+// Layout — Grid primitives
+export {
+  SimpleGrid,
+  Grid,
+  GridItem,
+  type SimpleGridProps,
+  type GridProps,
+  type GridItemProps,
+} from './Grid';
+
+// Floating action button
+export {
+  FloatingActionButton,
+  FAB,
+  type FloatingActionButtonProps,
+  type FabSize,
+  type FabVariant,
+  type FabPosition,
+} from './FloatingActionButton';
+
+// Bottom navigation
+export {
+  BottomNavigation,
+  BottomNavigationItem,
+  type BottomNavigationProps,
+  type BottomNavigationItemProps,
+  type BottomNavigationVariant,
+} from './BottomNavigation';
+
+// Carousel
+export {
+  Carousel,
+  CarouselItem,
+  type CarouselProps,
+  type CarouselItemProps,
+  type CarouselHandle,
+} from './Carousel';
+
+// Numeric input
+export { NumberInput, type NumberInputProps } from './NumberInput';
 
 // Re-export core types
 export type {

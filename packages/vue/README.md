@@ -21,7 +21,7 @@ const shuffle = () => (items.value = [...items.value].sort(() => Math.random() -
 
 <template>
   <SplitReveal type="words,chars" :stagger="0.02">
-    <h1>Motion that reads as craft.</h1>
+    <h1>Your shortcut to a beautiful UI.</h1>
   </SplitReveal>
 
   <Magnetic :strength="0.4">

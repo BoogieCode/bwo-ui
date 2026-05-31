@@ -93,7 +93,7 @@ export default function IntroductionPage() {
         <code>{`import { SplitReveal, Magnetic, Button } from '@bwo-ui/react';
 
 <SplitReveal as="h1" type="words" stagger={0.04}>
-  Motion that reads as craft.
+  The shortcut to beautiful UI.
 </SplitReveal>
 
 <Magnetic strength={0.4}>

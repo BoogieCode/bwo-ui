@@ -19,5 +19,3 @@ export function registerPlugins(): void {
   gsap.registerPlugin(ScrollTrigger, SplitText, Draggable, InertiaPlugin, Observer, Flip);
   registered = true;
 }
-
-export { gsap, ScrollTrigger, SplitText, Draggable, InertiaPlugin, Observer, Flip };

@@ -27,7 +27,7 @@ export function HeroDemo() {
         duration={0.7}
         from={{ y: 40, opacity: 0 }}
       >
-        Motion that reads as <span className="accent">craft</span>.
+        Your shortcut to a beautiful <span className="accent">UI</span>.
       </SplitReveal>
 
       <div

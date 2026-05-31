@@ -1,4 +1,6 @@
-import { gsap, registerPlugins, ScrollTrigger } from '../register';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
 import { isBrowser, resolveTarget } from '../types';
 

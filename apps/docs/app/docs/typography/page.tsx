@@ -85,7 +85,7 @@ export default function TypographyPage() {
                 letterSpacing: '-0.02em',
               }}
             >
-              Motion that reads as craft.
+              Your shortcut to a beautiful UI.
             </span>
           </div>
         ))}
@@ -122,7 +122,7 @@ export default function TypographyPage() {
                 letterSpacing: '-0.01em',
               }}
             >
-              Motion that reads as craft.
+              Your shortcut to a beautiful UI.
             </span>
           </div>
         ))}

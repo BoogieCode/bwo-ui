@@ -19,8 +19,11 @@ const groups = [
     links: [
       { href: '/docs/components/app-shell', label: 'AppShell' },
       { href: '/docs/components/glow', label: 'Glow' },
+      { href: '/docs/components/simple-grid', label: 'SimpleGrid' },
+      { href: '/docs/components/grid', label: 'Grid' },
       { href: '/docs/components/button', label: 'Button' },
       { href: '/docs/components/icon-button', label: 'IconButton' },
+      { href: '/docs/components/floating-action-button', label: 'FloatingActionButton' },
       { href: '/docs/components/card', label: 'Card' },
       { href: '/docs/components/badge', label: 'Badge' },
       { href: '/docs/components/avatar', label: 'Avatar' },
@@ -29,6 +32,7 @@ const groups = [
       { href: '/docs/components/alert', label: 'Alert' },
       { href: '/docs/components/stat', label: 'Stat' },
       { href: '/docs/components/separator', label: 'Separator' },
+      { href: '/docs/components/timeline', label: 'Timeline' },
     ],
   },
   {
@@ -36,20 +40,35 @@ const groups = [
     links: [
       { href: '/docs/components/input', label: 'Input' },
       { href: '/docs/components/textarea', label: 'Textarea' },
+      { href: '/docs/components/number-input', label: 'NumberInput' },
       { href: '/docs/components/select', label: 'Select' },
+      { href: '/docs/components/combobox', label: 'Combobox' },
       { href: '/docs/components/checkbox', label: 'Checkbox' },
       { href: '/docs/components/radio-group', label: 'RadioGroup' },
       { href: '/docs/components/switch', label: 'Switch' },
       { href: '/docs/components/slider', label: 'Slider' },
+      { href: '/docs/components/calendar', label: 'Calendar' },
+      { href: '/docs/components/date-picker', label: 'DatePicker' },
+      { href: '/docs/components/stepper', label: 'Stepper' },
+    ],
+  },
+  {
+    title: 'Data',
+    links: [
+      { href: '/docs/components/data-table', label: 'DataTable' },
+      { href: '/docs/components/command', label: 'Command' },
     ],
   },
   {
     title: 'Overlay',
     links: [
       { href: '/docs/components/dialog', label: 'Dialog' },
+      { href: '/docs/components/sheet', label: 'Sheet' },
       { href: '/docs/components/popover', label: 'Popover' },
       { href: '/docs/components/tooltip', label: 'Tooltip' },
       { href: '/docs/components/toast', label: 'Toast' },
+      { href: '/docs/components/dropdown-menu', label: 'DropdownMenu' },
+      { href: '/docs/components/context-menu', label: 'ContextMenu' },
     ],
   },
   {
@@ -57,6 +76,10 @@ const groups = [
     links: [
       { href: '/docs/components/tabs', label: 'Tabs' },
       { href: '/docs/components/accordion', label: 'Accordion' },
+      { href: '/docs/components/breadcrumb', label: 'Breadcrumb' },
+      { href: '/docs/components/pagination', label: 'Pagination' },
+      { href: '/docs/components/bottom-navigation', label: 'BottomNavigation' },
+      { href: '/docs/components/carousel', label: 'Carousel' },
     ],
   },
   {

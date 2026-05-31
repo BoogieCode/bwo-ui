@@ -24,7 +24,7 @@ For animation primitives, this package ships **Svelte actions** — the idiomati
 </script>
 
 <h1 use:splitReveal={{ type: 'words,chars', stagger: 0.02 }}>
-  Motion that reads as craft.
+  Your shortcut to a beautiful UI.
 </h1>
 
 <button use:magnetic={{ strength: 0.4 }} class="bwo-btn">Get started</button>

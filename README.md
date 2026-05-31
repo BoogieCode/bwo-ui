@@ -42,7 +42,7 @@ export function Hero() {
   return (
     <section>
       <SplitReveal type="words" stagger={0.05}>
-        <h1>Motion that reads as craft.</h1>
+        <h1>Your shortcut to a beautiful UI.</h1>
       </SplitReveal>
 
       <Magnetic strength={0.4}>

@@ -1,4 +1,5 @@
-import { gsap, registerPlugins } from '../register';
+import { gsap } from 'gsap';
+import { registerPlugins } from '../register';
 import type { MotionInstance } from '../types';
 import { isBrowser } from '../types';
 

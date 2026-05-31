@@ -19,7 +19,7 @@ export default function Page() {
       <CodeBlock lang="tsx">{`import { SplitReveal } from '@bwo-ui/react';
 
 <SplitReveal type="words,chars" stagger={0.02} from={{ y: 40, opacity: 0 }}>
-  <h1>Motion that reads as craft.</h1>
+  <h1>Your shortcut to a beautiful UI.</h1>
 </SplitReveal>`}</CodeBlock>
 
       <h2>Props</h2>

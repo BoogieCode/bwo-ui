@@ -1,4 +1,7 @@
-import { Draggable, gsap, InertiaPlugin, registerPlugins } from '../register';
+import { gsap } from 'gsap';
+import { Draggable } from 'gsap/Draggable';
+import { InertiaPlugin } from 'gsap/InertiaPlugin';
+import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
 import { isBrowser, resolveTarget } from '../types';
 

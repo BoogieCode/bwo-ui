@@ -1,4 +1,6 @@
-import { Flip, gsap, registerPlugins } from '../register';
+import { gsap } from 'gsap';
+import { Flip } from 'gsap/Flip';
+import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
 import { isBrowser, resolveTarget } from '../types';
 
