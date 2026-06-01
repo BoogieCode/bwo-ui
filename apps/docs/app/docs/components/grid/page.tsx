@@ -19,8 +19,13 @@ export default function Page() {
       <CodeBlock lang="tsx">{`import { Grid, GridItem } from '@bwo-ui/react';
 
 <Grid
-  templateAreas={['"hero hero side"', '"main main side"', '"foot foot foot"']}
-  templateColumns="1fr 1fr 280px"
+  templateAreas={[
+    'hero hero side',
+    'main main side',
+    'foot foot foot',
+  ]}
+  templateColumns="1fr 1fr 220px"
+  templateRows="110px 130px 70px"
   gap={12}
 >
   <GridItem area="hero">Hero</GridItem>
@@ -28,6 +33,12 @@ export default function Page() {
   <GridItem area="main">Main</GridItem>
   <GridItem area="foot">Footer</GridItem>
 </Grid>`}</CodeBlock>
+      <p>
+        Tip: <code>GridItem</code> doesn&apos;t style its own box — wrap your content in a{' '}
+        <code>Card</code> (or any element with a background/border) so each cell is visible.
+        Add <code>templateRows</code> when you want explicit row heights; otherwise rows are
+        sized to their content.
+      </p>
 
       <h2>Props — Grid</h2>
       <PropsTable

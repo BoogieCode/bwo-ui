@@ -1,13 +1,23 @@
-import { defineComponent, h, onUnmounted, ref, watch, type PropType } from 'vue';
+import {
+  defineComponent,
+  h,
+  onUnmounted,
+  ref,
+  watch,
+  type PropType,
+  type VNode,
+} from 'vue';
 import { cn } from './utils';
 
-export type AvatarSize = 'sm' | 'md' | 'lg';
+export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type AvatarShape = 'circle' | 'rounded' | 'square';
 
 export const Avatar = defineComponent({
   name: 'Avatar',
   inheritAttrs: true,
   props: {
     size: { type: String as PropType<AvatarSize>, default: 'md' },
+    shape: { type: String as PropType<AvatarShape>, default: 'circle' },
     src: { type: String, default: undefined },
     alt: { type: String, default: '' },
     fallback: { type: String, default: undefined },
@@ -64,6 +74,7 @@ export const Avatar = defineComponent({
           class: cn(
             'bwo-avatar',
             props.size !== 'md' && `bwo-avatar--${props.size}`,
+            props.shape !== 'circle' && `bwo-avatar--${props.shape}`,
             attrs.class as string | undefined,
           ),
         },
@@ -86,5 +97,68 @@ export const Avatar = defineComponent({
             : null,
         ],
       );
+  },
+});
+
+/* ─── AvatarGroup ──────────────────────────────────────────────────────── */
+
+export const AvatarGroup = defineComponent({
+  name: 'AvatarGroup',
+  inheritAttrs: true,
+  props: {
+    max: { type: Number, default: undefined },
+    size: { type: String as PropType<AvatarSize>, default: 'md' },
+    shape: { type: String as PropType<AvatarShape>, default: 'circle' },
+    total: { type: Number, default: undefined },
+  },
+  setup(props, { attrs, slots }) {
+    return () => {
+      const all = (slots.default?.() ?? []) as VNode[];
+      const items = all.filter((v) => v && typeof v === 'object' && v.type);
+      const visible = props.max === undefined ? items : items.slice(0, props.max);
+      const baseTotal = props.total ?? items.length;
+      const overflow = Math.max(0, baseTotal - visible.length);
+
+      const children: (VNode | null)[] = visible.map((v) => {
+        const childProps =
+          v.props && typeof v.props === 'object'
+            ? { ...(v.props as Record<string, unknown>) }
+            : {};
+        if (!('size' in childProps)) childProps.size = props.size;
+        if (!('shape' in childProps)) childProps.shape = props.shape;
+        return h(v.type as never, childProps as never, v.children as never);
+      });
+
+      if (overflow > 0) {
+        children.push(
+          h(
+            'span',
+            {
+              class: cn(
+                'bwo-avatar',
+                'bwo-avatar--overflow',
+                props.size !== 'md' && `bwo-avatar--${props.size}`,
+                props.shape !== 'circle' && `bwo-avatar--${props.shape}`,
+              ),
+              'aria-label': `${overflow} more`,
+            },
+            [h('span', { class: 'bwo-avatar-fallback' }, `+${overflow}`)],
+          ),
+        );
+      }
+
+      return h(
+        'div',
+        {
+          ...attrs,
+          class: cn(
+            'bwo-avatar-group',
+            props.size !== 'md' && `bwo-avatar-group--${props.size}`,
+            attrs.class as string | undefined,
+          ),
+        },
+        children,
+      );
+    };
   },
 });

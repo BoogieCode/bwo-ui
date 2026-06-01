@@ -202,6 +202,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Com
             ref={setListEl}
             id={listboxId}
             role="listbox"
+            data-bwo-floating=""
             className="bwo-combobox-listbox"
             style={{
               position: 'fixed',

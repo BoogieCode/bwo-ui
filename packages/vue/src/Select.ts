@@ -246,6 +246,7 @@ export const SelectContent = defineComponent({
                   : undefined,
                 tabindex: -1,
                 'data-state': 'open',
+                'data-bwo-floating': '',
                 style: {
                   position: 'fixed',
                   top: `${pos.value?.top ?? -9999}px`,

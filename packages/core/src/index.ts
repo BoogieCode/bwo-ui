@@ -50,7 +50,7 @@ export { createRipple } from './effects/ripple';
 export type { RippleOptions } from './effects/ripple';
 
 export { createBlur } from './effects/blur';
-export type { BlurOptions } from './effects/blur';
+export type { BlurDirection, BlurOptions } from './effects/blur';
 
 export { createPin } from './effects/pin';
 export type { PinOptions } from './effects/pin';

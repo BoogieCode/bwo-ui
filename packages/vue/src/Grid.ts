@@ -100,7 +100,10 @@ export const Grid = defineComponent({
         if (r.base) cssVars['--bwo-grid-tr'] = `repeat(${r.base}, auto)`;
       }
       if (props.templateAreas) {
-        cssVars['--bwo-grid-ta'] = props.templateAreas.map((row) => `"${row}"`).join(' ');
+        // Strip any pre-existing quotes so callers can pass either form.
+        cssVars['--bwo-grid-ta'] = props.templateAreas
+          .map((row) => `"${row.replace(/^"+|"+$/g, '').trim()}"`)
+          .join(' ');
       }
       if (props.gap !== undefined) cssVars['--bwo-grid-gap'] = formatSize(props.gap);
       if (props.columnGap !== undefined) cssVars['--bwo-grid-col-gap'] = formatSize(props.columnGap);

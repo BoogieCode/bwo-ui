@@ -5,7 +5,6 @@ import {
   createContext,
   forwardRef,
   isValidElement,
-  useCallback,
   useContext,
   useId,
   useMemo,
@@ -24,6 +23,9 @@ import { useDismiss } from './internal/use-dismiss';
 import { useFocusTrap } from './internal/use-focus-trap';
 import { useScrollLock } from './internal/scroll-lock';
 import { cn } from './utils';
+
+export type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
+export type DialogPosition = 'center' | 'top';
 
 interface DialogContextValue {
   open: boolean;
@@ -148,16 +150,37 @@ export const DialogOverlay = forwardRef<HTMLDivElement, DialogOverlayProps>(func
 });
 
 export interface DialogContentProps extends HTMLAttributes<HTMLDivElement> {
+  /** Visual width preset. `md` is the default (480 px). `full` is 92 vw — for image previews. */
+  size?: DialogSize;
+  /** `center` (default) vertically centres. `top` pins near the top of the viewport — for command palettes. */
+  position?: DialogPosition;
+  /** Remove the inner content padding. Useful when the body manages its own layout (image previews). */
+  unpadded?: boolean;
   /** Skip rendering the built-in DialogOverlay (use for fully custom backdrops). */
   hideOverlay?: boolean;
   /** Skip the built-in close button. */
   hideClose?: boolean;
+  /** Dismiss when the overlay is clicked. Default: `true`. */
+  closeOnOverlayClick?: boolean;
+  /** Dismiss when Escape is pressed. Default: `true`. */
+  closeOnEscape?: boolean;
   /** Forward an `aria-label` when there is no DialogTitle in the tree. */
   'aria-label'?: string;
 }
 
 export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(function DialogContent(
-  { className, children, hideOverlay, hideClose, ...props },
+  {
+    className,
+    children,
+    size = 'md',
+    position = 'center',
+    unpadded,
+    hideOverlay,
+    hideClose,
+    closeOnOverlayClick = true,
+    closeOnEscape = true,
+    ...props
+  },
   ref,
 ) {
   const ctx = useDialogContext('DialogContent');
@@ -167,8 +190,8 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(func
     enabled: open,
     refs: [contentRef],
     onDismiss: () => setOpen(false),
-    escapeKey: true,
-    outsidePointer: true,
+    escapeKey: closeOnEscape,
+    outsidePointer: closeOnOverlayClick,
   });
   useFocusTrap({
     enabled: open && modal,
@@ -202,8 +225,16 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(func
             aria-describedby={descriptionId}
             id={contentId}
             data-state={state}
+            data-size={size}
+            data-position={position}
             tabIndex={-1}
-            className={cn('bwo-dialog-content', className)}
+            className={cn(
+              'bwo-dialog-content',
+              `bwo-dialog-content--${size}`,
+              position !== 'center' && `bwo-dialog-content--${position}`,
+              unpadded && 'bwo-dialog-content--unpadded',
+              className,
+            )}
             {...props}
           >
             {children}
@@ -257,6 +288,22 @@ export const DialogDescription = forwardRef<HTMLParagraphElement, DialogDescript
   },
 );
 
+export interface DialogHeaderProps extends HTMLAttributes<HTMLDivElement> {}
+
+export const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
+  function DialogHeader({ className, ...props }, ref) {
+    return <div ref={ref} className={cn('bwo-dialog-header', className)} {...props} />;
+  },
+);
+
+export interface DialogFooterProps extends HTMLAttributes<HTMLDivElement> {}
+
+export const DialogFooter = forwardRef<HTMLDivElement, DialogFooterProps>(
+  function DialogFooter({ className, ...props }, ref) {
+    return <div ref={ref} className={cn('bwo-dialog-footer', className)} {...props} />;
+  },
+);
+
 export interface DialogCloseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
 }
@@ -288,5 +335,7 @@ export const Dialog = {
   Content: DialogContent,
   Title: DialogTitle,
   Description: DialogDescription,
+  Header: DialogHeader,
+  Footer: DialogFooter,
   Close: DialogClose,
 };

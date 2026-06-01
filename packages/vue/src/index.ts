@@ -15,7 +15,7 @@ export { ScrollProgress } from './ScrollProgress';
 export { Stagger } from './Stagger';
 export { GradientText } from './GradientText';
 export { Ripple } from './Ripple';
-export { Blur } from './Blur';
+export { Blur, type BlurDirection, type BlurIntensity } from './Blur';
 export { Pin } from './Pin';
 export { Spin, Pulse } from './Motion';
 export { Glow } from './Glow';
@@ -45,12 +45,32 @@ export { Slider, type SliderOrientation } from './Slider';
 export { RadioGroupRoot, RadioGroupItem } from './RadioGroup';
 export { Badge, type BadgeVariant } from './Badge';
 export { Card, CardHeader, CardTitle, CardDescription, CardFooter } from './Card';
-export { Avatar, type AvatarSize } from './Avatar';
-export { Skeleton } from './Skeleton';
-export { Progress } from './Progress';
-export { Alert, type AlertVariant } from './Alert';
-export { Stat } from './Stat';
-export { Separator } from './Separator';
+export { Avatar, AvatarGroup, type AvatarShape, type AvatarSize } from './Avatar';
+export { Skeleton, type SkeletonAnimation, type SkeletonVariant } from './Skeleton';
+export {
+  Progress,
+  type ProgressShape,
+  type ProgressSize,
+  type ProgressVariant,
+} from './Progress';
+export { Alert, type AlertAppearance, type AlertVariant } from './Alert';
+export {
+  Stat,
+  StatGroup,
+  type StatAlign,
+  type StatGoodWhen,
+  type StatSize,
+  type StatTone,
+} from './Stat';
+export {
+  Separator,
+  type SeparatorLabelAlign,
+  type SeparatorOrientation,
+  type SeparatorSize,
+  type SeparatorSpacing,
+  type SeparatorTone,
+  type SeparatorVariant,
+} from './Separator';
 export { FormField } from './FormField';
 export { AppShell, BrandMark, type AppShellAlign } from './AppShell';
 
@@ -69,7 +89,15 @@ export {
   type StepperOrientation,
   type StepStatus,
 } from './Stepper';
-export { Timeline, TimelineItem, type TimelineOrientation, type TimelineItemStatus } from './Timeline';
+export {
+  Timeline,
+  TimelineItem,
+  type TimelineAlign,
+  type TimelineConnectorStyle,
+  type TimelineItemStatus,
+  type TimelineOrientation,
+  type TimelineSize,
+} from './Timeline';
 export { SimpleGrid, Grid, GridItem } from './Grid';
 export {
   FloatingActionButton,
@@ -87,12 +115,16 @@ export { Carousel } from './Carousel';
 
 // Overlays
 export {
-  DialogRoot,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-  DialogDescription,
   DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot,
+  DialogTitle,
+  DialogTrigger,
+  type DialogPosition,
+  type DialogSize,
 } from './Dialog';
 export {
   PopoverRoot,

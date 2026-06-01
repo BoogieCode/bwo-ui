@@ -100,11 +100,21 @@ export interface PopoverTriggerProps extends ButtonHTMLAttributes<HTMLButtonElem
 
 export const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(
   function PopoverTrigger({ asChild, children, onClick, ...rest }, ref) {
-    const { open, setOpen, setTriggerEl, setAnchorEl, anchorEl, triggerId, contentId } =
+    const { open, setOpen, setTriggerEl, setAnchorEl, triggerId, contentId } =
       usePopoverContext('PopoverTrigger');
+    // `anchorEl` is the fallback anchor when no explicit <PopoverAnchor> is used.
+    // It should be set once when the trigger first mounts and stay put. Reading
+    // `anchorEl` from context closure caused an infinite update loop: React
+    // swaps ref callbacks every render (`old(null) + new(el)`), and the old
+    // closure's stale `anchorEl = null` would null the state right after the
+    // new closure set it. A ref guard avoids touching state on subsequent calls.
+    const anchorSetRef = useRef(false);
     const setRef = (el: HTMLElement | null) => {
       setTriggerEl(el);
-      if (!anchorEl) setAnchorEl(el);
+      if (el && !anchorSetRef.current) {
+        anchorSetRef.current = true;
+        setAnchorEl(el);
+      }
       if (typeof ref === 'function') ref(el as HTMLButtonElement);
       else if (ref)
         (ref as MutableRefObject<HTMLButtonElement | null>).current = el as HTMLButtonElement;
@@ -213,6 +223,7 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
               tabIndex={-1}
               data-state={state}
               data-side={pos?.side ?? side}
+              data-bwo-floating=""
               style={{
                 position: 'fixed',
                 top: pos?.top ?? -9999,

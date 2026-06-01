@@ -1,5 +1,50 @@
 # @bwo-ui/vue
 
+## 0.5.0
+
+### Minor Changes
+
+- # 0.5.0 — component depth pass + bento docs overhaul
+
+  A wide sweep across the kit: every "display" primitive now ships with the variant / size / tone axes a serious UI library needs, the docs site got 13 comprehensive component pages (with full props tables, recipes, and a11y notes), and several latent bugs were squashed (Popover infinite update loop, Timeline broken connector lines, Select listbox behind dialog, hydration mismatch on dates).
+
+  ## New components / features
+
+  - **AvatarGroup** with `max`, cascading `size` / `shape`, `+N` overflow pill, and a hover-lift micro-interaction.
+  - **StatGroup** companion to Stat, with optional `divided` vertical separators.
+  - **Dialog.Header / Dialog.Footer** subcomponents — matches Card's anatomy. Dialog also got `size: 'sm' | 'md' | 'lg' | 'xl' | 'full'`, `position: 'center' | 'top'`, `unpadded`, `closeOnOverlayClick`, `closeOnEscape`.
+  - **Stat delta indicator** — `delta` / `deltaSuffix` / `deltaLabel` / `goodWhen: 'up' | 'down'` plus auto-coloured ▲ ▼ → arrows.
+  - **Progress** got `variant`, `size`, `shape: 'linear' | 'circular'`, `striped`, `radius` and a working **indeterminate animation** (was emitting `data-state="indeterminate"` with no CSS behind it).
+  - **Separator** got `variant: 'solid' | 'dashed' | 'dotted'`, `size`, `tone`, `spacing`, plus a labelled mode (`label`, `labelAlign`) with auto-ARIA flip.
+  - **Skeleton** got `variant: 'rect' | 'circle' | 'text'`, `animation: 'shimmer' | 'pulse' | 'none'`, `lines` (auto-shortened last line), and respects `prefers-reduced-motion` at the CSS layer.
+  - **Badge** got `size: 'sm' | 'md' | 'lg'` and `dot` (status indicator) — paired with `currentColor` so the dot inherits the variant.
+  - **IconButton** brought to parity with Button (`primary` / `green` / `yellow` / `ghost` / `outline` / `solid`).
+  - **Alert** got `appearance: 'soft' | 'solid' | 'outline'`, `actions`, smart ARIA (status / alert) based on urgency, and `Alert.Header` / `Alert.Footer`. Vue Alert's `'danger'` renamed to `'error'` (parity).
+  - **Blur** factory got `direction: 'in' | 'out'`, `intensity: 'subtle' | 'medium' | 'strong'` shorthand, and respects `prefers-reduced-motion`.
+  - **Timeline** rebuilt with a `::before` pseudo-element connector so the line is continuous from one marker to the next (no padding-gap break). Added `size`, `connectorStyle`, `align`, and a pulsing active marker.
+  - **Avatar** sizes expanded to `xs / sm / md / lg / xl` and got `shape: 'circle' | 'rounded' | 'square'`.
+  - **Card** is now a flex column with `margin-top: auto` on `CardFooter` — pricing rows and stat grids auto-align without extra wrappers.
+
+  ## Critical bug fixes
+
+  - **Popover infinite update loop** — `PopoverTrigger.setRef` read `anchorEl` from closure; React's ref-swap (old(null) + new(el)) had the stale closure null the state right after the new one set it, looping forever. Replaced with a `useRef` guard.
+  - **Nested floating UI dismissal** — clicking a Select item or Popover inside a Dialog was dismissing the Dialog because the listbox is portaled out of the Dialog's DOM subtree. `useDismiss` now skips clicks landing inside any element with `[data-bwo-floating]`. Every portaled overlay (Select / Popover / Tooltip / Dropdown / Combobox / Toast) opts in.
+  - **Select listbox stacking** — was `z-index: 50`, below the Dialog content's `z-index: 51`. Bumped to `z-index: 60` (matches the rest of the floating UI tier).
+  - **Timeline connector breaks** — the inline `.bwo-timeline-connector` div ended at the item's content edge, leaving a `padding-bottom` gap before the next marker. Refactored to a `::before` pseudo-element that spans marker-bottom to item-bottom (the next marker's top). Lines are now continuous edge-to-edge.
+  - **Vue Alert drift fixed** — Vue Alert was missing `icon`, `onDismiss`, `radius`, `appearance`, `actions`, used `'danger'` instead of `'error'`, and never applied the urgent-vs-polite ARIA logic. Brought to full React parity. Note: **`variant="danger"` → `variant="error"` is a breaking rename** in Vue.
+
+  ## Docs overhaul
+
+  Comprehensive rewrites for 13 component pages — each now has structured demos, recipes, props tables, and accessibility notes:
+  Alert, Avatar (+ AvatarGroup), Badge, Blur, Button, Card, Dialog, IconButton, Progress, Separator, Skeleton, Stat (+ StatGroup), Timeline.
+
+  Homepage redesigned: 9-tile irregular hero bento, expanded 12-tile component gallery with blur-into-focus reveal, new FAQ + Framework strip sections, constant 24 px lateral gutter on every viewport, dark-mode polish across inline code and pre blocks.
+
+### Patch Changes
+
+- Updated dependencies
+  - @bwo-ui/core@0.5.0
+
 ## 0.4.0
 
 ### Minor Changes

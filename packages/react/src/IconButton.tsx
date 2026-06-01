@@ -3,7 +3,13 @@
 import { forwardRef, type ButtonHTMLAttributes } from 'react';
 import { cn, type Radius } from './utils';
 
-export type IconButtonVariant = 'primary' | 'ghost';
+export type IconButtonVariant =
+  | 'primary'
+  | 'green'
+  | 'yellow'
+  | 'ghost'
+  | 'outline'
+  | 'solid';
 export type IconButtonSize = 'sm' | 'md' | 'lg';
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

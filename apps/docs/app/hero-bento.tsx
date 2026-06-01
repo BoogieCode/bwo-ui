@@ -1,7 +1,9 @@
 'use client';
 
 import {
+  Alert,
   Avatar,
+  AvatarGroup,
   Badge,
   Calendar,
   CountUp,
@@ -11,10 +13,14 @@ import {
   Magnetic,
   Preanimate,
   PreanimateProvider,
+  Progress,
   Skeleton,
-  Slider,
   SplitReveal,
   Switch,
+  TabsContent,
+  TabsList,
+  TabsRoot,
+  TabsTrigger,
   type DataTableColumn,
 } from '@bwo-ui/react';
 import Link from 'next/link';
@@ -178,22 +184,30 @@ function CalendarSkeleton() {
   );
 }
 
-function CmdSkeleton() {
+function TeamSkeleton() {
   return (
     <>
-      <TileHead label="Command" right={<Skeleton width={32} height={20} />} />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 4 }}>
-        {Array.from({ length: 3 }).map((_, i) => (
-          <div
+      <TileHead label="Team" right={<Skeleton width={56} height={20} />} />
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 4,
+          marginTop: 10,
+        }}
+      >
+        {Array.from({ length: 4 }).map((_, i) => (
+          <Skeleton
             key={i}
-            style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '4px 0' }}
-          >
-            <Skeleton width={14} height={14} circle />
-            <Skeleton width={`${65 - i * 12}%`} height={12} />
-            <Skeleton width={18} height={14} style={{ marginLeft: 'auto' }} />
-          </div>
+            width={36}
+            height={36}
+            circle
+            style={{ marginLeft: i === 0 ? 0 : -8 }}
+          />
         ))}
       </div>
+      <Skeleton width="65%" height={12} style={{ marginTop: 12 }} />
+      <Skeleton width="40%" height={11} />
     </>
   );
 }
@@ -224,26 +238,20 @@ function DataSkeleton() {
   );
 }
 
-function FormsSkeleton() {
+function SettingsSkeleton() {
   return (
     <>
-      <TileHead label="Forms" right={<Skeleton width={86} height={11} />} />
+      <TileHead label="Settings" right={<Skeleton width={76} height={11} />} />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 4 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Skeleton width={104} height={12} />
-          <Skeleton width={36} height={20} />
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Skeleton width={72} height={12} />
-          <Skeleton width={36} height={20} />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Skeleton width={56} height={12} />
-            <Skeleton width={30} height={11} />
+        {[104, 72, 88].map((w, i) => (
+          <div
+            key={i}
+            style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+          >
+            <Skeleton width={w} height={12} />
+            <Skeleton width={36} height={20} />
           </div>
-          <Skeleton width="100%" height={6} />
-        </div>
+        ))}
       </div>
     </>
   );
@@ -261,6 +269,56 @@ function ThemeSkeleton() {
         {Array.from({ length: 5 }).map((_, i) => (
           <Skeleton key={i} width={22} height={22} circle />
         ))}
+      </div>
+    </>
+  );
+}
+
+function ProgressSkeleton() {
+  return (
+    <>
+      <TileHead label="Progress" right={<Skeleton width={48} height={11} />} />
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: 4,
+        }}
+      >
+        <Skeleton width={72} height={72} circle />
+      </div>
+      <Skeleton width="60%" height={11} style={{ marginTop: 6 }} />
+    </>
+  );
+}
+
+function TabsSkeleton() {
+  return (
+    <>
+      <TileHead label="Tabs" right={<Skeleton width={32} height={11} />} />
+      <div style={{ display: 'flex', gap: 4, marginTop: 6 }}>
+        <Skeleton width={56} height={28} />
+        <Skeleton width={56} height={28} />
+        <Skeleton width={56} height={28} />
+      </div>
+      <Skeleton width="92%" height={11} style={{ marginTop: 10 }} />
+      <Skeleton width="70%" height={11} />
+    </>
+  );
+}
+
+function AlertSkeleton() {
+  return (
+    <>
+      <TileHead label="Alert" right={<Skeleton width={56} height={11} />} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 4 }}>
+        <Skeleton width={28} height={28} circle />
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
+          <Skeleton width="40%" height={12} />
+          <Skeleton width="80%" height={11} />
+        </div>
       </div>
     </>
   );
@@ -285,16 +343,30 @@ function StatTile() {
         Zero external UI dependencies.
       </p>
       <div className="bento-sparkline" aria-hidden>
-        {[3, 5, 4, 7, 6, 9, 8, 11, 10, 14, 13, 17, 16, 20, 22, 27, 30, 35, 41, 48].map((h, i) => (
-          <span key={i} style={{ height: `${(h / 50) * 100}%`, opacity: 0.3 + (i / 20) * 0.7 }} />
-        ))}
+        {[2, 3, 3, 4, 4, 5, 6, 6, 8, 10, 12, 15, 18, 22, 27, 33, 38, 43, 46, 48].map(
+          (h, i, arr) => (
+            <span
+              key={i}
+              style={{
+                height: `${(h / arr[arr.length - 1]!) * 100}%`,
+                opacity: 0.35 + (i / (arr.length - 1)) * 0.65,
+              }}
+            />
+          ),
+        )}
       </div>
     </>
   );
 }
 
 function CalendarTile() {
-  const [date, setDate] = useState<Date | null>(new Date());
+  // Same hydration concern as the DatePicker tile — `new Date()` differs between
+  // server render and client hydration, which would mismatch the highlighted cell.
+  // Initialise to null and set after mount.
+  const [date, setDate] = useState<Date | null>(null);
+  useEffect(() => {
+    setDate(new Date());
+  }, []);
   return (
     <>
       <div className="bento-row-top">
@@ -312,53 +384,39 @@ function CalendarTile() {
   );
 }
 
-function CmdTile() {
+const TEAM = [
+  { initials: 'AR', accent: '#ff481f' },
+  { initials: 'MS', accent: '#7463ff' },
+  { initials: 'IL', accent: '#16a34a' },
+  { initials: 'CT', accent: '#0ea5e9' },
+  { initials: 'DV', accent: '#ffc446' },
+  { initials: 'AP', accent: '#a855f7' },
+  { initials: 'EV', accent: '#ec4899' },
+];
+
+function TeamTile() {
   return (
     <>
       <div className="bento-row-top">
-        <span className="bento-eyebrow">Command</span>
-        <kbd className="bento-kbd">⌘K</kbd>
+        <span className="bento-eyebrow">Team</span>
+        <span className="bento-badge-live" style={{ background: 'rgba(116, 99, 255, 0.18)' }}>
+          <span className="bento-dot" style={{ background: '#7463ff' }} /> 12 active
+        </span>
       </div>
-      <div className="bento-cmd-rows">
-        <div className="bento-cmd-row is-active">
-          <span className="bento-cmd-icon" aria-hidden>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M12 5v14M5 12h14"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-              />
-            </svg>
-          </span>
-          New project
-          <span className="bento-cmd-meta">N</span>
-        </div>
-        <div className="bento-cmd-row">
-          <span className="bento-cmd-icon" aria-hidden>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <circle cx="11" cy="11" r="6" stroke="currentColor" strokeWidth="2" />
-              <path d="M19 19l-3.5-3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-          </span>
-          Search docs
-          <span className="bento-cmd-meta">/</span>
-        </div>
-        <div className="bento-cmd-row">
-          <span className="bento-cmd-icon" aria-hidden>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M3 12c2-5 7-5 9 0s7 5 9 0"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
-          </span>
-          Toggle theme
-          <span className="bento-cmd-meta">T</span>
-        </div>
+      <div className="bento-team-stack">
+        <AvatarGroup max={4} size="md">
+          {TEAM.map((p) => (
+            <Avatar
+              key={p.initials}
+              fallback={p.initials}
+              style={{ background: p.accent, color: '#fff' }}
+            />
+          ))}
+        </AvatarGroup>
       </div>
+      <p className="bento-team-caption">
+        Avatar stacks with a built-in <code>+N</code> overflow pill — drop your team in.
+      </p>
     </>
   );
 }
@@ -376,32 +434,112 @@ function DataTile() {
   );
 }
 
-function FormsTile() {
-  const [vol, setVol] = useState([72]);
+function SettingsTile() {
   const [notify, setNotify] = useState(true);
   const [auto, setAuto] = useState(false);
+  const [marketing, setMarketing] = useState(true);
   return (
     <>
       <div className="bento-row-top">
-        <span className="bento-eyebrow">Forms</span>
-        <span className="bento-tag">Switch · Slider</span>
+        <span className="bento-eyebrow">Settings</span>
+        <span className="bento-tag">Switch · Checkbox</span>
       </div>
       <div className="bento-forms-grid">
         <label className="bento-forms-row">
-          <span>Notifications</span>
+          <span>Push notifications</span>
           <Switch checked={notify} onCheckedChange={setNotify} />
         </label>
         <label className="bento-forms-row">
-          <span>Auto-sync</span>
+          <span>Auto-sync drafts</span>
           <Switch checked={auto} onCheckedChange={setAuto} />
         </label>
-        <div className="bento-forms-slider">
-          <div className="bento-forms-slider-head">
-            <span>Volume</span>
-            <span className="bento-forms-slider-val">{vol[0]}%</span>
-          </div>
-          <Slider value={vol} onValueChange={setVol} min={0} max={100} />
-        </div>
+        <label className="bento-forms-row">
+          <span>Marketing emails</span>
+          <Switch checked={marketing} onCheckedChange={setMarketing} />
+        </label>
+      </div>
+    </>
+  );
+}
+
+function ProgressTile() {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    // Tick up to 100 and stop. No restart loop — once the ring is full, it stays full.
+    const id = setInterval(() => {
+      setValue((v) => {
+        if (v >= 100) {
+          clearInterval(id);
+          return 100;
+        }
+        return v + 2;
+      });
+    }, 80);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <>
+      <div className="bento-row-top">
+        <span className="bento-eyebrow">Progress</span>
+        <span className="bento-tag">Circular</span>
+      </div>
+      <div className="bento-progress-stage">
+        <Progress shape="circular" size="lg" variant="primary" value={value}>
+          {value}%
+        </Progress>
+      </div>
+      <p className="bento-progress-caption">SVG ring with centred label.</p>
+    </>
+  );
+}
+
+function TabsTile() {
+  const [tab, setTab] = useState('today');
+  return (
+    <>
+      <div className="bento-row-top">
+        <span className="bento-eyebrow">Tabs</span>
+        <span className="bento-tag">Sorting</span>
+      </div>
+      <div className="bento-tabs-stage">
+        <TabsRoot value={tab} onValueChange={setTab}>
+          <TabsList>
+            <TabsTrigger value="today">Today</TabsTrigger>
+            <TabsTrigger value="week">Week</TabsTrigger>
+            <TabsTrigger value="month">Month</TabsTrigger>
+          </TabsList>
+          <TabsContent value="today">
+            <div className="bento-tabs-body">
+              <strong>14</strong> events &middot; <span>4 unread</span>
+            </div>
+          </TabsContent>
+          <TabsContent value="week">
+            <div className="bento-tabs-body">
+              <strong>62</strong> events &middot; <span>11 unread</span>
+            </div>
+          </TabsContent>
+          <TabsContent value="month">
+            <div className="bento-tabs-body">
+              <strong>248</strong> events &middot; <span>32 unread</span>
+            </div>
+          </TabsContent>
+        </TabsRoot>
+      </div>
+    </>
+  );
+}
+
+function HeroAlertTile() {
+  return (
+    <>
+      <div className="bento-row-top">
+        <span className="bento-eyebrow">Alert</span>
+        <span className="bento-tag">In-flow message</span>
+      </div>
+      <div className="bento-alert-stage">
+        <Alert variant="success" title="Plan upgraded" appearance="soft">
+          Boogie Pro is live on your workspace. Unlimited builds.
+        </Alert>
       </div>
     </>
   );
@@ -556,12 +694,13 @@ export function HeroBento() {
 
         <Grid
           templateAreas={[
-            'stat stat cal',
-            'cmd  data cal',
-            'forms forms theme',
+            'stat stat theme',
+            'team data theme',
+            'cal progress tabs',
+            'alert alert settings',
           ]}
           templateColumns="1fr 1fr 1fr"
-          templateRows="220px 200px 180px"
+          templateRows="220px 180px 220px 160px"
           gap={14}
           className="hero-bento-grid"
         >
@@ -574,22 +713,22 @@ export function HeroBento() {
               <StatTile />
             </Preanimate>
           </GridItem>
-          <GridItem area="cal">
+          <GridItem area="theme">
             <Preanimate
-              className="bento-tile bento-tile--cal"
-              skeleton={<CalendarSkeleton />}
+              className="bento-tile bento-tile--theme"
+              skeleton={<ThemeSkeleton />}
               delay={380}
             >
-              <CalendarTile />
+              <ThemeTile />
             </Preanimate>
           </GridItem>
-          <GridItem area="cmd">
+          <GridItem area="team">
             <Preanimate
-              className="bento-tile bento-tile--cmd"
-              skeleton={<CmdSkeleton />}
+              className="bento-tile bento-tile--team"
+              skeleton={<TeamSkeleton />}
               delay={440}
             >
-              <CmdTile />
+              <TeamTile />
             </Preanimate>
           </GridItem>
           <GridItem area="data">
@@ -601,22 +740,49 @@ export function HeroBento() {
               <DataTile />
             </Preanimate>
           </GridItem>
-          <GridItem area="forms">
+          <GridItem area="cal">
             <Preanimate
-              className="bento-tile bento-tile--forms"
-              skeleton={<FormsSkeleton />}
+              className="bento-tile bento-tile--cal"
+              skeleton={<CalendarSkeleton />}
               delay={560}
             >
-              <FormsTile />
+              <CalendarTile />
             </Preanimate>
           </GridItem>
-          <GridItem area="theme">
+          <GridItem area="progress">
             <Preanimate
-              className="bento-tile bento-tile--theme"
-              skeleton={<ThemeSkeleton />}
-              delay={620}
+              className="bento-tile bento-tile--progress"
+              skeleton={<ProgressSkeleton />}
+              delay={600}
             >
-              <ThemeTile />
+              <ProgressTile />
+            </Preanimate>
+          </GridItem>
+          <GridItem area="tabs">
+            <Preanimate
+              className="bento-tile bento-tile--tabs"
+              skeleton={<TabsSkeleton />}
+              delay={640}
+            >
+              <TabsTile />
+            </Preanimate>
+          </GridItem>
+          <GridItem area="alert">
+            <Preanimate
+              className="bento-tile bento-tile--alert"
+              skeleton={<AlertSkeleton />}
+              delay={680}
+            >
+              <HeroAlertTile />
+            </Preanimate>
+          </GridItem>
+          <GridItem area="settings">
+            <Preanimate
+              className="bento-tile bento-tile--forms"
+              skeleton={<SettingsSkeleton />}
+              delay={720}
+            >
+              <SettingsTile />
             </Preanimate>
           </GridItem>
         </Grid>

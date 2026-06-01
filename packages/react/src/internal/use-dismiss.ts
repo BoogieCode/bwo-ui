@@ -33,6 +33,11 @@ export function useDismiss({
       for (const ref of refs) {
         if (ref?.current && ref.current.contains(target)) return;
       }
+      // Don't treat clicks inside another portaled floating overlay as "outside" —
+      // e.g. a Select listbox opened from inside a Dialog. Both portal to body, so
+      // by DOM tree the listbox is outside the dialog content, but visually it's
+      // nested. The opt-in marker is `data-bwo-floating` on the overlay root.
+      if (target instanceof Element && target.closest('[data-bwo-floating]')) return;
       onDismiss();
     };
     const handleKey = (event: KeyboardEvent) => {

@@ -1,7 +1,13 @@
 import { defineComponent, h, type PropType } from 'vue';
 import { cn, type Radius } from './utils';
 
-export type IconButtonVariant = 'primary' | 'ghost';
+export type IconButtonVariant =
+  | 'primary'
+  | 'green'
+  | 'yellow'
+  | 'ghost'
+  | 'outline'
+  | 'solid';
 export type IconButtonSize = 'sm' | 'md' | 'lg';
 
 export const IconButton = defineComponent({

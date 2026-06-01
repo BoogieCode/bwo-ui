@@ -8,6 +8,7 @@ import {
   toRef,
   useId,
   type InjectionKey,
+  type PropType,
   type Ref,
 } from 'vue';
 import { Portal } from './internal/portal';
@@ -16,6 +17,9 @@ import { useDismiss } from './internal/use-dismiss';
 import { useFocusTrap } from './internal/use-focus-trap';
 import { useScrollLock } from './internal/scroll-lock';
 import { cn } from './utils';
+
+export type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
+export type DialogPosition = 'center' | 'top';
 
 interface DialogContext {
   open: Ref<boolean>;
@@ -100,13 +104,24 @@ export const DialogContent = defineComponent({
   name: 'DialogContent',
   inheritAttrs: true,
   props: {
+    size: { type: String as PropType<DialogSize>, default: 'md' },
+    position: { type: String as PropType<DialogPosition>, default: 'center' },
+    unpadded: { type: Boolean, default: false },
     hideOverlay: { type: Boolean, default: false },
     hideClose: { type: Boolean, default: false },
+    closeOnOverlayClick: { type: Boolean, default: true },
+    closeOnEscape: { type: Boolean, default: true },
   },
   setup(props, { attrs, slots }) {
     const ctx = useDialog('DialogContent');
     const enabled = computed(() => ctx.open.value);
-    useDismiss({ enabled, refs: [ctx.contentRef], onDismiss: () => ctx.setOpen(false) });
+    useDismiss({
+      enabled,
+      refs: [ctx.contentRef],
+      onDismiss: () => ctx.setOpen(false),
+      escapeKey: props.closeOnEscape,
+      outsidePointer: props.closeOnOverlayClick,
+    });
     useFocusTrap({
       enabled: computed(() => ctx.open.value && ctx.modal) as unknown as Ref<boolean>,
       containerRef: ctx.contentRef,
@@ -131,8 +146,16 @@ export const DialogContent = defineComponent({
                 'aria-describedby': ctx.descriptionId,
                 id: ctx.contentId,
                 'data-state': 'open',
+                'data-size': props.size,
+                'data-position': props.position,
                 tabindex: -1,
-                class: cn('bwo-dialog-content', attrs.class as string | undefined),
+                class: cn(
+                  'bwo-dialog-content',
+                  `bwo-dialog-content--${props.size}`,
+                  props.position !== 'center' && `bwo-dialog-content--${props.position}`,
+                  props.unpadded && 'bwo-dialog-content--unpadded',
+                  attrs.class as string | undefined,
+                ),
               },
               [
                 slots.default?.(),
@@ -187,6 +210,32 @@ export const DialogDescription = defineComponent({
           id: (attrs.id as string) ?? ctx.descriptionId,
           class: cn('bwo-dialog-description', attrs.class as string | undefined),
         },
+        slots.default?.(),
+      );
+  },
+});
+
+export const DialogHeader = defineComponent({
+  name: 'DialogHeader',
+  inheritAttrs: true,
+  setup(_, { attrs, slots }) {
+    return () =>
+      h(
+        'div',
+        { ...attrs, class: cn('bwo-dialog-header', attrs.class as string | undefined) },
+        slots.default?.(),
+      );
+  },
+});
+
+export const DialogFooter = defineComponent({
+  name: 'DialogFooter',
+  inheritAttrs: true,
+  setup(_, { attrs, slots }) {
+    return () =>
+      h(
+        'div',
+        { ...attrs, class: cn('bwo-dialog-footer', attrs.class as string | undefined) },
         slots.default?.(),
       );
   },

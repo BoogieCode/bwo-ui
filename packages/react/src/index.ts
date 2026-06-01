@@ -17,7 +17,7 @@ export { ScrollProgress, type ScrollProgressProps } from './ScrollProgress';
 export { Stagger, type StaggerProps } from './Stagger';
 export { GradientText, type GradientTextProps } from './GradientText';
 export { Ripple, type RippleProps } from './Ripple';
-export { Blur, type BlurProps } from './Blur';
+export { Blur, type BlurDirection, type BlurIntensity, type BlurProps } from './Blur';
 export { Pin, type PinProps } from './Pin';
 export { useMotion } from './use-motion';
 export { type Radius } from './utils';
@@ -94,23 +94,68 @@ export {
   type BrandMarkProps,
 } from './AppShell';
 export { Spin, Pulse, type SpinProps, type PulseProps } from './Motion';
-export { Avatar, type AvatarProps, type AvatarSize } from './Avatar';
-export { Skeleton, type SkeletonProps } from './Skeleton';
-export { Progress, type ProgressProps } from './Progress';
-export { Separator, type SeparatorProps } from './Separator';
-export { Alert, type AlertProps, type AlertVariant } from './Alert';
-export { Stat, type StatProps } from './Stat';
+export {
+  Avatar,
+  AvatarGroup,
+  type AvatarGroupProps,
+  type AvatarProps,
+  type AvatarShape,
+  type AvatarSize,
+} from './Avatar';
+export {
+  Skeleton,
+  type SkeletonAnimation,
+  type SkeletonProps,
+  type SkeletonVariant,
+} from './Skeleton';
+export {
+  Progress,
+  type ProgressProps,
+  type ProgressShape,
+  type ProgressSize,
+  type ProgressVariant,
+} from './Progress';
+export {
+  Separator,
+  type SeparatorLabelAlign,
+  type SeparatorOrientation,
+  type SeparatorProps,
+  type SeparatorSize,
+  type SeparatorSpacing,
+  type SeparatorTone,
+  type SeparatorVariant,
+} from './Separator';
+export {
+  Alert,
+  type AlertAppearance,
+  type AlertProps,
+  type AlertVariant,
+} from './Alert';
+export {
+  Stat,
+  StatGroup,
+  type StatAlign,
+  type StatGoodWhen,
+  type StatGroupProps,
+  type StatProps,
+  type StatSize,
+  type StatTone,
+} from './Stat';
 
 // Overlays
 export {
   Dialog,
-  DialogRoot,
-  DialogTrigger,
-  DialogContent,
-  DialogOverlay,
-  DialogTitle,
-  DialogDescription,
   DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogRoot,
+  DialogTitle,
+  DialogTrigger,
+  type DialogPosition,
+  type DialogSize,
 } from './Dialog';
 export {
   Toast,
@@ -252,10 +297,13 @@ export {
 export {
   Timeline,
   TimelineItem,
-  type TimelineProps,
+  type TimelineAlign,
+  type TimelineConnectorStyle,
   type TimelineItemProps,
-  type TimelineOrientation,
   type TimelineItemStatus,
+  type TimelineOrientation,
+  type TimelineProps,
+  type TimelineSize,
 } from './Timeline';
 
 // Layout — Grid primitives

@@ -158,6 +158,7 @@ export const PopoverContent = defineComponent({
                 tabindex: -1,
                 'data-state': 'open',
                 'data-side': pos.value?.side ?? props.side,
+                'data-bwo-floating': '',
                 style: {
                   position: 'fixed',
                   top: `${pos.value?.top ?? -9999}px`,

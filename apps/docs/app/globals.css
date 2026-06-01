@@ -285,8 +285,15 @@ h1, h2, h3, h4 {
 
 .shell {
   max-width: var(--bwo-max);
-  margin: 0 auto;
-  padding: 0 24px;
+  margin-inline: auto;
+  padding-inline: var(--shell-gutter, 24px);
+}
+
+/* Consistent vertical rhythm for landing sections. Replaces ad-hoc
+   inline `padding: '64px 24px'` so the lateral gutter (from .shell)
+   stays constant across every section, on every viewport. */
+.shell-section {
+  padding-block: clamp(56px, 8vw, 96px);
 }
 
 /* tp-header — centered pill nav, adapted from agntix tp-header-box */
@@ -487,7 +494,8 @@ h1, h2, h3, h4 {
   .topnav-inner { height: 56px; padding: 0 4px; }
   .topnav-links { gap: 12px; font-size: 13px; }
   .topnav-links a:nth-child(-n+3) { display: none; }
-  .shell { padding: 0 16px; }
+  /* Lateral gutter stays constant — we keep it at 24px on mobile too so the
+     hero-bento and every landing section share the same alignment. */
   .hero { padding: 60px 0 40px; }
   .demo { padding: 24px; }
   .landing-grid { padding: 32px 0; }
@@ -637,13 +645,19 @@ pre {
   margin: 16px 0;
   box-shadow: var(--bwo-shadow-md);
 }
+/* Pre stays dark in both modes (intentional — code looks the same everywhere),
+   but on a dark page background it needs a subtle border to feel distinct. */
+:root.boo-dark pre { border: 1px solid var(--bwo-border); }
 code:not(pre code) {
   background: var(--bwo-grey-4);
   border: 1px solid var(--bwo-border);
   border-radius: 4px;
   padding: 1px 6px;
   font-size: 0.88em;
-  color: var(--bwo-black);
+  /* `--bwo-text` swaps in the dark-mode block (`--bwo-black` → `--bwo-white`).
+     Using `--bwo-black` directly here made every inline <code> invisible in
+     dark mode because the background swapped but the text colour didn't. */
+  color: var(--bwo-text);
 }
 
 /* ====== Demo box ====== */
@@ -777,7 +791,10 @@ footer {
 /* ====== Hero Bento ====== */
 
 .hero-bento {
-  padding: 88px 0 32px;
+  /* Top/bottom only — lateral padding comes from the `.shell` (24 px gutter).
+     Using the `padding` shorthand here would overwrite the shell's
+     `padding-inline` to 0 and the bento grid would hug the viewport edges. */
+  padding-block: 88px 32px;
   text-align: center;
 }
 .hero-bento-eyebrow {
@@ -1026,14 +1043,15 @@ footer {
   display: flex;
   align-items: flex-end;
   gap: 3px;
-  height: 32px;
-  margin-top: 4px;
+  /* Taller silhouette — the rise reads as deliberate growth rather than a stub. */
+  height: 56px;
+  margin-top: 6px;
 }
 .bento-sparkline > span {
   flex: 1;
   background: linear-gradient(180deg, var(--bwo-red), var(--bwo-red-bright));
   border-radius: 2px;
-  min-height: 4px;
+  min-height: 3px;
 }
 
 /* Calendar tile */
@@ -1051,64 +1069,94 @@ footer {
   width: 100%;
 }
 .bento-tile--cal .bwo-calendar-cell {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   font-size: 11px;
 }
-.bento-tile--cal .bwo-calendar-grid { gap: 1px; padding: 0; }
+.bento-tile--cal .bwo-calendar-grid { gap: 2px; padding: 0; }
 .bento-tile--cal .bwo-calendar-title { font-size: 12.5px; }
 .bento-tile--cal .bwo-calendar-nav { width: 22px; height: 22px; }
+.bento-tile--cal .bwo-calendar-header { margin-bottom: 8px; }
 
-/* Command palette tile */
-.bento-kbd {
-  font-family: var(--bwo-font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border: 1px solid var(--bwo-border);
-  border-radius: 6px;
-  background: var(--bwo-grey-4);
-  color: var(--bwo-black);
-}
-:root.boo-dark .bento-kbd { color: var(--bwo-white); }
-.bento-cmd-rows {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 4px;
-}
-.bento-cmd-row {
+/* Alert tile (wide hero alert) */
+.bento-tile--alert { justify-content: space-between; }
+.bento-alert-stage {
+  flex: 1;
   display: flex;
   align-items: center;
+  margin-top: 4px;
+}
+.bento-alert-stage .bwo-alert { width: 100%; }
+
+/* Theme tile gets taller now — let content stretch evenly */
+.bento-tile--theme .bento-theme-preview { font-size: 22px; }
+.bento-tile--theme .bento-theme-dot { width: 32px; height: 32px; }
+
+/* Progress tile (circular) */
+.bento-tile--progress { justify-content: space-between; }
+.bento-progress-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+.bento-progress-stage .bwo-progress-circle { width: 84px; height: 84px; }
+.bento-progress-stage .bwo-progress-circle svg { width: 84px; height: 84px; }
+.bento-progress-stage .bwo-progress-circle-label { font-size: 17px; font-weight: 700; }
+.bento-progress-caption {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--bwo-text-body);
+  line-height: 1.4;
+  /* Was 26ch — caused overflow in the 180 px tile when the copy wrapped to 3
+     lines. Cap shorter so the caption stays 1-2 lines and the tile breathes. */
+  max-width: 100%;
+  text-align: center;
+}
+
+/* Tabs tile */
+.bento-tile--tabs { justify-content: flex-start; }
+.bento-tabs-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-  padding: 8px 10px;
-  font-size: 13px;
-  color: var(--bwo-text);
-  border-radius: 6px;
-  transition: background 0.12s ease;
+  margin-top: 4px;
 }
-:root.boo-dark .bento-cmd-row { color: var(--bwo-text-body); }
-.bento-cmd-row.is-active {
+.bento-tabs-stage .bwo-tabs-list { gap: 4px; }
+.bento-tabs-stage .bwo-tabs-trigger { padding: 6px 10px; font-size: 12px; }
+.bento-tabs-body {
+  font-size: 12.5px;
+  color: var(--bwo-text-body);
+  line-height: 1.45;
+}
+.bento-tabs-body strong { color: var(--bwo-text); font-size: 18px; font-weight: 700; }
+
+/* Team tile (avatar stack) */
+.bento-tile--team { justify-content: space-between; }
+.bento-team-stack {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.bento-team-stack .bwo-avatar { font-size: 12.5px; }
+.bento-team-caption {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--bwo-text-body);
+  line-height: 1.45;
+  max-width: 30ch;
+}
+.bento-team-caption code {
+  font-size: 11px;
   background: var(--bwo-grey-4);
-  color: var(--bwo-black);
-  font-weight: 500;
-}
-:root.boo-dark .bento-cmd-row.is-active { color: var(--bwo-white); }
-.bento-cmd-icon {
-  display: inline-flex;
-  color: var(--bwo-text-body);
-  opacity: 0.7;
-}
-.bento-cmd-meta {
-  margin-left: auto;
-  font-family: var(--bwo-font-mono);
-  font-size: 10.5px;
-  color: var(--bwo-text-body);
-  opacity: 0.55;
   border: 1px solid var(--bwo-border);
   border-radius: 4px;
-  padding: 1px 6px;
+  padding: 1px 5px;
+  color: var(--bwo-black);
 }
+:root.boo-dark .bento-team-caption code { color: var(--bwo-white); }
 
 /* DataTable tile */
 .bento-tile--data { padding: 14px; }
@@ -1215,25 +1263,186 @@ footer {
     grid-template-columns: 1fr 1fr !important;
     grid-template-areas:
       'stat stat'
+      'theme theme'
+      'team data'
       'cal cal'
-      'cmd data'
-      'forms theme' !important;
+      'progress tabs'
+      'alert alert'
+      'settings settings' !important;
     grid-template-rows: auto !important;
   }
-  .bento-tile--cal { min-height: 280px; }
+  .bento-tile--cal { min-height: 240px; }
+  .bento-tile--theme { min-height: 200px; }
 }
 @media (max-width: 560px) {
   .hero-bento-grid {
     grid-template-columns: 1fr !important;
     grid-template-areas:
       'stat'
-      'cal'
-      'cmd'
+      'theme'
+      'team'
       'data'
-      'forms'
-      'theme' !important;
+      'cal'
+      'progress'
+      'tabs'
+      'alert'
+      'settings' !important;
   }
 }
+
+/* ====== Landing section grids (consolidated responsive) ============= */
+
+.stats-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+@media (max-width: 760px) {
+  .stats-strip-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 32px; }
+}
+@media (max-width: 420px) {
+  .stats-strip-grid { grid-template-columns: 1fr; }
+}
+
+.live-demo-card-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 32px;
+  align-items: stretch;
+}
+@media (max-width: 700px) {
+  .live-demo-card-inner { grid-template-columns: 1fr; gap: 24px; }
+  .live-demo-divider { display: none; }
+}
+
+.feature-grid-rich {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+@media (max-width: 960px) {
+  .feature-grid-rich { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .feature-grid-rich { grid-template-columns: 1fr; }
+}
+
+.motion-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+@media (max-width: 700px) {
+  .motion-showcase-grid { grid-template-columns: 1fr; }
+}
+
+.code-side-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+@media (max-width: 720px) {
+  .code-side-grid { grid-template-columns: 1fr; }
+}
+
+/* ====== Component gallery ====== */
+
+.component-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 920px) {
+  .component-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 580px) {
+  .component-gallery-grid { grid-template-columns: 1fr; }
+}
+
+.component-gallery-tile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.component-gallery-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: 18px 8px 4px;
+}
+
+/* Stretch variant — for tiles whose content needs full stage width (Slider,
+   Combobox, anything with a draggable/typeable surface). Set explicitly via the
+   `stretch` prop on GalleryTile instead of `:has()` so older browsers and
+   nested-state corner cases all work the same way. */
+.component-gallery-stage--stretch {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 18px 16px;
+}
+.gallery-slider-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.gallery-slider-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--bwo-text-body);
+}
+.gallery-slider-val {
+  font-variant-numeric: tabular-nums;
+  color: var(--bwo-text);
+  font-weight: 500;
+}
+
+/* ====== Framework pills ====== */
+
+.framework-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.framework-pill {
+  appearance: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 12px 18px;
+  background: var(--bwo-surface);
+  border: 1px solid var(--bwo-border);
+  border-radius: 12px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.framework-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--bwo-shadow-md);
+  border-color: rgba(0, 0, 0, 0.16);
+}
+.framework-pill-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bwo-text);
+}
+.framework-pill-tag {
+  font-size: 11px;
+  font-family: var(--bwo-font-mono, ui-monospace, monospace);
+  color: var(--bwo-text-body);
+}
+:root.boo-dark .framework-pill { border-color: rgba(255, 255, 255, 0.1); }
+:root.boo-dark .framework-pill:hover { border-color: rgba(255, 255, 255, 0.2); }
 
 /* ====== Marquee demo bits ====== */
 

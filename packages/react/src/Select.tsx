@@ -568,6 +568,7 @@ export const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(func
               }
               tabIndex={-1}
               data-state={state}
+              data-bwo-floating=""
               style={{
                 position: 'fixed',
                 top: pos?.top ?? -9999,

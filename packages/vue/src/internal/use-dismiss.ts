@@ -35,6 +35,7 @@ export function useDismiss({
         for (const r of refs) {
           if (r.value && r.value.contains(target)) return;
         }
+        if (target instanceof Element && target.closest('[data-bwo-floating]')) return;
         onDismiss();
       };
       document.addEventListener('pointerdown', pointerHandler, true);
