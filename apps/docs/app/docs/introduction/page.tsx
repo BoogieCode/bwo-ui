@@ -55,9 +55,9 @@ export default function IntroductionPage() {
           dependency, so you do not double-bundle it.
         </li>
         <li>
-          <strong>Composable &amp; Predictable:</strong> headless Radix UI bases the
-          interactive primitives, so accessibility, focus management, and keyboard handling
-          are handled for you.
+          <strong>Composable &amp; Predictable:</strong> every interactive primitive is built
+          from scratch with accessibility, focus management, and keyboard handling baked in
+          — no external UI library underneath.
         </li>
       </ul>
 
@@ -140,12 +140,14 @@ export default function IntroductionPage() {
 
       <h2>Composable &amp; Predictable</h2>
       <p>
-        The React UI primitives sit on top of Radix UI; the Vue side uses Reka UI. That gives
-        you accessibility (focus traps, escape handlers, ARIA wiring, keyboard navigation,
-        SR-friendly markup) for free — but the visual layer is entirely ours, themed with{' '}
-        <code>--bwo-*</code> variables. Same applies to the form primitives:{' '}
-        <code>Select</code>, <code>Dialog</code>, <code>Tooltip</code>, <code>Popover</code>,
-        and <code>Toast</code> behave consistently across the three framework wrappers.
+        Every interactive primitive is written from scratch on a shared in-house stack
+        (<code>Portal</code>, <code>Presence</code>, <code>useDismiss</code>,{' '}
+        <code>useFocusTrap</code>, <code>useScrollLock</code>, floating positioning). You
+        get accessibility (focus traps, escape handlers, ARIA wiring, keyboard navigation,
+        SR-friendly markup) plus a visual layer that is entirely ours, themed with{' '}
+        <code>--bwo-*</code> variables. <code>Select</code>, <code>Dialog</code>,{' '}
+        <code>Tooltip</code>, <code>Popover</code>, and <code>Toast</code> behave
+        consistently across every framework wrapper.
       </p>
 
       <h2>Ready to install?</h2>

@@ -7,7 +7,10 @@ export default function Page() {
   return (
     <>
       <h1>Popover</h1>
-      <p className="lead">Click-triggered floating panel with focus management. Radix-powered.</p>
+      <p className="lead">
+        Click-triggered floating panel with focus management. Built from scratch on the
+        in-house floating + dismiss stack.
+      </p>
 
       <PopoverDemo />
 

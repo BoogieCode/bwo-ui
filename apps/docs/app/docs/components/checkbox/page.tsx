@@ -8,7 +8,7 @@ export default function Page() {
     <>
       <h1>Checkbox</h1>
       <p className="lead">
-        Accessible checkbox built on Radix. Supports the indeterminate state. Pair with a{' '}
+        Accessible checkbox built from scratch. Supports the indeterminate state. Pair with a{' '}
         <code>&lt;label&gt;</code> using the standard <code>htmlFor</code> association.
       </p>
 
@@ -22,14 +22,9 @@ export default function Page() {
 </label>`}</CodeBlock>
 
       <p>
-        All props from Radix&apos;s{' '}
-        <code>
-          <a href="https://www.radix-ui.com/primitives/docs/components/checkbox#root" target="_blank" rel="noopener noreferrer">
-            Checkbox.Root
-          </a>
-        </code>{' '}
-        are forwarded — <code>checked</code>, <code>defaultChecked</code>, <code>onCheckedChange</code>,{' '}
-        <code>disabled</code>, etc.
+        Props: <code>checked</code>, <code>defaultChecked</code> (accepts{' '}
+        <code>boolean | &apos;indeterminate&apos;</code>), <code>onCheckedChange</code>,{' '}
+        <code>disabled</code>, <code>name</code>, <code>value</code>, <code>required</code>.
       </p>
     </>
   );

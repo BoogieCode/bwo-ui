@@ -51,16 +51,16 @@ export function StatsStrip() {
         }}
       >
         <Reveal direction="bottom" delay={0} duration={0.8}>
-          <Stat label="Components" count={30} />
+          <Stat label="Components" count={48} />
         </Reveal>
         <Reveal direction="bottom" delay={0.1} duration={0.8}>
-          <Stat label="Motion effects" count={10} />
+          <Stat label="Motion effects" count={18} />
         </Reveal>
         <Reveal direction="bottom" delay={0.2} duration={0.8}>
           <Stat label="Frameworks" count={3} />
         </Reveal>
         <Reveal direction="bottom" delay={0.3} duration={0.8}>
-          <Stat label="React bundle" value="10kb" hint="ESM, gzipped" />
+          <Stat label="Runtime deps" value="0" hint="every primitive owned" />
         </Reveal>
       </div>
     </section>
@@ -98,8 +98,8 @@ export function LiveDemoStrip() {
             color: 'var(--bwo-text-body)',
           }}
         >
-          Every component shipped with full ARIA, keyboard navigation, focus management, and the
-          same boogie tokens.
+          Every component ships with ARIA, keyboard navigation, focus management, and the same
+          boogie tokens — written from scratch, no headless library underneath.
         </p>
       </Reveal>
 
@@ -295,9 +295,9 @@ export function FeatureGrid() {
       tags: ['SplitText', 'ScrollTrigger', 'Flip'],
     },
     {
-      title: 'Radix UI under the hood',
-      desc: 'Every stateful component is built on Radix primitives (and reka-ui in Vue) for full a11y, focus management, and keyboard navigation.',
-      tags: ['Radix', 'a11y', 'Reka UI'],
+      title: 'Owned end-to-end',
+      desc: 'Every primitive — Dialog, Popover, Tooltip, Select, Tabs, Accordion, Toast, Calendar, Combobox — written from scratch. No headless UI library underneath. No command-palette dep. No date-picker dep.',
+      tags: ['Zero deps', 'From scratch', 'a11y'],
     },
     {
       title: 'CSS variables for theming',
@@ -310,9 +310,9 @@ export function FeatureGrid() {
       tags: ['Tokens', 'Inter', 'Pill UI'],
     },
     {
-      title: 'Tiny by default',
-      desc: 'React 25 KB ESM. GSAP is a peer dependency. Tree-shake what you don’t use.',
-      tags: ['25 KB', 'Peer dep', 'Tree-shake'],
+      title: 'ESM-first, tree-shakable',
+      desc: 'Ship only what you import. GSAP is a peer dep — pay nothing for effects you don’t use.',
+      tags: ['ESM', 'Peer dep', 'Tree-shake'],
     },
     {
       title: 'MIT, public, on npm',
@@ -502,8 +502,8 @@ export function BigCTA() {
             >
               Ship the boogie.
             </SplitReveal>
-            <p style={{ maxWidth: '44ch', margin: '0 auto 28px', color: 'rgba(255,255,255,0.75)' }}>
-              Three frameworks. One install. Zero dependencies beyond peer-GSAP.
+            <p style={{ maxWidth: '46ch', margin: '0 auto 28px', color: 'rgba(255,255,255,0.75)' }}>
+              48 primitives. Three frameworks. Zero runtime dependencies (GSAP is peer).
             </p>
             <Magnetic strength={0.4}>
               <Button
@@ -516,7 +516,7 @@ export function BigCTA() {
                   letterSpacing: '0.02em',
                 }}
               >
-                pnpm add @bwo-ui/react
+                npm i @bwo-ui/react
               </Button>
             </Magnetic>
           </div>

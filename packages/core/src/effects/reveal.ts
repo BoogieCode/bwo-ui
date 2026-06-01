@@ -2,7 +2,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export type RevealDirection = 'left' | 'right' | 'top' | 'bottom';
 
@@ -56,7 +56,7 @@ export function createReveal(target: Target, options: RevealOptions = {}): Motio
   const el = resolveTarget(target);
   if (!el || !(el instanceof HTMLElement)) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
 
   const tween = gsap.fromTo(
     el,

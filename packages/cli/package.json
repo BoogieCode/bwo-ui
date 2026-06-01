@@ -1,0 +1,51 @@
+{
+  "name": "@bwo-ui/cli",
+  "version": "0.4.0",
+  "description": "Copy bwo-ui component source straight into your project. No runtime dep, you own the code.",
+  "license": "MIT",
+  "author": "BOOGIE WOOGIE S.R.L. <contact@boogie.ro>",
+  "homepage": "https://github.com/BoogieCode/bwo-ui/tree/master/packages/cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BoogieCode/bwo-ui.git",
+    "directory": "packages/cli"
+  },
+  "keywords": [
+    "bwo-ui",
+    "cli",
+    "components",
+    "scaffolding",
+    "copy"
+  ],
+  "type": "module",
+  "bin": {
+    "bwo": "./bin/bwo.js",
+    "bwo-ui": "./bin/bwo.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "snapshot",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node scripts/snapshot.mjs && tsup",
+    "dev": "node scripts/snapshot.mjs && tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rimraf dist snapshot .turbo"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8",
+    "rimraf": "^6.0.1",
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

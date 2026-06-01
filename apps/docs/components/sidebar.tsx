@@ -50,6 +50,7 @@ const groups = [
       { href: '/docs/components/calendar', label: 'Calendar' },
       { href: '/docs/components/date-picker', label: 'DatePicker' },
       { href: '/docs/components/stepper', label: 'Stepper' },
+      { href: '/docs/components/rate', label: 'Rate' },
     ],
   },
   {

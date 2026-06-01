@@ -1,7 +1,7 @@
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface PinOptions {
   /** ScrollTrigger start. Default: `'top top'`. */
@@ -45,7 +45,7 @@ export function createPin(target: Target, options: PinOptions = {}): MotionInsta
     return { destroy: () => {} };
   }
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
 
   const trigger = ScrollTrigger.create({
     trigger: el,

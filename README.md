@@ -5,14 +5,14 @@
 `bwo-ui` is a tiny set of motion primitives — scroll reveals, magnetic buttons, marquees, animated layout shifts — built on top of GSAP and shipped once for every framework you might use.
 
 ```bash
-# react
-pnpm add @bwo-ui/react gsap
+# React
+npm  i   @bwo-ui/react gsap     # or: pnpm add / yarn add / bun add
 
-# vue
-pnpm add @bwo-ui/vue gsap
+# Vue
+npm  i   @bwo-ui/vue gsap       # or: pnpm add / yarn add / bun add
 
-# svelte
-pnpm add @bwo-ui/svelte gsap
+# Svelte
+npm  i   @bwo-ui/svelte gsap    # or: pnpm add / yarn add / bun add
 ```
 
 GSAP is a peer dependency — install it once in your app.

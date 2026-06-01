@@ -2,7 +2,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface CountUpOptions {
   /** End value. Default: parsed from element textContent. */
@@ -64,7 +64,7 @@ export function createCountUp(target: Target, options: CountUpOptions = {}): Mot
   const el = resolveTarget(target);
   if (!el || !(el instanceof HTMLElement)) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
 
   // Resolve target value.
   let to = opts.to;

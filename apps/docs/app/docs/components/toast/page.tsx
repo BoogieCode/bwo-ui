@@ -37,7 +37,7 @@ function SaveButton() {
 }`}</CodeBlock>
 
       <p>
-        For finer control, use the Radix-style primitives directly:{' '}
+        For finer control, use the lower-level primitives directly:{' '}
         <code>Toast.Provider</code>, <code>Toast.Root</code>, <code>Toast.Title</code>,
         <code>Toast.Description</code>, <code>Toast.Close</code>, <code>Toast.Viewport</code>.
       </p>

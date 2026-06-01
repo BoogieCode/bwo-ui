@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <>
       <h1>Switch</h1>
-      <p className="lead">Toggle built on Radix. Spring-eased thumb, ARIA-correct.</p>
+      <p className="lead">Toggle built from scratch. Spring-eased thumb, ARIA-correct.</p>
 
       <SwitchDemo />
 
@@ -19,7 +19,7 @@ export default function Page() {
 </label>`}</CodeBlock>
       <p>
         Props: <code>checked</code>, <code>defaultChecked</code>, <code>onCheckedChange</code>,{' '}
-        <code>disabled</code> (all forwarded to Radix).
+        <code>disabled</code>, <code>name</code>, <code>value</code>, <code>required</code>.
       </p>
     </>
   );

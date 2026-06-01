@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 import { registerPlugins } from '../register';
 import type { MotionInstance } from '../types';
-import { isBrowser } from '../types';
+import { isBrowser, mergeOptions } from '../types';
 
 export interface MagneticCursorOptions {
   /** Pixel size of the custom cursor dot. Default: `12`. */
@@ -44,7 +44,7 @@ export function createMagneticCursor(options: MagneticCursorOptions = {}): Motio
   }
 
   registerPlugins();
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
   const hoverColor = opts.hoverColor ?? `${opts.color}33`;
 
   const dot = document.createElement('div');

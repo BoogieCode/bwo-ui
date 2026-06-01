@@ -12,16 +12,21 @@ export default function Page() {
       <RadioGroupDemo />
 
       <h2>Usage</h2>
-      <CodeBlock lang="tsx">{`import { RadioGroup } from '@bwo-ui/react';
+      <CodeBlock lang="tsx">{`import { RadioGroupRoot, RadioGroupItem } from '@bwo-ui/react';
 
-<RadioGroup.Root defaultValue="monthly">
+const [billing, setBilling] = useState('monthly');
+
+<RadioGroupRoot value={billing} onValueChange={setBilling}>
   <label style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-    <RadioGroup.Item value="monthly" /> Monthly
+    <RadioGroupItem value="monthly" /> Monthly — €19/mo
   </label>
   <label style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-    <RadioGroup.Item value="annual" /> Annual (save 20%)
+    <RadioGroupItem value="annual" /> Annual — €182/yr (save 20%)
   </label>
-</RadioGroup.Root>`}</CodeBlock>
+  <label style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+    <RadioGroupItem value="lifetime" /> Lifetime — €499 once
+  </label>
+</RadioGroupRoot>`}</CodeBlock>
     </>
   );
 }

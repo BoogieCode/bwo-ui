@@ -2,7 +2,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface ParallaxOptions {
   /**
@@ -41,7 +41,7 @@ export function createParallax(
   const el = resolveTarget(target);
   if (!el) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
   const triggerEl = (opts.trigger ? resolveTarget(opts.trigger) : el) ?? el;
 
   const tween = gsap.fromTo(

@@ -3,7 +3,7 @@ import { Draggable } from 'gsap/Draggable';
 import { InertiaPlugin } from 'gsap/InertiaPlugin';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export type MarqueeDirection = 'left' | 'right' | 'up' | 'down';
 
@@ -45,7 +45,7 @@ export function createMarquee(target: Target, options: MarqueeOptions = {}): Mot
   const container = resolveTarget(target);
   if (!container || !(container instanceof HTMLElement)) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
   const horizontal = opts.direction === 'left' || opts.direction === 'right';
   const sign = opts.direction === 'left' || opts.direction === 'up' ? -1 : 1;
 

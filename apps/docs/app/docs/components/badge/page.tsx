@@ -20,7 +20,10 @@ export default function Page() {
 
 <Badge>Default</Badge>
 <Badge variant="solid">Solid</Badge>
-<Badge variant="green">Green</Badge>`}</CodeBlock>
+<Badge variant="green">New</Badge>
+<Badge variant="yellow">Beta</Badge>
+<Badge variant="red">Hot</Badge>
+<Badge variant="soft">Soft</Badge>`}</CodeBlock>
 
       <h2>Props</h2>
       <PropsTable

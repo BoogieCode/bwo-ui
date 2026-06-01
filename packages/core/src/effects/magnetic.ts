@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface MagneticOptions {
   /** How strongly the element follows the cursor (0 = none, 1 = full). Default: `0.35`. */
@@ -30,7 +30,7 @@ export function createMagnetic(target: Target, options: MagneticOptions = {}): M
   const el = resolveTarget(target);
   if (!el || !(el instanceof HTMLElement)) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
   const mover = (opts.child ? el.querySelector<HTMLElement>(opts.child) : el) ?? el;
 
   const quickX = gsap.quickTo(mover, 'x', { duration: opts.duration, ease: opts.ease });

@@ -5,7 +5,10 @@ GSAP-powered motion and boogie-themed UI styles for Svelte 4 / Svelte 5.
 ## Install
 
 ```bash
-pnpm add @bwo-ui/svelte gsap
+npm  i   @bwo-ui/svelte gsap
+# or: pnpm add @bwo-ui/svelte gsap
+# or: yarn add @bwo-ui/svelte gsap
+# or: bun  add @bwo-ui/svelte gsap
 ```
 
 ## Two ways to use it
@@ -65,22 +68,14 @@ For stateless UI (buttons, inputs, badges, cards, etc.), apply the bwo-ui class 
 
 The full class catalog is documented at the [bwo-ui docs site](https://bwo-ui.dev/docs/components/button).
 
-### Stateful components (Select, Checkbox, Switch, Slider)
+### Stateful components
 
-For Radix-style stateful components with full accessibility, install [`bits-ui`](https://bits-ui.com) alongside and apply our class names:
+First-class Svelte 5 components for Select, Checkbox, Switch, Slider, Dialog, Popover,
+Tooltip, Tabs, Accordion, Toast, and the rest are tracked on the roadmap. For now, apply
+the `bwo-*` class names to your own markup and pair with `@bwo-ui/core/styles.css`.
 
-```svelte
-<script lang="ts">
-  import { Switch } from 'bits-ui';
-  import '@bwo-ui/svelte/styles.css';
-</script>
-
-<Switch.Root class="bwo-switch">
-  <Switch.Thumb class="bwo-switch-thumb" />
-</Switch.Root>
-```
-
-Native Svelte components with these primitives built in are planned for **v0.3** — track [the roadmap on GitHub](https://github.com/BoogieCode/bwo-ui).
+Native Svelte components are planned for the next release — track [the roadmap on
+GitHub](https://github.com/BoogieCode/bwo-ui).
 
 ## License
 

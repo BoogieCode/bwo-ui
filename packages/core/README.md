@@ -7,7 +7,10 @@ Most users do not depend on this package directly — install the wrapper for yo
 ## Install
 
 ```bash
-pnpm add @bwo-ui/core gsap
+npm  i   @bwo-ui/core gsap
+# or: pnpm add @bwo-ui/core gsap
+# or: yarn add @bwo-ui/core gsap
+# or: bun  add @bwo-ui/core gsap
 ```
 
 `gsap` is a peer dependency.

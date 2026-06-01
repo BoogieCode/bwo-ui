@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface RippleOptions {
   /** Ripple color. Default: `'rgba(255,255,255,0.45)'`. */
@@ -36,7 +36,7 @@ export function createRipple(target: Target, options: RippleOptions = {}): Motio
   const el = resolveTarget(target);
   if (!el || !(el instanceof HTMLElement)) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
 
   const previousPosition = el.style.position;
   const previousOverflow = el.style.overflow;

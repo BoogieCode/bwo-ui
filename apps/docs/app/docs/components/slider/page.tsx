@@ -8,8 +8,8 @@ export default function Page() {
     <>
       <h1>Slider</h1>
       <p className="lead">
-        Range slider built on Radix. Single-thumb by default; pass an array of two values for a
-        range. Full keyboard and pointer support.
+        Range slider built from scratch. Single-thumb by default; pass an array of two values
+        for a range. Full keyboard and pointer support.
       </p>
 
       <SliderDemo />
@@ -21,14 +21,13 @@ export default function Page() {
 
 // range:
 <Slider defaultValue={[20, 80]} min={0} max={100} step={1} />`}</CodeBlock>
+
       <p>
-        All props from Radix&apos;s{' '}
-        <code>
-          <a href="https://www.radix-ui.com/primitives/docs/components/slider" target="_blank" rel="noopener noreferrer">
-            Slider.Root
-          </a>
-        </code>{' '}
-        are forwarded.
+        Props: <code>value</code>, <code>defaultValue</code>, <code>onValueChange</code>,{' '}
+        <code>onValueCommit</code>, <code>min</code>, <code>max</code>, <code>step</code>,{' '}
+        <code>largeStep</code>, <code>orientation</code> (<code>&apos;horizontal&apos;</code> /{' '}
+        <code>&apos;vertical&apos;</code>), <code>inverted</code>, <code>disabled</code>,{' '}
+        <code>name</code>.
       </p>
     </>
   );

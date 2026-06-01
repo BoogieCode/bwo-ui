@@ -20,7 +20,9 @@ export default function Page() {
 
 <Button>Primary</Button>
 <Button variant="green">Green</Button>
+<Button variant="yellow">Yellow</Button>
 <Button variant="ghost">Ghost</Button>
+<Button variant="outline">Outline</Button>
 <Button variant="solid">Solid CTA</Button>`}</CodeBlock>
 
       <h2>Props</h2>

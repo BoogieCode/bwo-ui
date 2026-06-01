@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface TiltOptions {
   /** Maximum rotation in degrees on each axis. Default: `14`. */
@@ -45,7 +45,7 @@ export function createTilt(target: Target, options: TiltOptions = {}): MotionIns
     return { destroy: () => {} };
   }
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
   const dir = opts.reverse ? -1 : 1;
 
   const previousPerspective = el.style.perspective;

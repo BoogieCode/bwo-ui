@@ -2,7 +2,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface BlurOptions {
   /** Initial blur in px. Default: `16`. */
@@ -50,7 +50,7 @@ export function createBlur(target: Target, options: BlurOptions = {}): MotionIns
   const el = resolveTarget(target);
   if (!el || !(el instanceof HTMLElement)) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
 
   const tween = gsap.fromTo(
     el,

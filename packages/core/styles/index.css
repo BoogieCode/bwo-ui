@@ -231,7 +231,7 @@
   font-family: inherit;
 }
 
-/* ─── Select (Radix-styled) ───────────────────────────────────────────────── */
+/* ─── Select ──────────────────────────────────────────────────────────────── */
 
 .bwo-select-trigger {
   display: inline-flex;
@@ -246,7 +246,7 @@
 
 .bwo-select-content {
   z-index: 50;
-  min-width: var(--radix-select-trigger-width, 200px);
+  min-width: 200px;
   background: var(--bwo-white);
   border: 1px solid var(--bwo-border);
   border-radius: var(--bwo-radius-sm);
@@ -276,6 +276,104 @@
   justify-content: center;
   color: var(--bwo-red);
 }
+
+/* Search input inside SelectContent */
+.bwo-select-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--bwo-border);
+  margin: -6px -6px 4px;
+  background: var(--bwo-grey-4);
+}
+.bwo-select-search-icon { color: var(--bwo-text-body); opacity: 0.55; flex-shrink: 0; }
+.bwo-select-search-input {
+  flex: 1;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--bwo-black);
+  padding: 0;
+  min-width: 0;
+}
+.bwo-select-search-input::placeholder { color: var(--bwo-text-body); opacity: 0.55; }
+
+/* Multi-select checkbox indicator on each item */
+.bwo-select-item[data-multiple] {
+  padding-left: 8px;
+}
+.bwo-select-checkbox {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1.5px solid var(--bwo-border-2);
+  background: var(--bwo-white);
+  color: var(--bwo-white);
+  flex-shrink: 0;
+  transition: var(--bwo-transition);
+}
+.bwo-select-checkbox[data-state='checked'] {
+  background: var(--bwo-black);
+  border-color: var(--bwo-black);
+}
+
+/* Empty state for searchable */
+.bwo-select-empty {
+  padding: 16px;
+  font-size: 13px;
+  color: var(--bwo-text-body);
+  text-align: center;
+}
+
+/* Footer (multi-select count + clear) */
+.bwo-select-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  margin: 4px -6px -6px;
+  border-top: 1px solid var(--bwo-border);
+  font-size: 12px;
+}
+.bwo-select-count {
+  color: var(--bwo-text-body);
+  font-weight: 500;
+}
+.bwo-select-clear {
+  appearance: none;
+  background: transparent;
+  border: none;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--bwo-red);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.bwo-select-clear:hover { background: var(--bwo-grey-4); }
+
+/* Dark mode for new bits */
+:root.boo-dark .bwo-select-search { background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.08); }
+:root.boo-dark .bwo-select-search-input { color: var(--bwo-white); }
+:root.boo-dark .bwo-select-checkbox {
+  background: var(--bwo-surface);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+:root.boo-dark .bwo-select-checkbox[data-state='checked'] {
+  background: var(--bwo-white);
+  border-color: var(--bwo-white);
+  color: var(--bwo-black);
+}
+:root.boo-dark .bwo-select-footer { border-color: rgba(255, 255, 255, 0.08); }
 
 /* ─── Checkbox ────────────────────────────────────────────────────────────── */
 
@@ -336,7 +434,7 @@
 }
 .bwo-switch[data-state='checked'] .bwo-switch-thumb { transform: translateX(21px); }
 
-/* ─── Slider (Radix) ──────────────────────────────────────────────────────── */
+/* ─── Slider ──────────────────────────────────────────────────────────────── */
 
 .bwo-slider {
   position: relative;
@@ -668,12 +766,12 @@
 .bwo-accordion-content[data-state='closed'] { animation: bwo-accordion-up 0.2s ease-out; }
 .bwo-accordion-content-inner { padding: 0 0 18px; max-width: 70ch; }
 @keyframes bwo-accordion-down {
-  from { height: 0; }
-  to { height: var(--radix-accordion-content-height); }
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 @keyframes bwo-accordion-up {
-  from { height: var(--radix-accordion-content-height); }
-  to { height: 0; }
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-4px); }
 }
 
 /* ─── RadioGroup ──────────────────────────────────────────────────────────── */
@@ -1065,6 +1163,21 @@
   margin: 0 auto;
   padding: 0;
   background: var(--bwo-bg);
+}
+.bwo-app-shell[data-align='left'],
+.bwo-app-shell--left {
+  margin-left: 0;
+  margin-right: auto;
+}
+.bwo-app-shell[data-align='right'],
+.bwo-app-shell--right {
+  margin-left: auto;
+  margin-right: 0;
+}
+.bwo-app-shell[data-align='center'],
+.bwo-app-shell--center {
+  margin-left: auto;
+  margin-right: auto;
 }
 .bwo-app-shell-header {
   display: flex;
@@ -2587,6 +2700,85 @@ button.bwo-step-indicator { cursor: pointer; }
   cursor: not-allowed;
 }
 .bwo-numberinput-stepper--up { border-bottom: 1px solid var(--bwo-border); }
+
+/* ─── Rate ──────────────────────────────────────────────────────────────── */
+
+.bwo-rate {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--bwo-text-muted);
+  --bwo-rate-color: var(--bwo-yellow);
+  --bwo-rate-icon-size: 22px;
+  outline: none;
+  user-select: none;
+}
+.bwo-rate--sm { --bwo-rate-icon-size: 16px; gap: 2px; }
+.bwo-rate--md { --bwo-rate-icon-size: 22px; gap: 4px; }
+.bwo-rate--lg { --bwo-rate-icon-size: 32px; gap: 6px; }
+
+.bwo-rate:focus-visible {
+  outline: 2px solid var(--bwo-focus-ring);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.bwo-rate[data-disabled] { opacity: 0.45; cursor: not-allowed; }
+.bwo-rate[data-readonly] { cursor: default; }
+
+.bwo-rate-slot {
+  position: relative;
+  display: inline-flex;
+  width: var(--bwo-rate-icon-size);
+  height: var(--bwo-rate-icon-size);
+  transition: transform 0.12s ease;
+}
+.bwo-rate:not([data-readonly]):not([data-disabled]) .bwo-rate-slot:hover {
+  transform: scale(1.08);
+}
+.bwo-rate-empty,
+.bwo-rate-full {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  pointer-events: none;
+}
+.bwo-rate-empty {
+  color: color-mix(in srgb, currentColor 28%, transparent);
+}
+.bwo-rate-full {
+  color: var(--bwo-rate-color);
+  transition: clip-path 0.12s ease;
+}
+.bwo-rate-empty svg,
+.bwo-rate-full svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.bwo-rate-hit {
+  appearance: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1;
+}
+.bwo-rate-hit--full { left: 0; width: 100%; }
+.bwo-rate-hit--left { left: 0; width: 50%; }
+.bwo-rate-hit--right { left: 50%; width: 50%; }
+.bwo-rate-value {
+  margin-left: 8px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--bwo-text-muted);
+}
+
+:root.boo-dark .bwo-rate-empty {
+  color: rgba(255, 255, 255, 0.18);
+}
 
 /* ─── Dark mode — newer batch ───────────────────────────────────────────── */
 

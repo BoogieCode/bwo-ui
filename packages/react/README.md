@@ -5,7 +5,10 @@ GSAP-powered animation components for React 18+.
 ## Install
 
 ```bash
-pnpm add @bwo-ui/react gsap
+npm  i   @bwo-ui/react gsap
+# or: pnpm add @bwo-ui/react gsap
+# or: yarn add @bwo-ui/react gsap
+# or: bun  add @bwo-ui/react gsap
 ```
 
 `gsap` is a peer dependency; `@bwo-ui/core` is bundled in.

@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface ScrambleTextOptions {
   /** The final text to settle on. Default: the element's current textContent. */
@@ -43,7 +43,7 @@ export function createScrambleText(
   const el = resolveTarget(target);
   if (!el || !(el instanceof HTMLElement)) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
   const finalText = opts.text ?? el.textContent ?? '';
   const charPool = opts.chars;
   let rafId: number | null = null;

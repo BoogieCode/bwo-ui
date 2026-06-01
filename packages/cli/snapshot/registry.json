@@ -1,0 +1,764 @@
+{
+  "files": {
+    "Accordion.tsx": {
+      "deps": [
+        "internal/use-controllable.ts",
+        "utils.ts"
+      ]
+    },
+    "Alert.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "AppShell.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Avatar.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Badge.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Blur.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "BootScreen.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "BottomNavigation.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Breadcrumb.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Button.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Calendar.tsx": {
+      "deps": [
+        "utils.ts",
+        "internal/date.ts"
+      ]
+    },
+    "Card.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Carousel.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Checkbox.tsx": {
+      "deps": [
+        "internal/use-controllable.ts",
+        "utils.ts"
+      ]
+    },
+    "Combobox.tsx": {
+      "deps": [
+        "utils.ts",
+        "internal/floating.ts"
+      ]
+    },
+    "Command.tsx": {
+      "deps": [
+        "Dialog.tsx",
+        "utils.ts"
+      ]
+    },
+    "ContextMenu.tsx": {
+      "deps": [
+        "internal/menu.tsx",
+        "internal/floating.ts"
+      ]
+    },
+    "CountUp.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "DataTable.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "DatePicker.tsx": {
+      "deps": [
+        "Calendar.tsx",
+        "Popover.tsx",
+        "utils.ts",
+        "internal/date.ts"
+      ]
+    },
+    "Dialog.tsx": {
+      "deps": [
+        "internal/portal.tsx",
+        "internal/presence.tsx",
+        "internal/use-controllable.ts",
+        "internal/use-dismiss.ts",
+        "internal/use-focus-trap.ts",
+        "internal/scroll-lock.ts",
+        "utils.ts"
+      ]
+    },
+    "DropdownMenu.tsx": {
+      "deps": [
+        "internal/menu.tsx"
+      ]
+    },
+    "FlipList.tsx": {
+      "deps": []
+    },
+    "FloatingActionButton.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "FormField.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Glow.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "GradientText.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "Grid.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "IconButton.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "index.ts": {
+      "deps": [
+        "SplitReveal.tsx",
+        "Magnetic.tsx",
+        "Marquee.tsx",
+        "FlipList.tsx",
+        "Parallax.tsx",
+        "Reveal.tsx",
+        "CountUp.tsx",
+        "ScrambleText.tsx",
+        "TextGlitch.tsx",
+        "MagneticCursor.tsx",
+        "Tilt.tsx",
+        "Spotlight.tsx",
+        "ScrollProgress.tsx",
+        "Stagger.tsx",
+        "GradientText.tsx",
+        "Ripple.tsx",
+        "Blur.tsx",
+        "Pin.tsx",
+        "use-motion.ts",
+        "utils.ts",
+        "Glow.tsx",
+        "Lean.tsx",
+        "MediaZoom.tsx",
+        "BootScreen.tsx",
+        "Preanimate.tsx",
+        "Typewriter.tsx",
+        "Button.tsx",
+        "IconButton.tsx",
+        "Input.tsx",
+        "Textarea.tsx",
+        "FormField.tsx",
+        "Select.tsx",
+        "Checkbox.tsx",
+        "Switch.tsx",
+        "Slider.tsx",
+        "RadioGroup.tsx",
+        "Badge.tsx",
+        "Card.tsx",
+        "AppShell.tsx",
+        "Motion.tsx",
+        "Avatar.tsx",
+        "Skeleton.tsx",
+        "Progress.tsx",
+        "Separator.tsx",
+        "Alert.tsx",
+        "Stat.tsx",
+        "Dialog.tsx",
+        "Toast.tsx",
+        "Tooltip.tsx",
+        "Popover.tsx",
+        "Tabs.tsx",
+        "Accordion.tsx",
+        "Breadcrumb.tsx",
+        "Pagination.tsx",
+        "Stepper.tsx",
+        "Sheet.tsx",
+        "DropdownMenu.tsx",
+        "ContextMenu.tsx",
+        "Combobox.tsx",
+        "Command.tsx",
+        "Calendar.tsx",
+        "DatePicker.tsx",
+        "DataTable.tsx",
+        "Timeline.tsx",
+        "Grid.tsx",
+        "FloatingActionButton.tsx",
+        "BottomNavigation.tsx",
+        "Carousel.tsx",
+        "NumberInput.tsx",
+        "Rate.tsx"
+      ]
+    },
+    "Input.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "internal/date.ts": {
+      "deps": []
+    },
+    "internal/floating.ts": {
+      "deps": []
+    },
+    "internal/menu.tsx": {
+      "deps": [
+        "internal/floating.ts"
+      ]
+    },
+    "internal/portal.tsx": {
+      "deps": []
+    },
+    "internal/presence.tsx": {
+      "deps": []
+    },
+    "internal/scroll-lock.ts": {
+      "deps": []
+    },
+    "internal/use-controllable.ts": {
+      "deps": []
+    },
+    "internal/use-dismiss.ts": {
+      "deps": []
+    },
+    "internal/use-focus-trap.ts": {
+      "deps": []
+    },
+    "Lean.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Magnetic.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "MagneticCursor.tsx": {
+      "deps": []
+    },
+    "Marquee.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "MediaZoom.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Motion.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "NumberInput.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Pagination.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Parallax.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "Pin.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "Popover.tsx": {
+      "deps": [
+        "internal/floating.ts",
+        "internal/portal.tsx",
+        "internal/presence.tsx",
+        "internal/use-controllable.ts",
+        "internal/use-dismiss.ts",
+        "utils.ts"
+      ]
+    },
+    "Preanimate.tsx": {
+      "deps": []
+    },
+    "Progress.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "RadioGroup.tsx": {
+      "deps": [
+        "internal/use-controllable.ts",
+        "utils.ts"
+      ]
+    },
+    "Rate.tsx": {
+      "deps": [
+        "internal/use-controllable.ts",
+        "utils.ts"
+      ]
+    },
+    "Reveal.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "Ripple.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "ScrambleText.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "ScrollProgress.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "Select.tsx": {
+      "deps": [
+        "internal/floating.ts",
+        "internal/portal.tsx",
+        "internal/presence.tsx",
+        "internal/use-dismiss.ts",
+        "utils.ts"
+      ]
+    },
+    "Separator.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Sheet.tsx": {
+      "deps": [
+        "internal/portal.tsx",
+        "internal/presence.tsx",
+        "internal/use-controllable.ts",
+        "internal/use-dismiss.ts",
+        "internal/use-focus-trap.ts",
+        "internal/scroll-lock.ts",
+        "utils.ts"
+      ]
+    },
+    "Skeleton.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Slider.tsx": {
+      "deps": [
+        "internal/use-controllable.ts",
+        "utils.ts"
+      ]
+    },
+    "SplitReveal.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "Spotlight.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "Stagger.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "Stat.tsx": {
+      "deps": [
+        "CountUp.tsx",
+        "utils.ts"
+      ]
+    },
+    "Stepper.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Switch.tsx": {
+      "deps": [
+        "internal/use-controllable.ts",
+        "utils.ts"
+      ]
+    },
+    "Tabs.tsx": {
+      "deps": [
+        "internal/use-controllable.ts",
+        "utils.ts"
+      ]
+    },
+    "Textarea.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "TextGlitch.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "Tilt.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "Timeline.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Toast.tsx": {
+      "deps": [
+        "internal/portal.tsx",
+        "internal/presence.tsx",
+        "internal/use-controllable.ts",
+        "utils.ts"
+      ]
+    },
+    "Tooltip.tsx": {
+      "deps": [
+        "internal/floating.ts",
+        "internal/portal.tsx",
+        "internal/presence.tsx",
+        "internal/use-controllable.ts",
+        "utils.ts"
+      ]
+    },
+    "Typewriter.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "use-motion.ts": {
+      "deps": []
+    },
+    "utils.ts": {
+      "deps": []
+    }
+  },
+  "components": {
+    "accordion": {
+      "file": "Accordion.tsx",
+      "name": "Accordion"
+    },
+    "alert": {
+      "file": "Alert.tsx",
+      "name": "Alert"
+    },
+    "app-shell": {
+      "file": "AppShell.tsx",
+      "name": "AppShell"
+    },
+    "avatar": {
+      "file": "Avatar.tsx",
+      "name": "Avatar"
+    },
+    "badge": {
+      "file": "Badge.tsx",
+      "name": "Badge"
+    },
+    "blur": {
+      "file": "Blur.tsx",
+      "name": "Blur"
+    },
+    "boot-screen": {
+      "file": "BootScreen.tsx",
+      "name": "BootScreen"
+    },
+    "bottom-navigation": {
+      "file": "BottomNavigation.tsx",
+      "name": "BottomNavigation"
+    },
+    "breadcrumb": {
+      "file": "Breadcrumb.tsx",
+      "name": "Breadcrumb"
+    },
+    "button": {
+      "file": "Button.tsx",
+      "name": "Button"
+    },
+    "calendar": {
+      "file": "Calendar.tsx",
+      "name": "Calendar"
+    },
+    "card": {
+      "file": "Card.tsx",
+      "name": "Card"
+    },
+    "carousel": {
+      "file": "Carousel.tsx",
+      "name": "Carousel"
+    },
+    "checkbox": {
+      "file": "Checkbox.tsx",
+      "name": "Checkbox"
+    },
+    "combobox": {
+      "file": "Combobox.tsx",
+      "name": "Combobox"
+    },
+    "command": {
+      "file": "Command.tsx",
+      "name": "Command"
+    },
+    "context-menu": {
+      "file": "ContextMenu.tsx",
+      "name": "ContextMenu"
+    },
+    "count-up": {
+      "file": "CountUp.tsx",
+      "name": "CountUp"
+    },
+    "data-table": {
+      "file": "DataTable.tsx",
+      "name": "DataTable"
+    },
+    "date-picker": {
+      "file": "DatePicker.tsx",
+      "name": "DatePicker"
+    },
+    "dialog": {
+      "file": "Dialog.tsx",
+      "name": "Dialog"
+    },
+    "dropdown-menu": {
+      "file": "DropdownMenu.tsx",
+      "name": "DropdownMenu"
+    },
+    "flip-list": {
+      "file": "FlipList.tsx",
+      "name": "FlipList"
+    },
+    "floating-action-button": {
+      "file": "FloatingActionButton.tsx",
+      "name": "FloatingActionButton"
+    },
+    "form-field": {
+      "file": "FormField.tsx",
+      "name": "FormField"
+    },
+    "glow": {
+      "file": "Glow.tsx",
+      "name": "Glow"
+    },
+    "gradient-text": {
+      "file": "GradientText.tsx",
+      "name": "GradientText"
+    },
+    "grid": {
+      "file": "Grid.tsx",
+      "name": "Grid"
+    },
+    "icon-button": {
+      "file": "IconButton.tsx",
+      "name": "IconButton"
+    },
+    "input": {
+      "file": "Input.tsx",
+      "name": "Input"
+    },
+    "lean": {
+      "file": "Lean.tsx",
+      "name": "Lean"
+    },
+    "magnetic": {
+      "file": "Magnetic.tsx",
+      "name": "Magnetic"
+    },
+    "magnetic-cursor": {
+      "file": "MagneticCursor.tsx",
+      "name": "MagneticCursor"
+    },
+    "marquee": {
+      "file": "Marquee.tsx",
+      "name": "Marquee"
+    },
+    "media-zoom": {
+      "file": "MediaZoom.tsx",
+      "name": "MediaZoom"
+    },
+    "motion": {
+      "file": "Motion.tsx",
+      "name": "Motion"
+    },
+    "number-input": {
+      "file": "NumberInput.tsx",
+      "name": "NumberInput"
+    },
+    "pagination": {
+      "file": "Pagination.tsx",
+      "name": "Pagination"
+    },
+    "parallax": {
+      "file": "Parallax.tsx",
+      "name": "Parallax"
+    },
+    "pin": {
+      "file": "Pin.tsx",
+      "name": "Pin"
+    },
+    "popover": {
+      "file": "Popover.tsx",
+      "name": "Popover"
+    },
+    "preanimate": {
+      "file": "Preanimate.tsx",
+      "name": "Preanimate"
+    },
+    "progress": {
+      "file": "Progress.tsx",
+      "name": "Progress"
+    },
+    "radio-group": {
+      "file": "RadioGroup.tsx",
+      "name": "RadioGroup"
+    },
+    "rate": {
+      "file": "Rate.tsx",
+      "name": "Rate"
+    },
+    "reveal": {
+      "file": "Reveal.tsx",
+      "name": "Reveal"
+    },
+    "ripple": {
+      "file": "Ripple.tsx",
+      "name": "Ripple"
+    },
+    "scramble-text": {
+      "file": "ScrambleText.tsx",
+      "name": "ScrambleText"
+    },
+    "scroll-progress": {
+      "file": "ScrollProgress.tsx",
+      "name": "ScrollProgress"
+    },
+    "select": {
+      "file": "Select.tsx",
+      "name": "Select"
+    },
+    "separator": {
+      "file": "Separator.tsx",
+      "name": "Separator"
+    },
+    "sheet": {
+      "file": "Sheet.tsx",
+      "name": "Sheet"
+    },
+    "skeleton": {
+      "file": "Skeleton.tsx",
+      "name": "Skeleton"
+    },
+    "slider": {
+      "file": "Slider.tsx",
+      "name": "Slider"
+    },
+    "split-reveal": {
+      "file": "SplitReveal.tsx",
+      "name": "SplitReveal"
+    },
+    "spotlight": {
+      "file": "Spotlight.tsx",
+      "name": "Spotlight"
+    },
+    "stagger": {
+      "file": "Stagger.tsx",
+      "name": "Stagger"
+    },
+    "stat": {
+      "file": "Stat.tsx",
+      "name": "Stat"
+    },
+    "stepper": {
+      "file": "Stepper.tsx",
+      "name": "Stepper"
+    },
+    "switch": {
+      "file": "Switch.tsx",
+      "name": "Switch"
+    },
+    "tabs": {
+      "file": "Tabs.tsx",
+      "name": "Tabs"
+    },
+    "textarea": {
+      "file": "Textarea.tsx",
+      "name": "Textarea"
+    },
+    "text-glitch": {
+      "file": "TextGlitch.tsx",
+      "name": "TextGlitch"
+    },
+    "tilt": {
+      "file": "Tilt.tsx",
+      "name": "Tilt"
+    },
+    "timeline": {
+      "file": "Timeline.tsx",
+      "name": "Timeline"
+    },
+    "toast": {
+      "file": "Toast.tsx",
+      "name": "Toast"
+    },
+    "tooltip": {
+      "file": "Tooltip.tsx",
+      "name": "Tooltip"
+    },
+    "typewriter": {
+      "file": "Typewriter.tsx",
+      "name": "Typewriter"
+    }
+  }
+}

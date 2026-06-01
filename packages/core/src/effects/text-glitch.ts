@@ -1,6 +1,6 @@
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface TextGlitchOptions {
   /** The final text. Default: the element's current textContent. */
@@ -46,7 +46,7 @@ export function createTextGlitch(
   const el = resolveTarget(target);
   if (!el || !(el instanceof HTMLElement)) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
   const finalText = opts.text ?? el.textContent ?? '';
   const once = options.once ?? (opts.trigger !== 'hover');
   let played = false;

@@ -8,5 +8,5 @@ export default defineConfig({
   sourcemap: true,
   treeshake: true,
   target: 'es2022',
-  external: ['vue', 'gsap', '@bwo-ui/core', 'reka-ui'],
+  external: ['vue', 'gsap', '@bwo-ui/core'],
 });

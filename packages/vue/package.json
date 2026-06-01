@@ -1,6 +1,6 @@
 {
   "name": "@bwo-ui/vue",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Vue 3 components and composables for GSAP-powered motion: SplitReveal, Magnetic, Marquee, FlipList.",
   "license": "MIT",
   "author": "BOOGIE WOOGIE S.R.L. <contact@boogie.ro>",
@@ -47,8 +47,7 @@
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
-    "@bwo-ui/core": "workspace:*",
-    "reka-ui": "^1.0.0-alpha.7"
+    "@bwo-ui/core": "workspace:*"
   },
   "peerDependencies": {
     "gsap": ">=3.12.0",

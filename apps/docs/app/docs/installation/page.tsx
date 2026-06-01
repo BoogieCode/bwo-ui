@@ -1,4 +1,5 @@
 import { CodeBlock } from '../../../components/code-block';
+import { InstallTabs } from '../../../components/install-tabs';
 
 export const metadata = { title: 'Installation — bwo-ui' };
 
@@ -9,7 +10,7 @@ export default function InstallationPage() {
       <p className="lead">Pick the package for your framework. GSAP is a peer dependency.</p>
 
       <h2>React</h2>
-      <CodeBlock lang="bash">{`pnpm add @bwo-ui/react gsap`}</CodeBlock>
+      <InstallTabs package="@bwo-ui/react gsap" />
       <CodeBlock lang="tsx">{`import { SplitReveal, Magnetic, Marquee, FlipList } from '@bwo-ui/react';
 
 export function Hero() {
@@ -21,7 +22,7 @@ export function Hero() {
 }`}</CodeBlock>
 
       <h2>Vue</h2>
-      <CodeBlock lang="bash">{`pnpm add @bwo-ui/vue gsap`}</CodeBlock>
+      <InstallTabs package="@bwo-ui/vue gsap" />
       <CodeBlock lang="vue">{`<script setup lang="ts">
 import { SplitReveal } from '@bwo-ui/vue';
 </script>
@@ -33,12 +34,20 @@ import { SplitReveal } from '@bwo-ui/vue';
 </template>`}</CodeBlock>
 
       <h2>Svelte</h2>
-      <CodeBlock lang="bash">{`pnpm add @bwo-ui/svelte gsap`}</CodeBlock>
+      <InstallTabs package="@bwo-ui/svelte gsap" />
       <CodeBlock lang="svelte">{`<script lang="ts">
   import { splitReveal } from '@bwo-ui/svelte';
 </script>
 
 <h1 use:splitReveal={{ type: 'words', stagger: 0.04 }}>Hello, motion.</h1>`}</CodeBlock>
+
+      <h2>CLI — copy components into your project</h2>
+      <p>
+        Want to own the source? Use the bwo-ui CLI to copy a component (and its internal
+        dependencies) straight into your project.
+      </p>
+      <InstallTabs exec="@bwo-ui/cli init" />
+      <InstallTabs exec="@bwo-ui/cli add dialog calendar combobox" />
 
       <h2>Why GSAP as a peer dependency?</h2>
       <p>

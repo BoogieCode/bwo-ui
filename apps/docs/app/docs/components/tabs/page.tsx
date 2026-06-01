@@ -7,23 +7,31 @@ export default function Page() {
   return (
     <>
       <h1>Tabs</h1>
-      <p className="lead">Segmented pill tabs. Keyboard nav (arrow keys, Home/End) via Radix.</p>
+      <p className="lead">
+        Segmented pill tabs. Keyboard nav (arrow keys, Home/End) built in. Written from scratch.
+      </p>
 
       <TabsDemo />
 
       <h2>Usage</h2>
-      <CodeBlock lang="tsx">{`import { Tabs } from '@bwo-ui/react';
+      <CodeBlock lang="tsx">{`import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '@bwo-ui/react';
 
-<Tabs.Root defaultValue="overview">
-  <Tabs.List>
-    <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
-    <Tabs.Trigger value="analytics">Analytics</Tabs.Trigger>
-    <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
-  </Tabs.List>
-  <Tabs.Content value="overview">Overview content</Tabs.Content>
-  <Tabs.Content value="analytics">Analytics content</Tabs.Content>
-  <Tabs.Content value="settings">Settings content</Tabs.Content>
-</Tabs.Root>`}</CodeBlock>
+<TabsRoot defaultValue="overview">
+  <TabsList>
+    <TabsTrigger value="overview">Overview</TabsTrigger>
+    <TabsTrigger value="analytics">Analytics</TabsTrigger>
+    <TabsTrigger value="settings">Settings</TabsTrigger>
+  </TabsList>
+  <TabsContent value="overview">
+    <p>High-level view of your site — traffic, top pages, last published.</p>
+  </TabsContent>
+  <TabsContent value="analytics">
+    <p>Page views, bounce rate, average time on page.</p>
+  </TabsContent>
+  <TabsContent value="settings">
+    <p>Manage your domain, theme, and team access.</p>
+  </TabsContent>
+</TabsRoot>`}</CodeBlock>
     </>
   );
 }

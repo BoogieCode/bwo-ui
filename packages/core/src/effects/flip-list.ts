@@ -2,7 +2,7 @@ import { gsap } from 'gsap';
 import { Flip } from 'gsap/Flip';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface FlipListOptions {
   /** Selector for the items inside the container. Default: `':scope > *'`. */
@@ -48,7 +48,7 @@ export function createFlipList(target: Target, options: FlipListOptions = {}): F
   const container = resolveTarget(target);
   if (!container || !(container instanceof HTMLElement)) return noop;
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
   let state: ReturnType<typeof Flip.getState> | null = null;
   let activeTween: gsap.core.Tween | gsap.core.Timeline | null = null;
 

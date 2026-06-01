@@ -9,7 +9,7 @@ export default function Page() {
       <h1>Tooltip</h1>
       <p className="lead">
         Hover/focus tooltip. Use the shorthand <code>&lt;Tooltip content=&quot;…&quot;&gt;</code>{' '}
-        or the granular Radix-style anatomy.
+        or the granular Provider/Root/Trigger/Content anatomy.
       </p>
 
       <TooltipDemo />

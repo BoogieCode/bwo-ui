@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface SpotlightOptions {
   /** Radius of the spotlight in px. Default: `320`. */
@@ -86,7 +86,7 @@ export function createSpotlight(
   if (!el || !(el instanceof HTMLElement)) return { destroy: () => {} };
 
   ensureStyle();
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
   el.dataset.bwoSpotlight = '';
   el.style.setProperty('--bwo-spotlight-size', `${opts.size}px`);
   el.style.setProperty('--bwo-spotlight-color', opts.color);

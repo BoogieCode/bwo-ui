@@ -2,7 +2,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface ScrollProgressOptions {
   /**
@@ -44,7 +44,7 @@ export function createScrollProgress(
   const el = resolveTarget(target);
   if (!el || !(el instanceof HTMLElement)) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
   const axis = opts.axis;
   const origin = opts.origin ?? (axis === 'x' ? 'left center' : 'top center');
   const scaleProp = axis === 'x' ? 'scaleX' : 'scaleY';

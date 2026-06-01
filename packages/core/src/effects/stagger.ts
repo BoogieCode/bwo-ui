@@ -2,7 +2,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface StaggerOptions {
   /** Selector for children to animate. Default: `':scope > *'`. */
@@ -50,7 +50,10 @@ export function createStagger(target: Target, options: StaggerOptions = {}): Mot
   const container = resolveTarget(target);
   if (!container || !(container instanceof HTMLElement)) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options, from: { ...DEFAULTS.from, ...(options.from ?? {}) } };
+  const opts = {
+    ...mergeOptions(DEFAULTS, options),
+    from: { ...DEFAULTS.from, ...(options.from ?? {}) },
+  };
   const items = container.querySelectorAll<HTMLElement>(opts.itemSelector);
   if (!items.length) return { destroy: () => {} };
 

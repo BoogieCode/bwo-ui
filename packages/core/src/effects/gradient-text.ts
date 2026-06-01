@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export interface GradientTextOptions {
   /** CSS gradient (no `background-image:` prefix). Default: a vivid 3-stop sweep. */
@@ -44,7 +44,7 @@ export function createGradientText(
   const el = resolveTarget(target);
   if (!el || !(el instanceof HTMLElement)) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options };
+  const opts = mergeOptions(DEFAULTS, options);
   // Replace angle inside the user gradient only if they passed a custom angle
   // AND used the default gradient. Otherwise honor the gradient string as-is.
   const gradient =

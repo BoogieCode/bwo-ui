@@ -3,7 +3,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { registerPlugins } from '../register';
 import type { MotionInstance, Target } from '../types';
-import { isBrowser, resolveTarget } from '../types';
+import { isBrowser, mergeOptions, resolveTarget } from '../types';
 
 export type SplitRevealType = 'chars' | 'words' | 'lines' | 'words,chars' | 'chars,words,lines';
 
@@ -56,7 +56,10 @@ export function createSplitReveal(
   const el = resolveTarget(target);
   if (!el) return { destroy: () => {} };
 
-  const opts = { ...DEFAULTS, ...options, from: { ...DEFAULTS.from, ...(options.from ?? {}) } };
+  const opts = {
+    ...mergeOptions(DEFAULTS, options),
+    from: { ...DEFAULTS.from, ...(options.from ?? {}) },
+  };
   const triggerEl = (opts.trigger ? resolveTarget(opts.trigger) : el) ?? el;
 
   let split: InstanceType<typeof SplitText> | null = null;

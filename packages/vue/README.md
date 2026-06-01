@@ -5,7 +5,10 @@ GSAP-powered animation components for Vue 3.
 ## Install
 
 ```bash
-pnpm add @bwo-ui/vue gsap
+npm  i   @bwo-ui/vue gsap
+# or: pnpm add @bwo-ui/vue gsap
+# or: yarn add @bwo-ui/vue gsap
+# or: bun  add @bwo-ui/vue gsap
 ```
 
 ## Components
