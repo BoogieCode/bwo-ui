@@ -19,6 +19,10 @@ export { GradientText, type GradientTextProps } from './GradientText';
 export { Ripple, type RippleProps } from './Ripple';
 export { Blur, type BlurDirection, type BlurIntensity, type BlurProps } from './Blur';
 export { Pin, type PinProps } from './Pin';
+export { ScrollReveal, type ScrollRevealProps } from './ScrollReveal';
+export { ScrollVelocity, type ScrollVelocityProps } from './ScrollVelocity';
+export { ScrollSnap, type ScrollSnapProps } from './ScrollSnap';
+export { ScrollMask, type ScrollMaskProps } from './ScrollMask';
 export { useMotion } from './use-motion';
 export { type Radius } from './utils';
 export { Glow, type GlowProps } from './Glow';
@@ -65,7 +69,15 @@ export {
 } from './Select';
 export { Checkbox, type CheckboxProps } from './Checkbox';
 export { Switch, type SwitchProps } from './Switch';
-export { Slider, type SliderProps } from './Slider';
+export {
+  Slider,
+  type SliderMark,
+  type SliderOrientation,
+  type SliderProps,
+  type SliderSize,
+  type SliderTooltipMode,
+  type SliderVariant,
+} from './Slider';
 export {
   RadioGroup,
   RadioGroupRoot,

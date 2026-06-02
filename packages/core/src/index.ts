@@ -54,3 +54,19 @@ export type { BlurDirection, BlurOptions } from './effects/blur';
 
 export { createPin } from './effects/pin';
 export type { PinOptions } from './effects/pin';
+
+export { createScrollReveal } from './effects/scroll-reveal';
+export type { ScrollRevealOptions, ScrollRevealFlavor } from './effects/scroll-reveal';
+
+export { createScrollVelocity } from './effects/scroll-velocity';
+export type { ScrollVelocityOptions } from './effects/scroll-velocity';
+
+export { createScrollSnap } from './effects/scroll-snap';
+export type {
+  ScrollSnapOptions,
+  ScrollSnapAxis,
+  ScrollSnapStrictness,
+} from './effects/scroll-snap';
+
+export { createScrollMask } from './effects/scroll-mask';
+export type { ScrollMaskOptions, ScrollMaskDirection } from './effects/scroll-mask';
