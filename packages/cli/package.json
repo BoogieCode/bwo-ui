@@ -1,7 +1,7 @@
 {
   "name": "@bwo-ui/cli",
-  "version": "0.5.0",
-  "description": "Copy bwo-ui component source straight into your project. No runtime dep, you own the code.",
+  "version": "0.6.0",
+  "description": "Copy bwo-ui component source straight into your repo — no runtime dependency, you own the code from day one. Ships the full 70+ primitive catalogue (Dialog, Popover, Combobox, DataTable, Calendar, Toast, plus the GSAP-backed motion kit) with TypeScript types. `npx bwo init`, then `npx bwo add <component>` — same workflow you know, but the primitives are yours to edit. Live demos at https://ui.boogie.ro.",
   "license": "MIT",
   "author": "BOOGIE WOOGIE S.R.L. <contact@boogie.ro>",
   "homepage": "https://github.com/BoogieCode/bwo-ui/tree/master/packages/cli",
@@ -14,8 +14,14 @@
     "bwo-ui",
     "cli",
     "components",
+    "ui-kit",
+    "design-system",
     "scaffolding",
-    "copy"
+    "codegen",
+    "headless",
+    "shadcn-style",
+    "motion",
+    "gsap"
   ],
   "type": "module",
   "bin": {

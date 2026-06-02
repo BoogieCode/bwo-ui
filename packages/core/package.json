@@ -1,7 +1,7 @@
 {
   "name": "@bwo-ui/core",
-  "version": "0.5.0",
-  "description": "Framework-agnostic GSAP motion factories used by @bwo-ui/{react,vue,svelte}.",
+  "version": "0.6.0",
+  "description": "Framework-agnostic motion engine behind @bwo-ui/{react,vue,svelte}. Ships GSAP-backed factories for every primitive owned end-to-end — Tilt, Ripple, Pulse, Spin, Parallax, ScrollReveal, ScrollMask, ScrollVelocity, ScrollSnap, ScrollProgress, SplitReveal, Marquee, FlipList, Magnetic, Spotlight, Typewriter — plus tokens + base CSS. Live demos & docs at https://ui.boogie.ro.",
   "license": "MIT",
   "author": "BOOGIE WOOGIE S.R.L. <contact@boogie.ro>",
   "homepage": "https://github.com/BoogieCode/bwo-ui/tree/master/packages/core",
@@ -15,10 +15,15 @@
     "animation",
     "motion",
     "scroll",
+    "scroll-trigger",
+    "parallax",
+    "tilt",
     "marquee",
     "magnetic",
-    "flip",
-    "splittext"
+    "splittext",
+    "design-system",
+    "tokens",
+    "bwo-ui"
   ],
   "type": "module",
   "sideEffects": false,

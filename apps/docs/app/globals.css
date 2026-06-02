@@ -390,23 +390,35 @@ h1, h2, h3, h4 {
 }
 .tp-submenu-grid {
   display: grid;
-  grid-template-columns: repeat(var(--cols, 3), minmax(140px, 1fr));
-  gap: 18px;
-  min-width: 480px;
-  padding: 18px;
+  grid-template-columns: repeat(var(--cols, 3), minmax(200px, 1fr));
+  gap: 28px;
+  min-width: 760px;
+  max-width: min(96vw, 1120px);
+  max-height: min(70vh, 640px);
+  overflow-y: auto;
+  padding: 22px 24px;
   text-align: left;
   background: var(--bwo-white);
   border: 1px solid var(--bwo-border);
   border-radius: var(--bwo-radius-md);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 56px rgba(0, 0, 0, 0.12);
+  scrollbar-width: thin;
+}
+/* When a dropdown only has a single column (e.g. Docs > Guides), keep it
+   intentionally narrower so it doesn't look like a stretched panel. */
+.tp-submenu-grid:has(> .tp-submenu-col:only-child) {
+  min-width: 280px;
+  grid-template-columns: minmax(240px, 1fr);
 }
 .tp-submenu-col h4 {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
+  letter-spacing: 0.1em;
+  font-weight: 700;
   color: var(--bwo-text-body);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--bwo-border);
 }
 .tp-submenu-col ul {
   list-style: none;
@@ -414,16 +426,17 @@ h1, h2, h3, h4 {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 .tp-submenu-col a {
   display: block;
-  padding: 6px 10px;
-  font-size: 13.5px;
+  padding: 7px 12px;
+  font-size: 14px;
   color: var(--bwo-text);
   border-radius: 8px;
   text-decoration: none;
   transition: var(--bwo-transition);
+  white-space: nowrap;
 }
 .tp-submenu-col a:hover,
 .tp-submenu-col a.is-active {
@@ -470,27 +483,6 @@ h1, h2, h3, h4 {
     gap: 12px;
     padding: 20px 16px 60px;
   }
-  .sidebar {
-    position: static !important;
-    background: var(--bwo-surface);
-    border: 1px solid var(--bwo-border);
-    border-radius: var(--bwo-radius-md);
-    padding: 16px;
-    max-height: 56px;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-  .sidebar.is-open { max-height: 1200px; }
-  .sidebar::before {
-    content: 'Navigation ▾';
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--bwo-text-body);
-    cursor: pointer;
-    user-select: none;
-    margin-bottom: 12px;
-  }
   .topnav-inner { height: 56px; padding: 0 4px; }
   .topnav-links { gap: 12px; font-size: 13px; }
   .topnav-links a:nth-child(-n+3) { display: none; }
@@ -511,6 +503,8 @@ h1, h2, h3, h4 {
 }
 
 .sidebar { position: sticky; top: 96px; align-self: start; }
+.sidebar-toggle { display: none; }
+.sidebar-nav-inner { display: block; }
 .sidebar-group { margin-bottom: 28px; }
 .sidebar-title {
   font-size: 11px;
@@ -536,6 +530,90 @@ h1, h2, h3, h4 {
   background: var(--bwo-grey-4);
   font-weight: 600;
 }
+
+/* ---- Sidebar · mobile (button toggle + scrollable nav inside) ----------- */
+@media (max-width: 860px) {
+  .sidebar {
+    position: static !important;
+    background: var(--bwo-surface);
+    border: 1px solid var(--bwo-border);
+    border-radius: var(--bwo-radius-md);
+    padding: 0;
+    overflow: hidden;
+  }
+  .sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px 16px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--bwo-text);
+    text-align: left;
+    gap: 12px;
+  }
+  .sidebar-toggle-label {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    line-height: 1.2;
+  }
+  .sidebar-toggle-eyebrow {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bwo-text-body);
+  }
+  .sidebar-toggle-active {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--bwo-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .sidebar-toggle-icon {
+    flex: 0 0 auto;
+    color: var(--bwo-text-body);
+    transition: transform 0.2s ease;
+  }
+  .sidebar.is-open .sidebar-toggle-icon { transform: rotate(180deg); }
+  .sidebar-nav-inner {
+    display: none;
+    padding: 8px 16px 16px;
+    border-top: 1px solid var(--bwo-border);
+    max-height: min(68vh, 520px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sidebar.is-open .sidebar-nav-inner { display: block; }
+  .sidebar-group { margin-bottom: 18px; }
+  .sidebar-group:last-child { margin-bottom: 4px; }
+  .sidebar-title { margin-top: 8px; }
+  .sidebar-link { padding: 9px 10px; font-size: 15px; }
+}
+
+/* ---- Tables inside .content & PropsTable — horizontal scroll on overflow */
+.table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--bwo-radius-md);
+  border: 1px solid var(--bwo-border);
+  scrollbar-width: thin;
+}
+.table-wrap > table { margin: 0; min-width: max-content; border: 0; }
+.content .table-wrap > table {
+  border-collapse: collapse;
+  width: 100%;
+}
+:root.boo-dark .table-wrap { border-color: var(--bwo-border); }
 
 .content { min-width: 0; }
 .content h1 { font-size: clamp(34px, 4vw, 46px); margin-bottom: 10px; }

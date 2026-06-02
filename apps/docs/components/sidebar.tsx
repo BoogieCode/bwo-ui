@@ -127,28 +127,57 @@ export function Sidebar() {
   // Auto-close after route change on mobile.
   useEffect(() => setOpen(false), [pathname]);
 
+  const activeLabel =
+    groups
+      .flatMap((g) => g.links)
+      .find((l) => l.href === pathname)?.label ?? 'Browse components';
+
   return (
-    <aside
-      className={`sidebar${isOpen ? ' is-open' : ''}`}
-      onClick={() => {
-        if (window.innerWidth <= 860) setOpen((v) => !v);
-      }}
-    >
-      {groups.map((group) => (
-        <div className="sidebar-group" key={group.title}>
-          <div className="sidebar-title">{group.title}</div>
-          {group.links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`sidebar-link${pathname === link.href ? ' active' : ''}`}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      ))}
+    <aside className={`sidebar${isOpen ? ' is-open' : ''}`}>
+      <button
+        type="button"
+        className="sidebar-toggle"
+        aria-expanded={isOpen}
+        aria-controls="sidebar-nav"
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span className="sidebar-toggle-label">
+          <span className="sidebar-toggle-eyebrow">Navigation</span>
+          <span className="sidebar-toggle-active">{activeLabel}</span>
+        </span>
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden
+          className="sidebar-toggle-icon"
+        >
+          <path
+            d="M6 9l6 6 6-6"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+      <div id="sidebar-nav" className="sidebar-nav-inner">
+        {groups.map((group) => (
+          <div className="sidebar-group" key={group.title}>
+            <div className="sidebar-title">{group.title}</div>
+            {group.links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`sidebar-link${pathname === link.href ? ' active' : ''}`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        ))}
+      </div>
     </aside>
   );
 }

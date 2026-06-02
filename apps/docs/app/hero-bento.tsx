@@ -332,18 +332,18 @@ function StatTile() {
       <div className="bento-row-top">
         <span className="bento-eyebrow">Components</span>
         <span className="bento-badge-live">
-          <span className="bento-dot" /> v0.3.0
+          <span className="bento-dot" /> v0.6.0
         </span>
       </div>
       <div className="bento-stat-number">
-        <CountUp to={48} duration={1.8} />+
+        <CountUp to={72} duration={1.8} />+
       </div>
       <p>
         Production primitives — forms, overlays, data, motion. All written from scratch.
         Zero external UI dependencies.
       </p>
       <div className="bento-sparkline" aria-hidden>
-        {[2, 3, 3, 4, 4, 5, 6, 6, 8, 10, 12, 15, 18, 22, 27, 33, 38, 43, 46, 48].map(
+        {[2, 3, 4, 6, 8, 11, 14, 18, 23, 28, 33, 39, 44, 50, 55, 60, 64, 67, 70, 72].map(
           (h, i, arr) => (
             <span
               key={i}
@@ -648,7 +648,7 @@ function HeroHeadline() {
 function HeroSub() {
   return (
     <p className="hero-bento-sub">
-      48 production primitives. Three frameworks. One stylesheet. Owned end-to-end — no
+      72 production primitives. Three frameworks. One stylesheet. Owned end-to-end — no
       wrappers, no headless library underneath.
     </p>
   );
@@ -675,7 +675,7 @@ export function HeroBento() {
       <div className="hero-bento-eyebrow">
         <span className="hero-bento-eyebrow-dot" />
         <span>
-          v0.3.0 — every primitive owned end-to-end
+          v0.6.0 — every primitive owned end-to-end
         </span>
       </div>
 
