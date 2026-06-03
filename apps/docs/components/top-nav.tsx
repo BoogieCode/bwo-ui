@@ -115,6 +115,7 @@ const ITEMS: Item[] = [
           { href: '/docs/components/scroll-mask', label: 'ScrollMask' },
           { href: '/docs/components/scroll-velocity', label: 'ScrollVelocity' },
           { href: '/docs/components/scroll-snap', label: 'ScrollSnap' },
+          { href: '/docs/components/circle-reveal', label: 'CircleReveal' },
           { href: '/docs/components/pin', label: 'Pin' },
         ],
       },

@@ -96,6 +96,7 @@ const groups = [
       { href: '/docs/components/scroll-mask', label: 'ScrollMask' },
       { href: '/docs/components/scroll-velocity', label: 'ScrollVelocity' },
       { href: '/docs/components/scroll-snap', label: 'ScrollSnap' },
+      { href: '/docs/components/circle-reveal', label: 'CircleReveal · PageIris' },
       { href: '/docs/components/pin', label: 'Pin' },
       { href: '/docs/components/typewriter', label: 'Typewriter' },
       { href: '/docs/components/scramble-text', label: 'ScrambleText' },

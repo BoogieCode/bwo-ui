@@ -23,6 +23,8 @@ export { ScrollReveal, type ScrollRevealProps } from './ScrollReveal';
 export { ScrollVelocity, type ScrollVelocityProps } from './ScrollVelocity';
 export { ScrollSnap, type ScrollSnapProps } from './ScrollSnap';
 export { ScrollMask, type ScrollMaskProps } from './ScrollMask';
+export { CircleReveal, type CircleRevealProps } from './CircleReveal';
+export { PageIris, type PageIrisProps } from './PageIris';
 export { useMotion } from './use-motion';
 export { type Radius } from './utils';
 export { Glow, type GlowProps } from './Glow';

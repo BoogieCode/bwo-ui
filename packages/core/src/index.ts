@@ -70,3 +70,10 @@ export type {
 
 export { createScrollMask } from './effects/scroll-mask';
 export type { ScrollMaskOptions, ScrollMaskDirection } from './effects/scroll-mask';
+
+export { createCircleReveal } from './effects/circle-reveal';
+export type {
+  CircleRevealOptions,
+  CircleRevealMode,
+  CircleRevealOrigin,
+} from './effects/circle-reveal';
