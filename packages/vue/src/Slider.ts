@@ -3,6 +3,10 @@ import { useControllable } from './internal/use-controllable';
 import { cn } from './utils';
 
 export type SliderOrientation = 'horizontal' | 'vertical';
+export type SliderSize = 'sm' | 'md' | 'lg';
+export type SliderVariant = 'primary' | 'green' | 'yellow' | 'red';
+export type SliderTooltipMode = 'never' | 'drag' | 'always';
+export type SliderMark = number | { value: number; label?: string };
 
 function clampN(v: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, v));
@@ -24,6 +28,11 @@ export const Slider = defineComponent({
     step: { type: Number, default: 1 },
     largeStep: { type: Number, default: undefined },
     orientation: { type: String as PropType<SliderOrientation>, default: 'horizontal' },
+    size: { type: String as PropType<SliderSize>, default: 'md' },
+    variant: { type: String as PropType<SliderVariant>, default: 'primary' },
+    marks: { type: Array as PropType<SliderMark[]>, default: undefined },
+    tooltip: { type: String as PropType<SliderTooltipMode>, default: 'never' },
+    formatValue: { type: Function as PropType<(v: number) => string>, default: undefined },
     disabled: { type: Boolean, default: false },
     inverted: { type: Boolean, default: false },
   },
@@ -36,6 +45,7 @@ export const Slider = defineComponent({
     );
     const trackRef = ref<HTMLElement | null>(null);
     const dragging = ref<number | null>(null);
+    const activeIndex = ref<number | null>(null);
 
     const computeFromPointer = (clientX: number, clientY: number): number | null => {
       const track = trackRef.value;
@@ -53,11 +63,26 @@ export const Slider = defineComponent({
       return clampN(snap(raw, props.min, props.step), props.min, props.max);
     };
 
+    // For multi-thumb ranges, walk other thumbs to find the nearest lower /
+    // upper neighbour. The previous implementation sorted the values array and
+    // then indexed into it with the *unsorted* index — which only worked when
+    // values were already passed in sorted order. For [70, 30], moving thumb 0
+    // would clamp against sorted[1] = 70 (its own value) and refuse to move.
     const updateAt = (index: number, next: number) => {
-      const updated = [...values.value];
-      const sorted = [...updated].sort((a, b) => a - b);
-      const lower = index > 0 ? sorted[index - 1] ?? props.min : props.min;
-      const upper = index < sorted.length - 1 ? sorted[index + 1] ?? props.max : props.max;
+      const current = values.value;
+      const myValue = current[index];
+      if (myValue === undefined) return;
+      let lower = props.min;
+      let upper = props.max;
+      for (let i = 0; i < current.length; i++) {
+        if (i === index) continue;
+        const v = current[i]!;
+        const isBelow = v < myValue || (v === myValue && i < index);
+        const isAbove = v > myValue || (v === myValue && i > index);
+        if (isBelow && v > lower) lower = v;
+        if (isAbove && v < upper) upper = v;
+      }
+      const updated = [...current];
       updated[index] = clampN(next, lower, upper);
       values.value = updated;
     };
@@ -67,6 +92,7 @@ export const Slider = defineComponent({
       event.preventDefault();
       (event.currentTarget as Element).setPointerCapture(event.pointerId);
       dragging.value = i;
+      activeIndex.value = i;
       const v = computeFromPointer(event.clientX, event.clientY);
       if (v !== null) updateAt(i, v);
     };
@@ -79,6 +105,7 @@ export const Slider = defineComponent({
       if (dragging.value === null) return;
       (event.currentTarget as Element).releasePointerCapture(event.pointerId);
       dragging.value = null;
+      activeIndex.value = null;
       emit('value-commit', values.value);
     };
     const onTrackPointerDown = (event: PointerEvent) => {
@@ -96,6 +123,7 @@ export const Slider = defineComponent({
       }
       updateAt(nearest, v);
       dragging.value = nearest;
+      activeIndex.value = nearest;
       (event.currentTarget as Element).setPointerCapture(event.pointerId);
     };
     const onThumbKeyDown = (i: number) => (event: KeyboardEvent) => {
@@ -131,15 +159,31 @@ export const Slider = defineComponent({
       valueToPct(sorted.value[sorted.value.length - 1] ?? props.max),
     );
 
-    return () =>
-      h(
+    const normalisedMarks = computed(() =>
+      props.marks?.map((m) => (typeof m === 'number' ? { value: m } : m)),
+    );
+
+    const fmt = (v: number): string => (props.formatValue ? props.formatValue(v) : String(v));
+
+    return () => {
+      const isHorizontal = props.orientation === 'horizontal';
+      const rangeStart = sorted.value[0] ?? props.min;
+      const rangeEnd = sorted.value[sorted.value.length - 1] ?? props.max;
+
+      return h(
         'span',
         {
           ...attrs,
           role: 'group',
           'data-orientation': props.orientation,
           'data-disabled': props.disabled || undefined,
-          class: cn('bwo-slider', attrs.class as string | undefined),
+          class: cn(
+            'bwo-slider',
+            props.size !== 'md' && `bwo-slider--${props.size}`,
+            props.variant !== 'primary' && `bwo-slider--${props.variant}`,
+            normalisedMarks.value && normalisedMarks.value.length > 0 && 'bwo-slider--with-marks',
+            attrs.class as string | undefined,
+          ),
           onPointermove: onPointerMove,
           onPointerup: onPointerUp,
         },
@@ -151,45 +195,95 @@ export const Slider = defineComponent({
               class: 'bwo-slider-track',
               onPointerdown: onTrackPointerDown,
             },
-            h('span', {
-              class: 'bwo-slider-range',
-              style:
-                props.orientation === 'horizontal'
+            [
+              h('span', {
+                class: 'bwo-slider-range',
+                style:
+                  isHorizontal
+                    ? props.inverted
+                      ? { right: `${startPct.value}%`, left: `${100 - endPct.value}%` }
+                      : { left: `${startPct.value}%`, right: `${100 - endPct.value}%` }
+                    : props.inverted
+                      ? { top: `${startPct.value}%`, bottom: `${100 - endPct.value}%` }
+                      : { bottom: `${startPct.value}%`, top: `${100 - endPct.value}%` },
+              }),
+              ...(normalisedMarks.value ?? []).map((mark) => {
+                const pct = valueToPct(mark.value);
+                if (pct < 0 || pct > 100) return null;
+                const isActive = mark.value >= rangeStart && mark.value <= rangeEnd;
+                const markStyle = isHorizontal
                   ? props.inverted
-                    ? { right: `${startPct.value}%`, left: `${100 - endPct.value}%` }
-                    : { left: `${startPct.value}%`, right: `${100 - endPct.value}%` }
+                    ? { right: `${pct}%` }
+                    : { left: `${pct}%` }
                   : props.inverted
-                    ? { top: `${startPct.value}%`, bottom: `${100 - endPct.value}%` }
-                    : { bottom: `${startPct.value}%`, top: `${100 - endPct.value}%` },
-            }),
+                    ? { top: `${pct}%` }
+                    : { bottom: `${pct}%` };
+                return h(
+                  'span',
+                  {
+                    key: mark.value,
+                    class: 'bwo-slider-mark',
+                    'data-active': isActive || undefined,
+                    style: markStyle,
+                    'aria-hidden': true,
+                  },
+                  mark.label !== undefined
+                    ? [h('span', { class: 'bwo-slider-mark-label' }, mark.label)]
+                    : undefined,
+                );
+              }),
+            ],
           ),
           ...values.value.map((v, i) => {
             const pct = valueToPct(v);
-            const style =
-              props.orientation === 'horizontal'
-                ? props.inverted
-                  ? { right: `${pct}%`, transform: 'translate(50%, -50%)' }
-                  : { left: `${pct}%`, transform: 'translate(-50%, -50%)' }
-                : props.inverted
-                  ? { top: `${pct}%`, transform: 'translate(-50%, -50%)' }
-                  : { bottom: `${pct}%`, transform: 'translate(-50%, 50%)' };
-            return h('span', {
-              key: i,
-              role: 'slider',
-              tabindex: props.disabled ? -1 : 0,
-              'aria-valuemin': props.min,
-              'aria-valuemax': props.max,
-              'aria-valuenow': v,
-              'aria-orientation': props.orientation,
-              'aria-label': `Value ${i + 1}`,
-              'data-disabled': props.disabled || undefined,
-              class: 'bwo-slider-thumb',
-              style,
-              onPointerdown: onThumbPointerDown(i),
-              onKeydown: onThumbKeyDown(i),
-            });
+            const style = isHorizontal
+              ? props.inverted
+                ? { right: `${pct}%`, transform: 'translate(50%, -50%)' }
+                : { left: `${pct}%`, transform: 'translate(-50%, -50%)' }
+              : props.inverted
+                ? { top: `${pct}%`, transform: 'translate(-50%, -50%)' }
+                : { bottom: `${pct}%`, transform: 'translate(-50%, 50%)' };
+            const showTooltip =
+              props.tooltip === 'always' ||
+              (props.tooltip === 'drag' && activeIndex.value === i);
+            return h(
+              'span',
+              {
+                key: i,
+                role: 'slider',
+                tabindex: props.disabled ? -1 : 0,
+                'aria-valuemin': props.min,
+                'aria-valuemax': props.max,
+                'aria-valuenow': v,
+                'aria-valuetext': props.formatValue ? fmt(v) : undefined,
+                'aria-orientation': props.orientation,
+                'aria-label': `Value ${i + 1}`,
+                'data-disabled': props.disabled || undefined,
+                'data-active': activeIndex.value === i || undefined,
+                class: 'bwo-slider-thumb',
+                style,
+                onPointerdown: onThumbPointerDown(i),
+                onKeydown: onThumbKeyDown(i),
+                onFocus: () => (activeIndex.value = i),
+                onBlur: () => (activeIndex.value = null),
+              },
+              props.tooltip !== 'never'
+                ? [
+                    h(
+                      'span',
+                      {
+                        class: 'bwo-slider-tooltip',
+                        'data-visible': showTooltip || undefined,
+                        'aria-hidden': true,
+                      },
+                      fmt(v),
+                    ),
+                  ]
+                : undefined,
+            );
           }),
         ],
       );
+    };
   },
 });

@@ -3,17 +3,23 @@
 import {
   forwardRef,
   useCallback,
-  useEffect,
   useId,
   useRef,
   useState,
   type HTMLAttributes,
   type PointerEvent as ReactPointerEvent,
+  type ReactNode,
 } from 'react';
 import { useControllable } from './internal/use-controllable';
 import { cn } from './utils';
 
 export type SliderOrientation = 'horizontal' | 'vertical';
+export type SliderSize = 'sm' | 'md' | 'lg';
+export type SliderVariant = 'primary' | 'green' | 'yellow' | 'red';
+export type SliderTooltipMode = 'never' | 'drag' | 'always';
+
+/** A tick on the slider track. Pass a number for an unlabelled mark, or an object for a labelled one. */
+export type SliderMark = number | { value: number; label?: ReactNode };
 
 export interface SliderProps
   extends Omit<HTMLAttributes<HTMLSpanElement>, 'defaultValue' | 'onChange'> {
@@ -28,6 +34,16 @@ export interface SliderProps
   /** Larger step applied with Shift+Arrow / Page keys. Default: step × 10. */
   largeStep?: number;
   orientation?: SliderOrientation;
+  /** Track + thumb scale — `sm` (3 / 14 px) / `md` (5 / 20 px, default) / `lg` (7 / 26 px). */
+  size?: SliderSize;
+  /** Range fill colour. */
+  variant?: SliderVariant;
+  /** Tick marks along the track. Pass numbers or `{ value, label }` objects. */
+  marks?: SliderMark[];
+  /** When and whether to show a value tooltip above the thumb. `'drag'` = while dragging. */
+  tooltip?: SliderTooltipMode;
+  /** Optional formatter for the tooltip and aria-valuetext. Defaults to `String(value)`. */
+  formatValue?: (value: number) => ReactNode;
   disabled?: boolean;
   /** When true, the value direction is reversed. */
   inverted?: boolean;
@@ -57,6 +73,11 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(function Slider(
     step = 1,
     largeStep,
     orientation = 'horizontal',
+    size = 'md',
+    variant = 'primary',
+    marks,
+    tooltip = 'never',
+    formatValue,
     disabled,
     inverted,
     className,
@@ -72,8 +93,10 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(function Slider(
   });
   const trackRef = useRef<HTMLSpanElement>(null);
   const draggingIndex = useRef<number | null>(null);
+  // Tracks which thumb is currently focused or being dragged — drives the
+  // tooltip visibility for `tooltip="drag"` and the `data-active` attribute.
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const sliderId = useId();
-  const [_, force] = useState(0);
 
   const computeFromPointer = useCallback(
     (clientX: number, clientY: number) => {
@@ -94,11 +117,31 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(function Slider(
     [min, max, step, orientation, inverted],
   );
 
+  // For multi-thumb ranges, each thumb's movement is bounded by its nearest
+  // neighbours so identities never cross. The old implementation sorted the
+  // values array and then indexed into it with the *unsorted* index — which
+  // only happened to work when the caller passed values in sorted order. For
+  // values like [70, 30], moving thumb 0 would clamp against sorted[1] = 70
+  // (its own value) and refuse to move.
+  //
+  // The fix walks the other thumbs and picks the largest one strictly below
+  // (or equal-with-smaller-index, to keep order stable when two thumbs sit on
+  // top of each other) as the lower bound, and the smallest one strictly
+  // above (or equal-with-larger-index) as the upper bound.
   const updateValue = (index: number, next: number) => {
+    const myValue = values[index];
+    if (myValue === undefined) return;
+    let lower = min;
+    let upper = max;
+    for (let i = 0; i < values.length; i++) {
+      if (i === index) continue;
+      const v = values[i]!;
+      const isBelow = v < myValue || (v === myValue && i < index);
+      const isAbove = v > myValue || (v === myValue && i > index);
+      if (isBelow && v > lower) lower = v;
+      if (isAbove && v < upper) upper = v;
+    }
     const updated = [...values];
-    const sorted = [...updated].sort((a, b) => a - b);
-    const lower = index > 0 ? sorted[index - 1] ?? min : min;
-    const upper = index < sorted.length - 1 ? sorted[index + 1] ?? max : max;
     updated[index] = clamp(next, lower, upper);
     setValues(updated);
   };
@@ -108,9 +151,9 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(function Slider(
     event.preventDefault();
     (event.currentTarget as Element).setPointerCapture(event.pointerId);
     draggingIndex.current = index;
+    setActiveIndex(index);
     const next = computeFromPointer(event.clientX, event.clientY);
     if (next !== null) updateValue(index, next);
-    force((n) => n + 1);
   };
 
   const onPointerMove = (event: ReactPointerEvent<HTMLSpanElement>) => {
@@ -123,6 +166,7 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(function Slider(
     if (draggingIndex.current === null) return;
     (event.currentTarget as Element).releasePointerCapture(event.pointerId);
     draggingIndex.current = null;
+    setActiveIndex(null);
     onValueCommit?.(values);
   };
 
@@ -141,6 +185,7 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(function Slider(
     }
     updateValue(nearestIndex, next);
     draggingIndex.current = nearestIndex;
+    setActiveIndex(nearestIndex);
     (event.currentTarget as Element).setPointerCapture(event.pointerId);
   };
 
@@ -178,8 +223,14 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(function Slider(
   const startPct = valueToPct(rangeStart);
   const endPct = valueToPct(rangeEnd);
 
-  // mark force as intentionally read (suppress unused-var lint without changing behavior)
-  useEffect(() => void _, [_]);
+  const formatTooltip = (v: number): ReactNode => (formatValue ? formatValue(v) : String(v));
+
+  // Normalise marks into `{ value, label }` objects so the renderer is uniform.
+  const normalisedMarks = marks?.map((m) =>
+    typeof m === 'number' ? { value: m } : m,
+  );
+
+  const isHorizontal = orientation === 'horizontal';
 
   return (
     <span
@@ -187,7 +238,13 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(function Slider(
       role="group"
       data-orientation={orientation}
       data-disabled={disabled || undefined}
-      className={cn('bwo-slider', className)}
+      className={cn(
+        'bwo-slider',
+        size !== 'md' && `bwo-slider--${size}`,
+        variant !== 'primary' && `bwo-slider--${variant}`,
+        normalisedMarks && normalisedMarks.length > 0 && 'bwo-slider--with-marks',
+        className,
+      )}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       {...props}
@@ -200,7 +257,7 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(function Slider(
         <span
           className="bwo-slider-range"
           style={
-            orientation === 'horizontal'
+            isHorizontal
               ? inverted
                 ? { right: `${startPct}%`, left: `${100 - endPct}%` }
                 : { left: `${startPct}%`, right: `${100 - endPct}%` }
@@ -209,17 +266,43 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(function Slider(
                 : { bottom: `${startPct}%`, top: `${100 - endPct}%` }
           }
         />
+        {normalisedMarks?.map((mark) => {
+          const pct = valueToPct(mark.value);
+          if (pct < 0 || pct > 100) return null;
+          const isActive = mark.value >= rangeStart && mark.value <= rangeEnd;
+          const markStyle = isHorizontal
+            ? inverted
+              ? { right: `${pct}%` }
+              : { left: `${pct}%` }
+            : inverted
+              ? { top: `${pct}%` }
+              : { bottom: `${pct}%` };
+          return (
+            <span
+              key={mark.value}
+              className="bwo-slider-mark"
+              data-active={isActive || undefined}
+              style={markStyle}
+              aria-hidden
+            >
+              {mark.label !== undefined && (
+                <span className="bwo-slider-mark-label">{mark.label}</span>
+              )}
+            </span>
+          );
+        })}
       </span>
       {values.map((v, i) => {
         const pct = valueToPct(v);
-        const style =
-          orientation === 'horizontal'
-            ? inverted
-              ? { right: `${pct}%`, transform: 'translate(50%, -50%)' }
-              : { left: `${pct}%`, transform: 'translate(-50%, -50%)' }
-            : inverted
-              ? { top: `${pct}%`, transform: 'translate(-50%, -50%)' }
-              : { bottom: `${pct}%`, transform: 'translate(-50%, 50%)' };
+        const style = isHorizontal
+          ? inverted
+            ? { right: `${pct}%`, transform: 'translate(50%, -50%)' }
+            : { left: `${pct}%`, transform: 'translate(-50%, -50%)' }
+          : inverted
+            ? { top: `${pct}%`, transform: 'translate(-50%, -50%)' }
+            : { bottom: `${pct}%`, transform: 'translate(-50%, 50%)' };
+        const showTooltip =
+          tooltip === 'always' || (tooltip === 'drag' && activeIndex === i);
         return (
           <span
             key={i}
@@ -228,15 +311,29 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(function Slider(
             aria-valuemin={min}
             aria-valuemax={max}
             aria-valuenow={v}
+            aria-valuetext={formatValue ? String(formatValue(v)) : undefined}
             aria-orientation={orientation}
             aria-label={props['aria-label'] ?? `Value ${i + 1}`}
             id={`${sliderId}-thumb-${i}`}
             data-disabled={disabled || undefined}
+            data-active={activeIndex === i || undefined}
             className="bwo-slider-thumb"
             style={style}
             onPointerDown={onPointerDown(i)}
             onKeyDown={onKeyDown(i)}
-          />
+            onFocus={() => setActiveIndex(i)}
+            onBlur={() => setActiveIndex(null)}
+          >
+            {tooltip !== 'never' && (
+              <span
+                className="bwo-slider-tooltip"
+                data-visible={showTooltip || undefined}
+                aria-hidden
+              >
+                {formatTooltip(v)}
+              </span>
+            )}
+          </span>
         );
       })}
       {name &&

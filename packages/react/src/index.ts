@@ -111,8 +111,12 @@ export { Checkbox, type CheckboxProps } from './Checkbox';
 export { Switch, type SwitchProps } from './Switch';
 export {
   Slider,
+  type SliderMark,
   type SliderOrientation,
   type SliderProps,
+  type SliderSize,
+  type SliderTooltipMode,
+  type SliderVariant,
 } from './Slider';
 export {
   RadioGroup,
