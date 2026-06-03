@@ -41,7 +41,14 @@ export {
 } from './Select';
 export { Checkbox, type CheckedState } from './Checkbox';
 export { Switch } from './Switch';
-export { Slider, type SliderOrientation } from './Slider';
+export {
+  Slider,
+  type SliderMark,
+  type SliderOrientation,
+  type SliderSize,
+  type SliderTooltipMode,
+  type SliderVariant,
+} from './Slider';
 export { RadioGroupRoot, RadioGroupItem } from './RadioGroup';
 export { Badge, type BadgeVariant } from './Badge';
 export { Card, CardHeader, CardTitle, CardDescription, CardFooter } from './Card';

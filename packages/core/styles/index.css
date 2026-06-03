@@ -459,46 +459,180 @@
 /* ─── Slider ──────────────────────────────────────────────────────────────── */
 
 .bwo-slider {
+  /* CSS custom properties drive all sizing — size variants just redefine them. */
+  --bwo-slider-track: 5px;
+  --bwo-slider-thumb: 20px;
+  --bwo-slider-fill: var(--bwo-black);
+  --bwo-slider-ring: var(--bwo-black);
   position: relative;
   display: flex;
   align-items: center;
   user-select: none;
   touch-action: none;
   width: 100%;
-  height: 22px;
+  height: var(--bwo-slider-thumb);
 }
-.bwo-slider[data-orientation='vertical'] { flex-direction: column; width: 22px; height: 160px; }
+.bwo-slider--sm { --bwo-slider-track: 3px; --bwo-slider-thumb: 14px; }
+.bwo-slider--lg { --bwo-slider-track: 7px; --bwo-slider-thumb: 26px; }
+
+.bwo-slider--green  { --bwo-slider-fill: var(--bwo-green); --bwo-slider-ring: var(--bwo-green); }
+.bwo-slider--yellow { --bwo-slider-fill: var(--bwo-yellow); --bwo-slider-ring: var(--bwo-yellow); }
+.bwo-slider--red    { --bwo-slider-fill: var(--bwo-red); --bwo-slider-ring: var(--bwo-red); }
+
+.bwo-slider[data-orientation='vertical'] {
+  flex-direction: column;
+  width: var(--bwo-slider-thumb);
+  height: 160px;
+}
 .bwo-slider-track {
   background: var(--bwo-border-2);
   position: relative;
   flex-grow: 1;
   border-radius: var(--bwo-radius-pill);
-  height: 5px;
+  height: var(--bwo-slider-track);
 }
-.bwo-slider[data-orientation='vertical'] .bwo-slider-track { width: 5px; height: 100%; }
+.bwo-slider[data-orientation='vertical'] .bwo-slider-track {
+  width: var(--bwo-slider-track);
+  height: 100%;
+}
 .bwo-slider-range {
   position: absolute;
-  background: var(--bwo-black);
+  background: var(--bwo-slider-fill);
   border-radius: var(--bwo-radius-pill);
   height: 100%;
 }
 .bwo-slider[data-orientation='vertical'] .bwo-slider-range { width: 100%; }
 .bwo-slider-thumb {
+  /* Absolute so the inline `left/right/top/bottom: <pct>%` from the React /
+     Vue components positions the thumb relative to the slider container,
+     not relative to flex flow (where the thumb would sit *after* the track). */
+  position: absolute;
   display: block;
-  width: 20px;
-  height: 20px;
+  width: var(--bwo-slider-thumb);
+  height: var(--bwo-slider-thumb);
   background: var(--bwo-white);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), 0 0 0 1.5px var(--bwo-black);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), 0 0 0 1.5px var(--bwo-slider-ring);
   border-radius: 50%;
   cursor: grab;
-  transition: box-shadow 0.2s ease;
+  /* Use the standalone `scale` property for the active-state grow so it
+     doesn't clobber the inline `transform: translate(...)` from the React /
+     Vue components (each orientation/inverted combination uses a different
+     translate, and a CSS rule overriding the whole transform would break
+     three of the four cases). */
+  scale: 1;
+  transition: box-shadow 0.2s ease, scale 0.15s ease;
 }
-.bwo-slider-thumb:hover { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 1.5px var(--bwo-black); }
+.bwo-slider-thumb:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 1.5px var(--bwo-slider-ring);
+}
+.bwo-slider-thumb[data-active] {
+  scale: 1.08;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.32), 0 0 0 1.5px var(--bwo-slider-ring);
+}
 .bwo-slider-thumb:focus-visible {
   outline: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 1.5px var(--bwo-black), 0 0 0 5px var(--bwo-focus-ring);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 0 0 1.5px var(--bwo-slider-ring),
+    0 0 0 5px var(--bwo-focus-ring);
 }
 .bwo-slider-thumb:active { cursor: grabbing; }
+.bwo-slider[data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Marks — tick lines on the track with optional labels below */
+.bwo-slider-mark {
+  position: absolute;
+  top: 50%;
+  width: 2px;
+  height: 8px;
+  border-radius: 1px;
+  background: var(--bwo-border-2);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.bwo-slider[data-orientation='vertical'] .bwo-slider-mark {
+  top: auto;
+  left: 50%;
+  width: 8px;
+  height: 2px;
+  transform: translate(-50%, 50%);
+}
+.bwo-slider-mark[data-active] {
+  background: var(--bwo-slider-fill);
+  opacity: 0.85;
+}
+.bwo-slider-mark-label {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: var(--bwo-text-body);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.bwo-slider[data-orientation='vertical'] .bwo-slider-mark-label {
+  top: 50%;
+  left: calc(100% + 8px);
+  transform: translateY(-50%);
+}
+.bwo-slider--with-marks { padding-bottom: 22px; }
+.bwo-slider--with-marks[data-orientation='vertical'] {
+  padding-bottom: 0;
+  padding-right: 40px;
+}
+
+/* Tooltip — small bubble above the thumb showing the current value */
+.bwo-slider-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--bwo-black);
+  color: var(--bwo-white);
+  font-size: 11.5px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.bwo-slider-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--bwo-black);
+}
+.bwo-slider-tooltip[data-visible] {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.bwo-slider[data-orientation='vertical'] .bwo-slider-tooltip {
+  bottom: auto;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+}
+.bwo-slider[data-orientation='vertical'] .bwo-slider-tooltip::after {
+  top: 50%;
+  left: 0;
+  transform: translateX(-100%) translateY(-50%);
+  border-top-color: transparent;
+  border-right-color: var(--bwo-black);
+}
+.bwo-slider[data-orientation='vertical'] .bwo-slider-tooltip[data-visible] {
+  transform: translateY(-50%) translateX(0);
+}
 
 /* ─── Badge ───────────────────────────────────────────────────────────────── */
 

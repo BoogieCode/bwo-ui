@@ -236,13 +236,17 @@ export const Slider = defineComponent({
           ),
           ...values.value.map((v, i) => {
             const pct = valueToPct(v);
+            // Cross-axis pin (`top: 50%` for horizontal, `left: 50%` for
+            // vertical) keeps the absolutely-positioned thumb centred on the
+            // track; translate(...) places the thumb *centre* exactly at the
+            // requested percentage.
             const style = isHorizontal
               ? props.inverted
-                ? { right: `${pct}%`, transform: 'translate(50%, -50%)' }
-                : { left: `${pct}%`, transform: 'translate(-50%, -50%)' }
+                ? { right: `${pct}%`, top: '50%', transform: 'translate(50%, -50%)' }
+                : { left: `${pct}%`, top: '50%', transform: 'translate(-50%, -50%)' }
               : props.inverted
-                ? { top: `${pct}%`, transform: 'translate(-50%, -50%)' }
-                : { bottom: `${pct}%`, transform: 'translate(-50%, 50%)' };
+                ? { top: `${pct}%`, left: '50%', transform: 'translate(-50%, -50%)' }
+                : { bottom: `${pct}%`, left: '50%', transform: 'translate(-50%, 50%)' };
             const showTooltip =
               props.tooltip === 'always' ||
               (props.tooltip === 'drag' && activeIndex.value === i);

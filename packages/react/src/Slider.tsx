@@ -294,13 +294,16 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(function Slider(
       </span>
       {values.map((v, i) => {
         const pct = valueToPct(v);
-        const style = isHorizontal
+        // Cross-axis pin (`top: 50%` for horizontal, `left: 50%` for vertical)
+        // keeps the absolutely-positioned thumb centred on the track; the
+        // translate(...) places the thumb *centre* exactly at the percentage.
+        const style: React.CSSProperties = isHorizontal
           ? inverted
-            ? { right: `${pct}%`, transform: 'translate(50%, -50%)' }
-            : { left: `${pct}%`, transform: 'translate(-50%, -50%)' }
+            ? { right: `${pct}%`, top: '50%', transform: 'translate(50%, -50%)' }
+            : { left: `${pct}%`, top: '50%', transform: 'translate(-50%, -50%)' }
           : inverted
-            ? { top: `${pct}%`, transform: 'translate(-50%, -50%)' }
-            : { bottom: `${pct}%`, transform: 'translate(-50%, 50%)' };
+            ? { top: `${pct}%`, left: '50%', transform: 'translate(-50%, -50%)' }
+            : { bottom: `${pct}%`, left: '50%', transform: 'translate(-50%, 50%)' };
         const showTooltip =
           tooltip === 'always' || (tooltip === 'drag' && activeIndex === i);
         return (
