@@ -1,7 +1,7 @@
 {
   "name": "@bwo-ui/vue",
   "version": "0.7.0",
-  "description": "100+ motion-first Vue 3 components and composables, owned end-to-end. Pixel-for-pixel parity with @bwo-ui/react — same primitives, same tokens, same API surface. GSAP-backed motion (Tilt, Ripple, Pulse, CircleReveal, ScrollReveal, ScrollMask, ScrollVelocity, Parallax, SplitReveal, TextDecode, Confetti, Shake) opt-in per element. Zero runtime dependencies (GSAP is a peer). Live demos at https://ui.boogie.ro.",
+  "description": "Vue 3 adapter for the bwo-ui kit — ~70 motion + UI components that mirror most of @bwo-ui/react. Ships GSAP-backed motion (Tilt, Ripple, Parallax, SplitReveal, Marquee, Magnetic, Spotlight, MediaZoom, Pin, Stagger, ScrollProgress, plus 12 more) alongside form, overlay, and layout primitives (Button, Input, Select, Dialog, Popover, Tooltip, Sheet, Tabs, Accordion, Card, etc.). The newer 0.6 / 0.7 React additions (CircleReveal, ScrollReveal, ScrollMask, ScrollVelocity, ScrollSnap, PageIris, ColorPicker, FileUpload, PinInput, TimePicker, TagInput, HoverCard, SegmentedControl, Confetti, Shake, Squircle, and others) are catching up in upcoming minors — track progress on the roadmap. Zero runtime dependencies (GSAP is a peer). Live demos at https://ui.boogie.ro.",
   "license": "MIT",
   "author": "BOOGIE WOOGIE S.R.L. <contact@boogie.ro>",
   "homepage": "https://github.com/BoogieCode/bwo-ui/tree/master/packages/vue",
