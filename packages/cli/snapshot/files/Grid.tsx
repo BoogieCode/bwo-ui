@@ -147,7 +147,11 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
   }
 
   if (templateAreas) {
-    cssVars['--bwo-grid-ta'] = templateAreas.map((row) => `"${row}"`).join(' ');
+    // Strip any pre-existing quotes — users may pass either `'hero hero side'`
+    // or `'"hero hero side"'`; the CSS itself requires exactly one set.
+    cssVars['--bwo-grid-ta'] = templateAreas
+      .map((row) => `"${row.replace(/^"+|"+$/g, '').trim()}"`)
+      .join(' ');
   }
   if (gap !== undefined) cssVars['--bwo-grid-gap'] = formatSize(gap);
   if (columnGap !== undefined) cssVars['--bwo-grid-col-gap'] = formatSize(columnGap);

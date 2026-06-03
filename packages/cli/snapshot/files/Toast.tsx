@@ -63,6 +63,7 @@ export const ToastViewport = forwardRef<HTMLOListElement, ToastViewportProps>(
           ref={setRef}
           aria-label={label}
           tabIndex={-1}
+          data-bwo-floating=""
           className={cn('bwo-toast-viewport', className)}
           {...props}
         />

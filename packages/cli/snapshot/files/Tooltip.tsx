@@ -234,6 +234,7 @@ export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(
               aria-labelledby={triggerId}
               data-state={state}
               data-side={pos?.side ?? side}
+              data-bwo-floating=""
               style={{
                 position: 'fixed',
                 top: pos?.top ?? -9999,

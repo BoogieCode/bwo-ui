@@ -4,26 +4,59 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { cn, type Radius } from './utils';
 
 export type AlertVariant = 'info' | 'success' | 'warning' | 'error';
+export type AlertAppearance = 'soft' | 'solid' | 'outline';
+
+const URGENT_VARIANTS: ReadonlySet<AlertVariant> = new Set(['warning', 'error']);
 
 export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   variant?: AlertVariant;
+  appearance?: AlertAppearance;
   title?: ReactNode;
   icon?: ReactNode;
+  /** Render as an `<button>`-bearing alert with a dismiss control. */
   onDismiss?: () => void;
+  /** Action buttons rendered below the body, before the dismiss button. */
+  actions?: ReactNode;
   /** Corner radius preset. Omit to inherit the global default (6px). */
   radius?: Radius;
+  /**
+   * Force the ARIA semantic. Defaults to `true` for `warning` / `error` (announces as
+   * `role="alert"` + `aria-live="assertive"`) and `false` for `info` / `success`
+   * (`role="status"` + `aria-live="polite"`).
+   */
+  urgent?: boolean;
 }
 
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  { variant = 'info', title, icon, onDismiss, radius, className, children, ...props },
+  {
+    variant = 'info',
+    appearance = 'soft',
+    title,
+    icon,
+    onDismiss,
+    actions,
+    radius,
+    urgent,
+    className,
+    children,
+    ...props
+  },
   ref,
 ) {
+  const isUrgent = urgent ?? URGENT_VARIANTS.has(variant);
   return (
     <div
       ref={ref}
-      role="alert"
+      role={isUrgent ? 'alert' : 'status'}
+      aria-live={isUrgent ? 'assertive' : 'polite'}
       data-radius={radius}
-      className={cn('bwo-alert', `bwo-alert--${variant}`, className)}
+      data-appearance={appearance}
+      className={cn(
+        'bwo-alert',
+        `bwo-alert--${variant}`,
+        appearance !== 'soft' && `bwo-alert--${appearance}`,
+        className,
+      )}
       {...props}
     >
       {icon !== undefined ? (
@@ -36,6 +69,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
       <div className="bwo-alert-body">
         {title && <div className="bwo-alert-title">{title}</div>}
         {children && <div className="bwo-alert-description">{children}</div>}
+        {actions && <div className="bwo-alert-actions">{actions}</div>}
       </div>
       {onDismiss && (
         <button

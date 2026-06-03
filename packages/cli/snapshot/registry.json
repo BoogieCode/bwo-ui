@@ -16,12 +16,22 @@
         "utils.ts"
       ]
     },
+    "AspectRatio.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "Avatar.tsx": {
       "deps": [
         "utils.ts"
       ]
     },
     "Badge.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Banner.tsx": {
       "deps": [
         "utils.ts"
       ]
@@ -73,6 +83,31 @@
         "utils.ts"
       ]
     },
+    "Chip.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "CircleReveal.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "Code.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Collapsible.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "ColorPicker.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "Combobox.tsx": {
       "deps": [
         "utils.ts",
@@ -82,6 +117,16 @@
     "Command.tsx": {
       "deps": [
         "Dialog.tsx",
+        "utils.ts"
+      ]
+    },
+    "Confetti.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Container.tsx": {
+      "deps": [
         "utils.ts"
       ]
     },
@@ -120,9 +165,24 @@
         "utils.ts"
       ]
     },
+    "DotLoader.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "DropdownMenu.tsx": {
       "deps": [
         "internal/menu.tsx"
+      ]
+    },
+    "Empty.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "FileUpload.tsx": {
+      "deps": [
+        "utils.ts"
       ]
     },
     "FlipList.tsx": {
@@ -153,6 +213,12 @@
         "utils.ts"
       ]
     },
+    "HoverCard.tsx": {
+      "deps": [
+        "Portal.tsx",
+        "utils.ts"
+      ]
+    },
     "IconButton.tsx": {
       "deps": [
         "utils.ts"
@@ -178,7 +244,40 @@
         "Ripple.tsx",
         "Blur.tsx",
         "Pin.tsx",
+        "ScrollReveal.tsx",
+        "ScrollVelocity.tsx",
+        "ScrollSnap.tsx",
+        "ScrollMask.tsx",
+        "CircleReveal.tsx",
+        "PageIris.tsx",
+        "TextShimmer.tsx",
+        "TextDecode.tsx",
+        "Confetti.tsx",
+        "Shake.tsx",
+        "Squircle.tsx",
         "use-motion.ts",
+        "Kbd.tsx",
+        "Spinner.tsx",
+        "DotLoader.tsx",
+        "Empty.tsx",
+        "AspectRatio.tsx",
+        "Container.tsx",
+        "ScrollArea.tsx",
+        "Portal.tsx",
+        "VisuallyHidden.tsx",
+        "Collapsible.tsx",
+        "Banner.tsx",
+        "Chip.tsx",
+        "Code.tsx",
+        "HoverCard.tsx",
+        "SegmentedControl.tsx",
+        "StepIndicator.tsx",
+        "TagInput.tsx",
+        "PinInput.tsx",
+        "PasswordInput.tsx",
+        "ColorPicker.tsx",
+        "TimePicker.tsx",
+        "FileUpload.tsx",
         "utils.ts",
         "Glow.tsx",
         "Lean.tsx",
@@ -266,6 +365,11 @@
     "internal/use-focus-trap.ts": {
       "deps": []
     },
+    "Kbd.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "Lean.tsx": {
       "deps": [
         "utils.ts"
@@ -299,6 +403,11 @@
         "utils.ts"
       ]
     },
+    "PageIris.tsx": {
+      "deps": [
+        "CircleReveal.tsx"
+      ]
+    },
     "Pagination.tsx": {
       "deps": [
         "utils.ts"
@@ -309,9 +418,19 @@
         "use-motion.ts"
       ]
     },
+    "PasswordInput.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "Pin.tsx": {
       "deps": [
         "use-motion.ts"
+      ]
+    },
+    "PinInput.tsx": {
+      "deps": [
+        "utils.ts"
       ]
     },
     "Popover.tsx": {
@@ -323,6 +442,9 @@
         "internal/use-dismiss.ts",
         "utils.ts"
       ]
+    },
+    "Portal.tsx": {
+      "deps": []
     },
     "Preanimate.tsx": {
       "deps": []
@@ -359,9 +481,39 @@
         "use-motion.ts"
       ]
     },
+    "ScrollArea.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "ScrollMask.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
     "ScrollProgress.tsx": {
       "deps": [
         "use-motion.ts"
+      ]
+    },
+    "ScrollReveal.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "ScrollSnap.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "ScrollVelocity.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "SegmentedControl.tsx": {
+      "deps": [
+        "utils.ts"
       ]
     },
     "Select.tsx": {
@@ -377,6 +529,9 @@
       "deps": [
         "utils.ts"
       ]
+    },
+    "Shake.tsx": {
+      "deps": []
     },
     "Sheet.tsx": {
       "deps": [
@@ -400,6 +555,11 @@
         "utils.ts"
       ]
     },
+    "Spinner.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "SplitReveal.tsx": {
       "deps": [
         "use-motion.ts"
@@ -410,6 +570,11 @@
         "use-motion.ts"
       ]
     },
+    "Squircle.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "Stagger.tsx": {
       "deps": [
         "use-motion.ts"
@@ -418,6 +583,11 @@
     "Stat.tsx": {
       "deps": [
         "CountUp.tsx",
+        "utils.ts"
+      ]
+    },
+    "StepIndicator.tsx": {
+      "deps": [
         "utils.ts"
       ]
     },
@@ -438,14 +608,29 @@
         "utils.ts"
       ]
     },
+    "TagInput.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "Textarea.tsx": {
       "deps": [
         "utils.ts"
       ]
     },
+    "TextDecode.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
     "TextGlitch.tsx": {
       "deps": [
         "use-motion.ts"
+      ]
+    },
+    "TextShimmer.tsx": {
+      "deps": [
+        "utils.ts"
       ]
     },
     "Tilt.tsx": {
@@ -454,6 +639,11 @@
       ]
     },
     "Timeline.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "TimePicker.tsx": {
       "deps": [
         "utils.ts"
       ]
@@ -485,6 +675,9 @@
     },
     "utils.ts": {
       "deps": []
+    },
+    "VisuallyHidden.tsx": {
+      "deps": []
     }
   },
   "components": {
@@ -500,6 +693,10 @@
       "file": "AppShell.tsx",
       "name": "AppShell"
     },
+    "aspect-ratio": {
+      "file": "AspectRatio.tsx",
+      "name": "AspectRatio"
+    },
     "avatar": {
       "file": "Avatar.tsx",
       "name": "Avatar"
@@ -507,6 +704,10 @@
     "badge": {
       "file": "Badge.tsx",
       "name": "Badge"
+    },
+    "banner": {
+      "file": "Banner.tsx",
+      "name": "Banner"
     },
     "blur": {
       "file": "Blur.tsx",
@@ -544,6 +745,26 @@
       "file": "Checkbox.tsx",
       "name": "Checkbox"
     },
+    "chip": {
+      "file": "Chip.tsx",
+      "name": "Chip"
+    },
+    "circle-reveal": {
+      "file": "CircleReveal.tsx",
+      "name": "CircleReveal"
+    },
+    "code": {
+      "file": "Code.tsx",
+      "name": "Code"
+    },
+    "collapsible": {
+      "file": "Collapsible.tsx",
+      "name": "Collapsible"
+    },
+    "color-picker": {
+      "file": "ColorPicker.tsx",
+      "name": "ColorPicker"
+    },
     "combobox": {
       "file": "Combobox.tsx",
       "name": "Combobox"
@@ -551,6 +772,14 @@
     "command": {
       "file": "Command.tsx",
       "name": "Command"
+    },
+    "confetti": {
+      "file": "Confetti.tsx",
+      "name": "Confetti"
+    },
+    "container": {
+      "file": "Container.tsx",
+      "name": "Container"
     },
     "context-menu": {
       "file": "ContextMenu.tsx",
@@ -572,9 +801,21 @@
       "file": "Dialog.tsx",
       "name": "Dialog"
     },
+    "dot-loader": {
+      "file": "DotLoader.tsx",
+      "name": "DotLoader"
+    },
     "dropdown-menu": {
       "file": "DropdownMenu.tsx",
       "name": "DropdownMenu"
+    },
+    "empty": {
+      "file": "Empty.tsx",
+      "name": "Empty"
+    },
+    "file-upload": {
+      "file": "FileUpload.tsx",
+      "name": "FileUpload"
     },
     "flip-list": {
       "file": "FlipList.tsx",
@@ -600,6 +841,10 @@
       "file": "Grid.tsx",
       "name": "Grid"
     },
+    "hover-card": {
+      "file": "HoverCard.tsx",
+      "name": "HoverCard"
+    },
     "icon-button": {
       "file": "IconButton.tsx",
       "name": "IconButton"
@@ -607,6 +852,10 @@
     "input": {
       "file": "Input.tsx",
       "name": "Input"
+    },
+    "kbd": {
+      "file": "Kbd.tsx",
+      "name": "Kbd"
     },
     "lean": {
       "file": "Lean.tsx",
@@ -636,6 +885,10 @@
       "file": "NumberInput.tsx",
       "name": "NumberInput"
     },
+    "page-iris": {
+      "file": "PageIris.tsx",
+      "name": "PageIris"
+    },
     "pagination": {
       "file": "Pagination.tsx",
       "name": "Pagination"
@@ -644,13 +897,25 @@
       "file": "Parallax.tsx",
       "name": "Parallax"
     },
+    "password-input": {
+      "file": "PasswordInput.tsx",
+      "name": "PasswordInput"
+    },
     "pin": {
       "file": "Pin.tsx",
       "name": "Pin"
     },
+    "pin-input": {
+      "file": "PinInput.tsx",
+      "name": "PinInput"
+    },
     "popover": {
       "file": "Popover.tsx",
       "name": "Popover"
+    },
+    "portal": {
+      "file": "Portal.tsx",
+      "name": "Portal"
     },
     "preanimate": {
       "file": "Preanimate.tsx",
@@ -680,9 +945,33 @@
       "file": "ScrambleText.tsx",
       "name": "ScrambleText"
     },
+    "scroll-area": {
+      "file": "ScrollArea.tsx",
+      "name": "ScrollArea"
+    },
+    "scroll-mask": {
+      "file": "ScrollMask.tsx",
+      "name": "ScrollMask"
+    },
     "scroll-progress": {
       "file": "ScrollProgress.tsx",
       "name": "ScrollProgress"
+    },
+    "scroll-reveal": {
+      "file": "ScrollReveal.tsx",
+      "name": "ScrollReveal"
+    },
+    "scroll-snap": {
+      "file": "ScrollSnap.tsx",
+      "name": "ScrollSnap"
+    },
+    "scroll-velocity": {
+      "file": "ScrollVelocity.tsx",
+      "name": "ScrollVelocity"
+    },
+    "segmented-control": {
+      "file": "SegmentedControl.tsx",
+      "name": "SegmentedControl"
     },
     "select": {
       "file": "Select.tsx",
@@ -691,6 +980,10 @@
     "separator": {
       "file": "Separator.tsx",
       "name": "Separator"
+    },
+    "shake": {
+      "file": "Shake.tsx",
+      "name": "Shake"
     },
     "sheet": {
       "file": "Sheet.tsx",
@@ -704,6 +997,10 @@
       "file": "Slider.tsx",
       "name": "Slider"
     },
+    "spinner": {
+      "file": "Spinner.tsx",
+      "name": "Spinner"
+    },
     "split-reveal": {
       "file": "SplitReveal.tsx",
       "name": "SplitReveal"
@@ -712,6 +1009,10 @@
       "file": "Spotlight.tsx",
       "name": "Spotlight"
     },
+    "squircle": {
+      "file": "Squircle.tsx",
+      "name": "Squircle"
+    },
     "stagger": {
       "file": "Stagger.tsx",
       "name": "Stagger"
@@ -719,6 +1020,10 @@
     "stat": {
       "file": "Stat.tsx",
       "name": "Stat"
+    },
+    "step-indicator": {
+      "file": "StepIndicator.tsx",
+      "name": "StepIndicator"
     },
     "stepper": {
       "file": "Stepper.tsx",
@@ -732,13 +1037,25 @@
       "file": "Tabs.tsx",
       "name": "Tabs"
     },
+    "tag-input": {
+      "file": "TagInput.tsx",
+      "name": "TagInput"
+    },
     "textarea": {
       "file": "Textarea.tsx",
       "name": "Textarea"
     },
+    "text-decode": {
+      "file": "TextDecode.tsx",
+      "name": "TextDecode"
+    },
     "text-glitch": {
       "file": "TextGlitch.tsx",
       "name": "TextGlitch"
+    },
+    "text-shimmer": {
+      "file": "TextShimmer.tsx",
+      "name": "TextShimmer"
     },
     "tilt": {
       "file": "Tilt.tsx",
@@ -747,6 +1064,10 @@
     "timeline": {
       "file": "Timeline.tsx",
       "name": "Timeline"
+    },
+    "time-picker": {
+      "file": "TimePicker.tsx",
+      "name": "TimePicker"
     },
     "toast": {
       "file": "Toast.tsx",
@@ -759,6 +1080,10 @@
     "typewriter": {
       "file": "Typewriter.tsx",
       "name": "Typewriter"
+    },
+    "visually-hidden": {
+      "file": "VisuallyHidden.tsx",
+      "name": "VisuallyHidden"
     }
   }
 }

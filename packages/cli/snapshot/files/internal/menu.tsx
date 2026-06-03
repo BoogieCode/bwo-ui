@@ -204,6 +204,7 @@ export function MenuContent({
       tabIndex={-1}
       data-state="open"
       data-side={side}
+      data-bwo-floating=""
       style={{
         position: 'fixed',
         top: pos?.top ?? -9999,
