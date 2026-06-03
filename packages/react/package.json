@@ -1,7 +1,7 @@
 {
   "name": "@bwo-ui/react",
-  "version": "0.6.0",
-  "description": "70+ motion-first React 18 components, owned end-to-end. Every primitive — Dialog, Popover, Combobox, DataTable, Calendar, Toast — written in-house, no headless library underneath. Ships GSAP-backed motion (Tilt, Ripple, Pulse, ScrollReveal, ScrollMask, ScrollVelocity, Parallax, SplitReveal, Marquee) out of the box. Theme via 40+ CSS custom properties, opt-in dark mode, zero runtime dependencies (GSAP is a peer). Live demos at https://ui.boogie.ro.",
+  "version": "0.7.0",
+  "description": "100+ motion-first React 18 components, owned end-to-end. Every primitive — Dialog, Popover, Combobox, DataTable, Calendar, Toast, ColorPicker, FileUpload, PinInput, TimePicker, TagInput, HoverCard, SegmentedControl, StepIndicator — written in-house, no headless library underneath. Ships GSAP-backed motion (Tilt, Ripple, Pulse, CircleReveal, ScrollReveal, ScrollMask, ScrollVelocity, Parallax, SplitReveal, TextDecode, TextShimmer, Confetti, Shake) out of the box. Theme via 40+ CSS custom properties, opt-in dark mode, zero runtime dependencies (GSAP is a peer). Live demos at https://ui.boogie.ro.",
   "license": "MIT",
   "author": "BOOGIE WOOGIE S.R.L. <contact@boogie.ro>",
   "homepage": "https://github.com/BoogieCode/bwo-ui/tree/master/packages/react",

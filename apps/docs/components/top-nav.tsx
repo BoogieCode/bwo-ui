@@ -34,22 +34,35 @@ const ITEMS: Item[] = [
         title: 'Layout & display',
         links: [
           { href: '/docs/components/app-shell', label: 'AppShell' },
+          { href: '/docs/components/container', label: 'Container' },
+          { href: '/docs/components/aspect-ratio', label: 'AspectRatio' },
           { href: '/docs/components/glow', label: 'Glow' },
           { href: '/docs/components/card', label: 'Card' },
           { href: '/docs/components/grid', label: 'Grid' },
           { href: '/docs/components/simple-grid', label: 'SimpleGrid' },
+          { href: '/docs/components/scroll-area', label: 'ScrollArea' },
           { href: '/docs/components/separator', label: 'Separator' },
           { href: '/docs/components/accordion', label: 'Accordion' },
+          { href: '/docs/components/collapsible', label: 'Collapsible' },
           { href: '/docs/components/tabs', label: 'Tabs' },
+          { href: '/docs/components/segmented-control', label: 'SegmentedControl' },
           { href: '/docs/components/carousel', label: 'Carousel' },
           { href: '/docs/components/timeline', label: 'Timeline' },
+          { href: '/docs/components/step-indicator', label: 'StepIndicator' },
           { href: '/docs/components/stepper', label: 'Stepper' },
           { href: '/docs/components/stat', label: 'Stat' },
           { href: '/docs/components/skeleton', label: 'Skeleton' },
+          { href: '/docs/components/spinner', label: 'Spinner' },
+          { href: '/docs/components/dot-loader', label: 'DotLoader' },
           { href: '/docs/components/progress', label: 'Progress' },
+          { href: '/docs/components/empty', label: 'Empty' },
+          { href: '/docs/components/banner', label: 'Banner' },
           { href: '/docs/components/alert', label: 'Alert' },
           { href: '/docs/components/badge', label: 'Badge' },
+          { href: '/docs/components/chip', label: 'Chip' },
           { href: '/docs/components/avatar', label: 'Avatar' },
+          { href: '/docs/components/kbd', label: 'Kbd' },
+          { href: '/docs/components/code', label: 'Code' },
         ],
       },
       {
@@ -61,6 +74,9 @@ const ITEMS: Item[] = [
           { href: '/docs/components/input', label: 'Input' },
           { href: '/docs/components/textarea', label: 'Textarea' },
           { href: '/docs/components/number-input', label: 'NumberInput' },
+          { href: '/docs/components/password-input', label: 'PasswordInput' },
+          { href: '/docs/components/pin-input', label: 'PinInput' },
+          { href: '/docs/components/tag-input', label: 'TagInput' },
           { href: '/docs/components/select', label: 'Select' },
           { href: '/docs/components/combobox', label: 'Combobox' },
           { href: '/docs/components/checkbox', label: 'Checkbox' },
@@ -68,8 +84,11 @@ const ITEMS: Item[] = [
           { href: '/docs/components/switch', label: 'Switch' },
           { href: '/docs/components/slider', label: 'Slider' },
           { href: '/docs/components/rate', label: 'Rate' },
+          { href: '/docs/components/color-picker', label: 'ColorPicker' },
+          { href: '/docs/components/file-upload', label: 'FileUpload' },
           { href: '/docs/components/calendar', label: 'Calendar' },
           { href: '/docs/components/date-picker', label: 'DatePicker' },
+          { href: '/docs/components/time-picker', label: 'TimePicker' },
         ],
       },
       {
@@ -78,6 +97,7 @@ const ITEMS: Item[] = [
           { href: '/docs/components/dialog', label: 'Dialog' },
           { href: '/docs/components/sheet', label: 'Sheet' },
           { href: '/docs/components/popover', label: 'Popover' },
+          { href: '/docs/components/hover-card', label: 'HoverCard' },
           { href: '/docs/components/tooltip', label: 'Tooltip' },
           { href: '/docs/components/toast', label: 'Toast' },
           { href: '/docs/components/dropdown-menu', label: 'DropdownMenu' },
@@ -87,6 +107,8 @@ const ITEMS: Item[] = [
           { href: '/docs/components/pagination', label: 'Pagination' },
           { href: '/docs/components/bottom-navigation', label: 'BottomNavigation' },
           { href: '/docs/components/data-table', label: 'DataTable' },
+          { href: '/docs/components/portal', label: 'Portal' },
+          { href: '/docs/components/visually-hidden', label: 'VisuallyHidden' },
         ],
       },
     ],
@@ -124,6 +146,8 @@ const ITEMS: Item[] = [
         links: [
           { href: '/docs/components/typewriter', label: 'Typewriter' },
           { href: '/docs/components/scramble-text', label: 'ScrambleText' },
+          { href: '/docs/components/text-decode', label: 'TextDecode' },
+          { href: '/docs/components/text-shimmer', label: 'TextShimmer' },
           { href: '/docs/components/text-glitch', label: 'TextGlitch' },
           { href: '/docs/components/gradient-text', label: 'GradientText' },
           { href: '/docs/components/count-up', label: 'CountUp' },
@@ -139,8 +163,11 @@ const ITEMS: Item[] = [
           { href: '/docs/components/spotlight', label: 'Spotlight' },
           { href: '/docs/components/ripple', label: 'Ripple' },
           { href: '/docs/components/media-zoom', label: 'MediaZoom' },
+          { href: '/docs/components/squircle', label: 'Squircle' },
           { href: '/docs/components/spin', label: 'Spin' },
           { href: '/docs/components/pulse', label: 'Pulse' },
+          { href: '/docs/components/shake', label: 'Shake' },
+          { href: '/docs/components/confetti', label: 'Confetti' },
           { href: '/docs/components/marquee', label: 'Marquee' },
           { href: '/docs/components/flip-list', label: 'FlipList' },
         ],
@@ -216,7 +243,10 @@ export function TopNav() {
                         </svg>
                       </button>
                       <div className="tp-submenu-wrapper">
-                        <div className="tp-submenu-grid">
+                        <div
+                          className="tp-submenu-grid"
+                          style={{ ['--cols' as string]: item.columns.length }}
+                        >
                           {item.columns.map((col) => (
                             <div className="tp-submenu-col" key={col.title}>
                               <h4>{col.title}</h4>

@@ -25,7 +25,45 @@ export { ScrollSnap, type ScrollSnapProps } from './ScrollSnap';
 export { ScrollMask, type ScrollMaskProps } from './ScrollMask';
 export { CircleReveal, type CircleRevealProps } from './CircleReveal';
 export { PageIris, type PageIrisProps } from './PageIris';
+export { TextShimmer, type TextShimmerProps } from './TextShimmer';
+export { TextDecode, type TextDecodeProps } from './TextDecode';
+export { Confetti, type ConfettiProps, type ConfettiHandle } from './Confetti';
+export { Shake, type ShakeProps, type ShakeHandle } from './Shake';
+export { Squircle, type SquircleProps } from './Squircle';
 export { useMotion } from './use-motion';
+
+// New display / utility primitives (0.7.0)
+export { Kbd, type KbdProps, type KbdSize } from './Kbd';
+export { Spinner, type SpinnerProps, type SpinnerSize } from './Spinner';
+export { DotLoader, type DotLoaderProps, type DotLoaderSize } from './DotLoader';
+export { Empty, type EmptyProps } from './Empty';
+export { AspectRatio, type AspectRatioProps } from './AspectRatio';
+export { Container, type ContainerProps, type ContainerSize } from './Container';
+export { ScrollArea, type ScrollAreaProps } from './ScrollArea';
+export { Portal, type PortalProps } from './Portal';
+export { VisuallyHidden, type VisuallyHiddenProps } from './VisuallyHidden';
+export { Collapsible, type CollapsibleProps } from './Collapsible';
+export { Banner, type BannerProps, type BannerTone } from './Banner';
+export { Chip, type ChipProps, type ChipVariant, type ChipTone, type ChipSize } from './Chip';
+export { Code, type CodeProps } from './Code';
+export { HoverCard, type HoverCardProps, type HoverCardSide } from './HoverCard';
+export {
+  SegmentedControl,
+  type SegmentedControlProps,
+  type SegmentedOption,
+  type SegmentedControlSize,
+} from './SegmentedControl';
+export { StepIndicator, type StepIndicatorProps, type StepIndicatorItem } from './StepIndicator';
+export { TagInput, type TagInputProps } from './TagInput';
+export { PinInput, type PinInputProps } from './PinInput';
+export {
+  PasswordInput,
+  type PasswordInputProps,
+  type PasswordStrength,
+} from './PasswordInput';
+export { ColorPicker, type ColorPickerProps } from './ColorPicker';
+export { TimePicker, type TimePickerProps, type TimePickerValue } from './TimePicker';
+export { FileUpload, type FileUploadProps } from './FileUpload';
 export { type Radius } from './utils';
 export { Glow, type GlowProps } from './Glow';
 export { Lean, type LeanProps } from './Lean';

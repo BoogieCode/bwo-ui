@@ -76,10 +76,10 @@ export function StatsStrip() {
         }}
       >
         <Reveal direction="bottom" delay={0} duration={0.8}>
-          <Stat label="Components" count={72} />
+          <Stat label="Components" count={101} />
         </Reveal>
         <Reveal direction="bottom" delay={0.1} duration={0.8}>
-          <Stat label="Motion effects" count={22} />
+          <Stat label="Motion effects" count={28} />
         </Reveal>
         <Reveal direction="bottom" delay={0.2} duration={0.8}>
           <Stat label="Frameworks" count={3} />
@@ -979,7 +979,7 @@ export function BigCTA() {
               Ship the boogie.
             </SplitReveal>
             <p style={{ maxWidth: '46ch', margin: '0 auto 28px', color: 'rgba(255,255,255,0.75)' }}>
-              72 primitives. Three frameworks. Zero runtime dependencies (GSAP is peer).
+              101 primitives. Three frameworks. Zero runtime dependencies (GSAP is peer).
             </p>
             <Magnetic strength={0.4}>
               <Button

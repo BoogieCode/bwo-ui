@@ -1,7 +1,7 @@
 {
   "name": "@bwo-ui/core",
-  "version": "0.6.0",
-  "description": "Framework-agnostic motion engine behind @bwo-ui/{react,vue,svelte}. Ships GSAP-backed factories for every primitive owned end-to-end — Tilt, Ripple, Pulse, Spin, Parallax, ScrollReveal, ScrollMask, ScrollVelocity, ScrollSnap, ScrollProgress, SplitReveal, Marquee, FlipList, Magnetic, Spotlight, Typewriter — plus tokens + base CSS. Live demos & docs at https://ui.boogie.ro.",
+  "version": "0.7.0",
+  "description": "Framework-agnostic motion engine behind @bwo-ui/{react,vue,svelte}. Ships GSAP-backed factories for every primitive owned end-to-end — Tilt, Ripple, Pulse, Spin, Parallax, ScrollReveal, ScrollMask, ScrollVelocity, ScrollSnap, ScrollProgress, CircleReveal, SplitReveal, Marquee, FlipList, Magnetic, Spotlight, Typewriter, TextDecode, Confetti, Shake — plus tokens + base CSS. Live demos & docs at https://ui.boogie.ro.",
   "license": "MIT",
   "author": "BOOGIE WOOGIE S.R.L. <contact@boogie.ro>",
   "homepage": "https://github.com/BoogieCode/bwo-ui/tree/master/packages/core",

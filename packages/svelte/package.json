@@ -1,7 +1,7 @@
 {
   "name": "@bwo-ui/svelte",
-  "version": "0.6.0",
-  "description": "70+ motion-first Svelte 5 components and actions, owned end-to-end. Same primitives as @bwo-ui/{react,vue} — written in-house, no headless library underneath. GSAP-backed motion (tilt, ripple, pulse, scrollReveal, scrollMask, scrollVelocity, parallax, splitReveal, marquee) exposed as Svelte actions you compose with use:. Zero runtime dependencies (GSAP is a peer). Live demos at https://ui.boogie.ro.",
+  "version": "0.7.0",
+  "description": "100+ motion-first Svelte 5 components and actions, owned end-to-end. Same primitives as @bwo-ui/{react,vue} — written in-house, no headless library underneath. GSAP-backed motion (tilt, ripple, pulse, circleReveal, scrollReveal, scrollMask, scrollVelocity, parallax, splitReveal, textDecode, confetti, shake) exposed as Svelte actions you compose with use:. Zero runtime dependencies (GSAP is a peer). Live demos at https://ui.boogie.ro.",
   "license": "MIT",
   "author": "BOOGIE WOOGIE S.R.L. <contact@boogie.ro>",
   "homepage": "https://github.com/BoogieCode/bwo-ui/tree/master/packages/svelte",

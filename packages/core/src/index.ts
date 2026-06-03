@@ -77,3 +77,12 @@ export type {
   CircleRevealMode,
   CircleRevealOrigin,
 } from './effects/circle-reveal';
+
+export { createTextDecode } from './effects/text-decode';
+export type { TextDecodeOptions } from './effects/text-decode';
+
+export { createConfetti } from './effects/confetti';
+export type { ConfettiOptions } from './effects/confetti';
+
+export { createShake } from './effects/shake';
+export type { ShakeOptions } from './effects/shake';
