@@ -1,0 +1,12 @@
+{
+  "name": "bwo",
+  "description": "Install Beautiful Web Objects (@bwo-ui) — a motion-first React / Vue / Svelte component kit shipped via shadcn-style copy-paste. 100+ UI primitives and 35+ GSAP-backed motion effects, source copied into your repo with no runtime dependency.",
+  "version": "0.1.0",
+  "author": {
+    "name": "BOOGIE WOOGIE S.R.L.",
+    "email": "boogieplaydeveloper@gmail.com"
+  },
+  "homepage": "https://ui.boogie.ro",
+  "repository": "https://github.com/BoogieCode/bwo-ui",
+  "license": "MIT"
+}

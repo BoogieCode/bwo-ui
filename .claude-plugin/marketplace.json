@@ -1,0 +1,29 @@
+{
+  "name": "bwo-ui",
+  "description": "Claude Code plugins for Beautiful Web Objects (@bwo-ui) — a motion-first React / Vue / Svelte component kit.",
+  "owner": {
+    "name": "BOOGIE WOOGIE S.R.L.",
+    "email": "boogieplaydeveloper@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "bwo",
+      "source": "./claude-plugin",
+      "description": "Install Beautiful Web Objects components into your project via natural-language requests. Wraps @bwo-ui/cli with catalogue awareness and intent matching.",
+      "category": "ui",
+      "tags": [
+        "ui",
+        "components",
+        "design-system",
+        "motion",
+        "gsap",
+        "react",
+        "vue",
+        "svelte",
+        "shadcn-style"
+      ],
+      "homepage": "https://ui.boogie.ro",
+      "license": "MIT"
+    }
+  ]
+}
