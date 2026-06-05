@@ -11,12 +11,32 @@
         "utils.ts"
       ]
     },
+    "AnimatedBeam.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "AnimatedGradientText.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "AppShell.tsx": {
       "deps": [
         "utils.ts"
       ]
     },
     "AspectRatio.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "AuroraBackground.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "AuroraText.tsx": {
       "deps": [
         "utils.ts"
       ]
@@ -36,12 +56,22 @@
         "utils.ts"
       ]
     },
+    "BentoGrid.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "Blur.tsx": {
       "deps": [
         "use-motion.ts"
       ]
     },
     "BootScreen.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "BorderBeam.tsx": {
       "deps": [
         "utils.ts"
       ]
@@ -120,6 +150,11 @@
         "utils.ts"
       ]
     },
+    "CompareSlider.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "Confetti.tsx": {
       "deps": [
         "utils.ts"
@@ -154,6 +189,11 @@
         "internal/date.ts"
       ]
     },
+    "DeviceMockup.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "Dialog.tsx": {
       "deps": [
         "internal/portal.tsx",
@@ -165,7 +205,17 @@
         "utils.ts"
       ]
     },
+    "Dock.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "DotLoader.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "DotPattern.tsx": {
       "deps": [
         "utils.ts"
       ]
@@ -183,6 +233,11 @@
     "FileUpload.tsx": {
       "deps": [
         "utils.ts"
+      ]
+    },
+    "FlipCard.tsx": {
+      "deps": [
+        "use-motion.ts"
       ]
     },
     "FlipList.tsx": {
@@ -209,6 +264,11 @@
       ]
     },
     "Grid.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "GridPattern.tsx": {
       "deps": [
         "utils.ts"
       ]
@@ -298,6 +358,7 @@
         "Badge.tsx",
         "Card.tsx",
         "AppShell.tsx",
+        "Sidebar.tsx",
         "Motion.tsx",
         "Avatar.tsx",
         "Skeleton.tsx",
@@ -313,6 +374,8 @@
         "Accordion.tsx",
         "Breadcrumb.tsx",
         "Pagination.tsx",
+        "PageHeader.tsx",
+        "Toolbar.tsx",
         "Stepper.tsx",
         "Sheet.tsx",
         "DropdownMenu.tsx",
@@ -328,7 +391,30 @@
         "BottomNavigation.tsx",
         "Carousel.tsx",
         "NumberInput.tsx",
-        "Rate.tsx"
+        "Rate.tsx",
+        "AuroraBackground.tsx",
+        "FlipCard.tsx",
+        "NumberTicker.tsx",
+        "BentoGrid.tsx",
+        "CompareSlider.tsx",
+        "GridPattern.tsx",
+        "DotPattern.tsx",
+        "ShimmerButton.tsx",
+        "Lightbox.tsx",
+        "BorderBeam.tsx",
+        "Meteors.tsx",
+        "Particles.tsx",
+        "RetroGrid.tsx",
+        "WordRotate.tsx",
+        "OrbitingCircles.tsx",
+        "AnimatedBeam.tsx",
+        "MagicCard.tsx",
+        "AnimatedGradientText.tsx",
+        "AuroraText.tsx",
+        "Dock.tsx",
+        "TextReveal.tsx",
+        "NeonGradientCard.tsx",
+        "DeviceMockup.tsx"
       ]
     },
     "Input.tsx": {
@@ -375,6 +461,19 @@
         "utils.ts"
       ]
     },
+    "Lightbox.tsx": {
+      "deps": [
+        "internal/portal.tsx",
+        "internal/use-controllable.ts",
+        "internal/scroll-lock.ts",
+        "utils.ts"
+      ]
+    },
+    "MagicCard.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "Magnetic.tsx": {
       "deps": [
         "use-motion.ts"
@@ -393,12 +492,37 @@
         "utils.ts"
       ]
     },
+    "Meteors.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "Motion.tsx": {
       "deps": [
         "utils.ts"
       ]
     },
+    "NeonGradientCard.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "NumberInput.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "NumberTicker.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "OrbitingCircles.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "PageHeader.tsx": {
       "deps": [
         "utils.ts"
       ]
@@ -414,6 +538,11 @@
       ]
     },
     "Parallax.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
+    "Particles.tsx": {
       "deps": [
         "use-motion.ts"
       ]
@@ -463,6 +592,11 @@
     "Rate.tsx": {
       "deps": [
         "internal/use-controllable.ts",
+        "utils.ts"
+      ]
+    },
+    "RetroGrid.tsx": {
+      "deps": [
         "utils.ts"
       ]
     },
@@ -541,6 +675,16 @@
         "internal/use-dismiss.ts",
         "internal/use-focus-trap.ts",
         "internal/scroll-lock.ts",
+        "utils.ts"
+      ]
+    },
+    "ShimmerButton.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
+    "Sidebar.tsx": {
+      "deps": [
         "utils.ts"
       ]
     },
@@ -628,6 +772,11 @@
         "use-motion.ts"
       ]
     },
+    "TextReveal.tsx": {
+      "deps": [
+        "use-motion.ts"
+      ]
+    },
     "TextShimmer.tsx": {
       "deps": [
         "utils.ts"
@@ -656,6 +805,11 @@
         "utils.ts"
       ]
     },
+    "Toolbar.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
+    },
     "Tooltip.tsx": {
       "deps": [
         "internal/floating.ts",
@@ -678,6 +832,11 @@
     },
     "VisuallyHidden.tsx": {
       "deps": []
+    },
+    "WordRotate.tsx": {
+      "deps": [
+        "utils.ts"
+      ]
     }
   },
   "components": {
@@ -689,6 +848,14 @@
       "file": "Alert.tsx",
       "name": "Alert"
     },
+    "animated-beam": {
+      "file": "AnimatedBeam.tsx",
+      "name": "AnimatedBeam"
+    },
+    "animated-gradient-text": {
+      "file": "AnimatedGradientText.tsx",
+      "name": "AnimatedGradientText"
+    },
     "app-shell": {
       "file": "AppShell.tsx",
       "name": "AppShell"
@@ -696,6 +863,14 @@
     "aspect-ratio": {
       "file": "AspectRatio.tsx",
       "name": "AspectRatio"
+    },
+    "aurora-background": {
+      "file": "AuroraBackground.tsx",
+      "name": "AuroraBackground"
+    },
+    "aurora-text": {
+      "file": "AuroraText.tsx",
+      "name": "AuroraText"
     },
     "avatar": {
       "file": "Avatar.tsx",
@@ -709,6 +884,10 @@
       "file": "Banner.tsx",
       "name": "Banner"
     },
+    "bento-grid": {
+      "file": "BentoGrid.tsx",
+      "name": "BentoGrid"
+    },
     "blur": {
       "file": "Blur.tsx",
       "name": "Blur"
@@ -716,6 +895,10 @@
     "boot-screen": {
       "file": "BootScreen.tsx",
       "name": "BootScreen"
+    },
+    "border-beam": {
+      "file": "BorderBeam.tsx",
+      "name": "BorderBeam"
     },
     "bottom-navigation": {
       "file": "BottomNavigation.tsx",
@@ -773,6 +956,10 @@
       "file": "Command.tsx",
       "name": "Command"
     },
+    "compare-slider": {
+      "file": "CompareSlider.tsx",
+      "name": "CompareSlider"
+    },
     "confetti": {
       "file": "Confetti.tsx",
       "name": "Confetti"
@@ -797,13 +984,25 @@
       "file": "DatePicker.tsx",
       "name": "DatePicker"
     },
+    "device-mockup": {
+      "file": "DeviceMockup.tsx",
+      "name": "DeviceMockup"
+    },
     "dialog": {
       "file": "Dialog.tsx",
       "name": "Dialog"
     },
+    "dock": {
+      "file": "Dock.tsx",
+      "name": "Dock"
+    },
     "dot-loader": {
       "file": "DotLoader.tsx",
       "name": "DotLoader"
+    },
+    "dot-pattern": {
+      "file": "DotPattern.tsx",
+      "name": "DotPattern"
     },
     "dropdown-menu": {
       "file": "DropdownMenu.tsx",
@@ -816,6 +1015,10 @@
     "file-upload": {
       "file": "FileUpload.tsx",
       "name": "FileUpload"
+    },
+    "flip-card": {
+      "file": "FlipCard.tsx",
+      "name": "FlipCard"
     },
     "flip-list": {
       "file": "FlipList.tsx",
@@ -841,6 +1044,10 @@
       "file": "Grid.tsx",
       "name": "Grid"
     },
+    "grid-pattern": {
+      "file": "GridPattern.tsx",
+      "name": "GridPattern"
+    },
     "hover-card": {
       "file": "HoverCard.tsx",
       "name": "HoverCard"
@@ -861,6 +1068,14 @@
       "file": "Lean.tsx",
       "name": "Lean"
     },
+    "lightbox": {
+      "file": "Lightbox.tsx",
+      "name": "Lightbox"
+    },
+    "magic-card": {
+      "file": "MagicCard.tsx",
+      "name": "MagicCard"
+    },
     "magnetic": {
       "file": "Magnetic.tsx",
       "name": "Magnetic"
@@ -877,13 +1092,33 @@
       "file": "MediaZoom.tsx",
       "name": "MediaZoom"
     },
+    "meteors": {
+      "file": "Meteors.tsx",
+      "name": "Meteors"
+    },
     "motion": {
       "file": "Motion.tsx",
       "name": "Motion"
     },
+    "neon-gradient-card": {
+      "file": "NeonGradientCard.tsx",
+      "name": "NeonGradientCard"
+    },
     "number-input": {
       "file": "NumberInput.tsx",
       "name": "NumberInput"
+    },
+    "number-ticker": {
+      "file": "NumberTicker.tsx",
+      "name": "NumberTicker"
+    },
+    "orbiting-circles": {
+      "file": "OrbitingCircles.tsx",
+      "name": "OrbitingCircles"
+    },
+    "page-header": {
+      "file": "PageHeader.tsx",
+      "name": "PageHeader"
     },
     "page-iris": {
       "file": "PageIris.tsx",
@@ -896,6 +1131,10 @@
     "parallax": {
       "file": "Parallax.tsx",
       "name": "Parallax"
+    },
+    "particles": {
+      "file": "Particles.tsx",
+      "name": "Particles"
     },
     "password-input": {
       "file": "PasswordInput.tsx",
@@ -932,6 +1171,10 @@
     "rate": {
       "file": "Rate.tsx",
       "name": "Rate"
+    },
+    "retro-grid": {
+      "file": "RetroGrid.tsx",
+      "name": "RetroGrid"
     },
     "reveal": {
       "file": "Reveal.tsx",
@@ -988,6 +1231,14 @@
     "sheet": {
       "file": "Sheet.tsx",
       "name": "Sheet"
+    },
+    "shimmer-button": {
+      "file": "ShimmerButton.tsx",
+      "name": "ShimmerButton"
+    },
+    "sidebar": {
+      "file": "Sidebar.tsx",
+      "name": "Sidebar"
     },
     "skeleton": {
       "file": "Skeleton.tsx",
@@ -1053,6 +1304,10 @@
       "file": "TextGlitch.tsx",
       "name": "TextGlitch"
     },
+    "text-reveal": {
+      "file": "TextReveal.tsx",
+      "name": "TextReveal"
+    },
     "text-shimmer": {
       "file": "TextShimmer.tsx",
       "name": "TextShimmer"
@@ -1073,6 +1328,10 @@
       "file": "Toast.tsx",
       "name": "Toast"
     },
+    "toolbar": {
+      "file": "Toolbar.tsx",
+      "name": "Toolbar"
+    },
     "tooltip": {
       "file": "Tooltip.tsx",
       "name": "Tooltip"
@@ -1084,6 +1343,10 @@
     "visually-hidden": {
       "file": "VisuallyHidden.tsx",
       "name": "VisuallyHidden"
+    },
+    "word-rotate": {
+      "file": "WordRotate.tsx",
+      "name": "WordRotate"
     }
   }
 }

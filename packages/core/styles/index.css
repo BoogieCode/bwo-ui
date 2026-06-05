@@ -111,6 +111,23 @@
   --bwo-step-4:  clamp(2.07rem, 1.70rem + 1.85vw, 2.59rem);
   --bwo-step-5:  clamp(2.49rem, 1.95rem + 2.70vw, 3.24rem);
   --bwo-step-6:  clamp(2.99rem, 2.20rem + 3.95vw, 4.05rem);
+
+  /* Sidebar / app-layout tokens. Declared here (inheritable) and only CONSUMED
+     by .bwo-sidebar* — never re-declared on those elements — so a consumer can
+     re-theme the whole sidebar (e.g. a dark admin rail) by overriding these
+     INLINE on the .bwo wrapper. (An element that re-declares its own custom
+     property would shadow an ancestor's inline override; consuming-only avoids
+     that. Default to the semantic surface so it themes with the system.) */
+  --bwo-sidebar-bg: var(--bwo-surface);
+  --bwo-sidebar-fg: var(--bwo-text);
+  --bwo-sidebar-muted: var(--bwo-text-muted);
+  --bwo-sidebar-border: var(--bwo-border);
+  --bwo-sidebar-hover-bg: var(--bwo-surface-muted);
+  --bwo-sidebar-active-bg: var(--bwo-accent);
+  --bwo-sidebar-active-fg: var(--bwo-accent-contrast);
+  --bwo-sidebar-width: 248px;
+  --bwo-sidebar-width-collapsed: 68px;
+  --bwo-sidebar-breakpoint: 960px;
 }
 
 /* Per-instance radius switcher. Set data-radius on any component (or any
@@ -1830,6 +1847,285 @@
   padding-bottom: 1px;
 }
 :root.boo-dark .bwo-brandmark { color: var(--bwo-white); }
+
+/* ─── Sidebar + 2-column app layout ──────────────────────────────────────────
+   Consumes the --bwo-sidebar-* tokens (declared in the token block) so the rail
+   re-themes from a single inline override on the .bwo wrapper. */
+
+.bwo-sidebar-layout {
+  display: grid;
+  grid-template-columns: var(--bwo-sidebar-width) minmax(0, 1fr);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+.bwo-sidebar-layout[data-collapsed] {
+  grid-template-columns: var(--bwo-sidebar-width-collapsed) minmax(0, 1fr);
+}
+.bwo-sidebar-aside {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  background: var(--bwo-sidebar-bg);
+  color: var(--bwo-sidebar-fg);
+  border-right: 1px solid var(--bwo-sidebar-border);
+  z-index: 40;
+}
+.bwo-sidebar-aside::-webkit-scrollbar { width: 3px; }
+.bwo-sidebar-aside::-webkit-scrollbar-thumb { background: var(--bwo-sidebar-border); border-radius: 4px; }
+.bwo-sidebar-main { min-width: 0; }
+.bwo-sidebar-scrim { display: none; }
+
+.bwo-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 18px 12px 14px;
+  gap: 4px;
+}
+.bwo-sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px 16px;
+  border-bottom: 1px solid var(--bwo-sidebar-border);
+  margin-bottom: 10px;
+  min-height: 30px;
+}
+.bwo-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.bwo-sidebar-section { display: contents; }
+.bwo-sidebar-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, var(--bwo-sidebar-muted) 85%, transparent);
+  padding: 14px 12px 6px;
+}
+.bwo-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--bwo-radius-current);
+  text-decoration: none;
+  color: color-mix(in srgb, var(--bwo-sidebar-fg) 72%, transparent);
+  font-family: var(--bwo-font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.bwo-sidebar-item:hover { background: var(--bwo-sidebar-hover-bg); color: var(--bwo-sidebar-fg); }
+.bwo-sidebar-item[data-active] {
+  background: var(--bwo-sidebar-active-bg);
+  color: var(--bwo-sidebar-active-fg);
+}
+.bwo-sidebar-item[data-active] .bwo-sidebar-item-desc { color: color-mix(in srgb, var(--bwo-sidebar-active-fg) 75%, transparent); }
+.bwo-sidebar-item[data-disabled] { opacity: 0.4; pointer-events: none; }
+.bwo-sidebar-item:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--bwo-focus-ring); }
+.bwo-sidebar-item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  flex-shrink: 0;
+}
+.bwo-sidebar-item-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.bwo-sidebar-item-label { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bwo-sidebar-item-desc {
+  font-size: 11px;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--bwo-sidebar-muted) 80%, transparent);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bwo-sidebar-item-badge {
+  margin-left: auto;
+  flex-shrink: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--bwo-sidebar-active-bg);
+  color: var(--bwo-sidebar-active-fg);
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.bwo-sidebar-footer {
+  margin-top: auto;
+  padding: 12px 8px 4px;
+  border-top: 1px solid var(--bwo-sidebar-border);
+}
+
+/* Collapsed icon-rail: hide text, center icons, hover-tooltip via title attr. */
+.bwo-sidebar-layout[data-collapsed] .bwo-sidebar-item-meta,
+.bwo-sidebar-layout[data-collapsed] .bwo-sidebar-item-badge,
+.bwo-sidebar-layout[data-collapsed] .bwo-sidebar-section-label,
+.bwo-sidebar-layout[data-collapsed] .bwo-sidebar-header .bwo-sidebar-header-text {
+  display: none;
+}
+.bwo-sidebar-layout[data-collapsed] .bwo-sidebar-item { justify-content: center; padding-left: 0; padding-right: 0; }
+
+.bwo-sidebar-trigger,
+.bwo-sidebar-collapse {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--bwo-radius-current);
+  border: 1px solid var(--bwo-border);
+  background: var(--bwo-surface);
+  color: var(--bwo-text);
+  cursor: pointer;
+  transition: var(--bwo-transition);
+}
+.bwo-sidebar-trigger { display: none; }
+.bwo-sidebar-trigger:hover,
+.bwo-sidebar-collapse:hover { background: var(--bwo-surface-muted); }
+
+/* Off-canvas drawer under the breakpoint. */
+@media (max-width: 960px) {
+  .bwo-sidebar-layout,
+  .bwo-sidebar-layout[data-collapsed] { grid-template-columns: minmax(0, 1fr); }
+  .bwo-sidebar-aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--bwo-sidebar-width);
+    transform: translateX(-100%);
+    transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .bwo-sidebar-layout[data-mobile-open] .bwo-sidebar-aside { transform: translateX(0); box-shadow: var(--bwo-shadow-lg); }
+  .bwo-sidebar-layout[data-mobile-open] .bwo-sidebar-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 39;
+    border: none;
+    padding: 0;
+    background: rgba(10, 10, 10, 0.45);
+    cursor: pointer;
+  }
+  .bwo-sidebar-trigger { display: inline-flex; }
+  /* The rail never sits collapsed inside the mobile drawer. */
+  .bwo-sidebar-layout[data-collapsed] .bwo-sidebar-item-meta,
+  .bwo-sidebar-layout[data-collapsed] .bwo-sidebar-section-label { display: revert; }
+  .bwo-sidebar-layout[data-collapsed] .bwo-sidebar-item { justify-content: flex-start; padding-left: 12px; padding-right: 12px; }
+}
+
+/* ─── PageHeader ─────────────────────────────────────────────────────────── */
+
+.bwo-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.bwo-page-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.bwo-page-header-leading { flex-shrink: 0; }
+.bwo-page-header-titles { min-width: 0; flex: 1 1 auto; }
+.bwo-page-header-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--bwo-accent);
+  margin-bottom: 6px;
+}
+.bwo-page-header-title {
+  font-family: var(--bwo-font-heading);
+  font-size: var(--bwo-step-4);
+  font-weight: var(--bwo-font-weight-heading);
+  letter-spacing: var(--bwo-tracking-tight);
+  line-height: 1.1;
+  margin: 0;
+  color: var(--bwo-text);
+}
+.bwo-page-header-subtitle {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--bwo-text-muted);
+  max-width: 68ch;
+}
+.bwo-page-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+/* ─── Toolbar ────────────────────────────────────────────────────────────── */
+
+.bwo-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.bwo-toolbar-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.bwo-toolbar-spacer { flex: 1 1 auto; }
+.bwo-toolbar-search {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: 0 1 320px;
+  min-width: 180px;
+}
+.bwo-toolbar-search-icon {
+  position: absolute;
+  left: 13px;
+  display: inline-flex;
+  pointer-events: none;
+  color: var(--bwo-text-muted);
+}
+.bwo-toolbar-search-input { padding-left: 38px; }
+.bwo-toolbar-selection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 8px 14px;
+  margin-bottom: 16px;
+  border-radius: var(--bwo-radius-current);
+  background: var(--bwo-accent-soft);
+  border: 1px solid color-mix(in srgb, var(--bwo-accent) 30%, transparent);
+}
+.bwo-toolbar-selection-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bwo-text);
+}
 
 /* ─── Card composition (Media / Eyebrow / Name / Caption) ────────────────── */
 

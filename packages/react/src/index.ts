@@ -145,6 +145,28 @@ export {
   type AppShellAlign,
   type BrandMarkProps,
 } from './AppShell';
+export {
+  SidebarLayout,
+  Sidebar,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarNav,
+  SidebarNavSection,
+  SidebarNavItem,
+  SidebarTrigger,
+  SidebarCollapseToggle,
+  useSidebar,
+  type SidebarLayoutProps,
+  type SidebarProps,
+  type SidebarHeaderProps,
+  type SidebarFooterProps,
+  type SidebarNavProps,
+  type SidebarNavSectionProps,
+  type SidebarNavItemProps,
+  type SidebarNavItemRenderProps,
+  type SidebarTriggerProps,
+  type SidebarCollapseToggleProps,
+} from './Sidebar';
 export { Spin, Pulse, type SpinProps, type PulseProps } from './Motion';
 export {
   Avatar,
@@ -262,6 +284,19 @@ export {
   type BreadcrumbSeparatorProps,
 } from './Breadcrumb';
 export { Pagination, type PaginationProps } from './Pagination';
+export { PageHeader, type PageHeaderProps } from './PageHeader';
+export {
+  Toolbar,
+  ToolbarGroup,
+  ToolbarSpacer,
+  ToolbarSearch,
+  ToolbarSelection,
+  type ToolbarProps,
+  type ToolbarGroupProps,
+  type ToolbarSpacerProps,
+  type ToolbarSearchProps,
+  type ToolbarSelectionProps,
+} from './Toolbar';
 
 // Multi-step forms
 export {
@@ -407,10 +442,47 @@ export {
   type RateSize,
 } from './Rate';
 
+// Template visuals (2026-06-05)
+export { AuroraBackground, type AuroraBackgroundProps } from './AuroraBackground';
+export { FlipCard, type FlipCardProps } from './FlipCard';
+export { NumberTicker, type NumberTickerProps } from './NumberTicker';
+export { BentoGrid, BentoCard, type BentoGridProps, type BentoCardProps } from './BentoGrid';
+export { CompareSlider, type CompareSliderProps } from './CompareSlider';
+export { GridPattern, type GridPatternProps } from './GridPattern';
+export { DotPattern, type DotPatternProps } from './DotPattern';
+export { ShimmerButton, type ShimmerButtonProps } from './ShimmerButton';
+export { Lightbox, type LightboxProps, type LightboxImage } from './Lightbox';
+
+// Template visuals — wave 2 (2026-06-05)
+export { BorderBeam, type BorderBeamProps } from './BorderBeam';
+export { Meteors, type MeteorsProps } from './Meteors';
+export { Particles, type ParticlesProps } from './Particles';
+export { RetroGrid, type RetroGridProps } from './RetroGrid';
+export { WordRotate, type WordRotateProps } from './WordRotate';
+export { OrbitingCircles, type OrbitingCirclesProps } from './OrbitingCircles';
+export { AnimatedBeam, type AnimatedBeamProps } from './AnimatedBeam';
+export { MagicCard, type MagicCardProps } from './MagicCard';
+export { AnimatedGradientText, type AnimatedGradientTextProps } from './AnimatedGradientText';
+export { AuroraText, type AuroraTextProps } from './AuroraText';
+export { Dock, DockIcon, type DockProps, type DockIconProps } from './Dock';
+export { TextReveal, type TextRevealProps } from './TextReveal';
+export { NeonGradientCard, type NeonGradientCardProps } from './NeonGradientCard';
+export { DeviceMockup, type DeviceMockupProps, type DeviceVariant } from './DeviceMockup';
+
 // Re-export core types
 export type {
   MotionInstance,
   Target,
+  AuroraOptions,
+  ShineOptions,
+  ShineTrigger,
+  FloatOptions,
+  FlipCardOptions,
+  DrawSvgOptions,
+  NumberTickerOptions,
+  KenBurnsOptions,
+  ParticlesOptions,
+  TextRevealOptions,
   SplitRevealOptions,
   SplitRevealType,
   MagneticOptions,

@@ -1,5 +1,12 @@
 # @bwo-ui/svelte
 
+## 0.7.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @bwo-ui/core@0.7.1
+
 ## 0.5.0
 
 ### Minor Changes

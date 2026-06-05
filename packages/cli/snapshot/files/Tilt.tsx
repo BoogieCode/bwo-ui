@@ -24,6 +24,9 @@ export function Tilt({ children, as, className, style, ...options }: TiltProps) 
       options.ease,
       options.reverse,
       options.glareSelector,
+      options.glare,
+      options.glareColor,
+      options.maxGlare,
     ],
   );
 

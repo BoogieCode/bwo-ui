@@ -16,6 +16,13 @@ export interface MarqueeOptions {
   draggable?: boolean;
   /** Pause when the cursor is over the strip. Default: `true`. */
   pauseOnHover?: boolean;
+  /**
+   * Fade the marquee edges with a gradient mask. `true` uses a sensible
+   * default width (48px); a number sets the fade width in pixels. The mask
+   * axis follows the marquee direction (horizontal vs. vertical).
+   * Default: `false`.
+   */
+  fade?: boolean | number;
   /** Selector for items inside the container. Default: `':scope > *'`. */
   itemSelector?: string;
 }
@@ -25,8 +32,11 @@ const DEFAULTS = {
   direction: 'left' as MarqueeDirection,
   draggable: true,
   pauseOnHover: true,
+  fade: false as boolean | number,
   itemSelector: ':scope > *',
 };
+
+const DEFAULT_FADE_PX = 48;
 
 /**
  * Builds a seamless looping marquee.
@@ -116,6 +126,19 @@ export function createMarquee(target: Target, options: MarqueeOptions = {}): Mot
     container.addEventListener('pointerleave', onLeave);
   }
 
+  // Edge-fade gradient mask. Axis follows the marquee direction.
+  let prevMask: string | undefined;
+  let prevWebkitMask: string | undefined;
+  if (opts.fade) {
+    const fadeWidth = typeof opts.fade === 'number' ? `${opts.fade}px` : `${DEFAULT_FADE_PX}px`;
+    const gradientDir = horizontal ? 'to right' : 'to bottom';
+    const maskImage = `linear-gradient(${gradientDir}, transparent, #000 ${fadeWidth}, #000 calc(100% - ${fadeWidth}), transparent)`;
+    prevMask = container.style.maskImage;
+    prevWebkitMask = container.style.webkitMaskImage;
+    container.style.maskImage = maskImage;
+    container.style.webkitMaskImage = maskImage;
+  }
+
   // Touch InertiaPlugin so tree-shakers don't drop it when only this effect is used.
   void InertiaPlugin;
 
@@ -126,6 +149,10 @@ export function createMarquee(target: Target, options: MarqueeOptions = {}): Mot
       if (opts.pauseOnHover) {
         container.removeEventListener('pointerenter', onEnter);
         container.removeEventListener('pointerleave', onLeave);
+      }
+      if (opts.fade) {
+        container.style.maskImage = prevMask ?? '';
+        container.style.webkitMaskImage = prevWebkitMask ?? '';
       }
       // Move original items back out so the user's DOM is restored.
       while (track.firstChild) container.appendChild(track.firstChild);

@@ -16,7 +16,7 @@ export function Marquee({ children, as, className, style, ...options }: MarqueeP
   const Tag = (as ?? 'div') as ElementType;
   const ref = useMotion<HTMLElement>(
     (el) => createMarquee(el, options),
-    [options.speed, options.direction, options.draggable, options.pauseOnHover],
+    [options.speed, options.direction, options.draggable, options.pauseOnHover, options.fade],
   );
 
   return (

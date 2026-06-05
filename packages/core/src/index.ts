@@ -86,3 +86,32 @@ export type { ConfettiOptions } from './effects/confetti';
 
 export { createShake } from './effects/shake';
 export type { ShakeOptions } from './effects/shake';
+
+// Template visuals (2026-06-05)
+export { createAurora } from './effects/aurora';
+export type { AuroraOptions } from './effects/aurora';
+
+export { createShine } from './effects/shine';
+export type { ShineOptions, ShineTrigger } from './effects/shine';
+
+export { createFloat } from './effects/float';
+export type { FloatOptions } from './effects/float';
+
+export { createFlipCard } from './effects/flip-card';
+export type { FlipCardOptions } from './effects/flip-card';
+
+export { createDrawSvg } from './effects/draw-svg';
+export type { DrawSvgOptions } from './effects/draw-svg';
+
+export { createNumberTicker } from './effects/number-ticker';
+export type { NumberTickerOptions } from './effects/number-ticker';
+
+export { createKenBurns } from './effects/ken-burns';
+export type { KenBurnsOptions } from './effects/ken-burns';
+
+// Template visuals — wave 2 (2026-06-05)
+export { createParticles } from './effects/particles';
+export type { ParticlesOptions } from './effects/particles';
+
+export { createTextReveal } from './effects/text-reveal';
+export type { TextRevealOptions } from './effects/text-reveal';

@@ -19,8 +19,25 @@ export interface ConfettiOptions {
   size?: [number, number];
   /** Palette to randomise from. */
   colors?: string[];
-  /** Optional origin offset within the container (in px). Default: container centre. */
+  /**
+   * Reference element the burst ORIGINATES from — its centre (in viewport
+   * coordinates) becomes the launch point. Lets you trigger from a button but
+   * launch from a hero/section/anywhere. Defaults to the `target` element.
+   */
+  originElement?: Target;
+  /**
+   * Explicit launch point. In `portal` mode (default) these are VIEWPORT
+   * coordinates; in non-portal mode they are offsets within the target box.
+   * Overrides `originElement`.
+   */
   origin?: { x: number; y: number };
+  /**
+   * Render particles in a fixed, full-viewport layer appended to `<body>` so
+   * they fly freely and are never clipped by (or trapped under) a small trigger
+   * element. The old behaviour — a layer absolutely positioned inside the
+   * target — is `portal: false`. Default: `true`.
+   */
+  portal?: boolean;
   /** Z-index applied to the particle layer. Default: `9999`. */
   zIndex?: number;
 }
@@ -34,53 +51,82 @@ const DEFAULTS = {
   duration: 1.6,
   size: [6, 12] as [number, number],
   colors: ['#ff481f', '#ffc446', '#16a34a', '#0ea5e9', '#7463ff', '#ec4899'],
+  portal: true,
   zIndex: 9999,
 };
+
+const noop: MotionInstance = { destroy: () => {} };
 
 function rand(min: number, max: number): number {
   return min + Math.random() * (max - min);
 }
 
 /**
- * Fires a confetti burst at the given target (the target becomes the origin
- * container). The particles are absolutely positioned inside an injected layer
- * so they don't disrupt page layout. The instance fires once per `play()`.
+ * Fires a confetti burst. By default particles render in a fixed, full-viewport
+ * layer and launch from the centre of `originElement` (or the `target`), so a
+ * burst triggered by a small button still flies across the screen instead of
+ * being trapped under the button. Pass `portal: false` for the legacy
+ * inside-the-target behaviour. The instance fires once per creation.
  */
 export function createConfetti(
   target: Target,
   options: ConfettiOptions = {},
 ): MotionInstance {
-  if (!isBrowser()) return { destroy: () => {} };
-
-  const el = resolveTarget(target);
-  if (!el || !(el instanceof HTMLElement)) return { destroy: () => {} };
+  if (!isBrowser()) return noop;
 
   const opts = mergeOptions(DEFAULTS, options);
   if (opts.colors.length === 0) opts.colors = DEFAULTS.colors;
 
-  // Position the layer relative to the target.
-  const prev = getComputedStyle(el).position;
-  if (prev === 'static') el.style.position = 'relative';
-
-  const layer = document.createElement('div');
-  layer.setAttribute('aria-hidden', 'true');
-  layer.style.cssText = `
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: visible;
-    z-index: ${opts.zIndex};
-  `;
-  el.appendChild(layer);
-
-  const rect = el.getBoundingClientRect();
-  const ox = opts.origin?.x ?? rect.width / 2;
-  const oy = opts.origin?.y ?? rect.height / 2;
+  // The element the burst launches FROM (reference div, else the target).
+  const originEl =
+    (options.originElement ? resolveTarget(options.originElement) : null) ?? resolveTarget(target);
 
   const angleRad = (opts.angle * Math.PI) / 180;
   const spreadRad = (opts.spread * Math.PI) / 180;
   const minSize = opts.size[0];
   const maxSize = opts.size[1];
+
+  // ── set up the particle layer + resolve the launch point (ox, oy) ──────────
+  let layer: HTMLDivElement;
+  let ox: number;
+  let oy: number;
+  let restorePosition: (() => void) | null = null;
+
+  if (opts.portal) {
+    // Fixed, full-viewport layer on <body> — particles never get clipped.
+    layer = document.createElement('div');
+    layer.setAttribute('aria-hidden', 'true');
+    layer.style.cssText = `position: fixed; inset: 0; pointer-events: none; overflow: visible; z-index: ${opts.zIndex};`;
+    document.body.appendChild(layer);
+
+    if (opts.origin) {
+      ox = opts.origin.x;
+      oy = opts.origin.y;
+    } else if (originEl instanceof HTMLElement) {
+      const r = originEl.getBoundingClientRect();
+      ox = r.left + r.width / 2;
+      oy = r.top + r.height / 2;
+    } else {
+      ox = window.innerWidth / 2;
+      oy = window.innerHeight / 2;
+    }
+  } else {
+    // Legacy: layer absolutely positioned inside the origin element.
+    const el = originEl;
+    if (!(el instanceof HTMLElement)) return noop;
+    const prev = getComputedStyle(el).position;
+    if (prev === 'static') {
+      el.style.position = 'relative';
+      restorePosition = () => { el.style.position = ''; };
+    }
+    layer = document.createElement('div');
+    layer.setAttribute('aria-hidden', 'true');
+    layer.style.cssText = `position: absolute; inset: 0; pointer-events: none; overflow: visible; z-index: ${opts.zIndex};`;
+    el.appendChild(layer);
+    const rect = el.getBoundingClientRect();
+    ox = opts.origin?.x ?? rect.width / 2;
+    oy = opts.origin?.y ?? rect.height / 2;
+  }
 
   const tweens: gsap.core.Tween[] = [];
   const particles: HTMLElement[] = [];
@@ -129,7 +175,7 @@ export function createConfetti(
     if (cleaned) return;
     cleaned = true;
     layer.remove();
-    if (prev === 'static') el.style.position = '';
+    restorePosition?.();
   }, opts.duration * 1500);
 
   return {
@@ -140,7 +186,7 @@ export function createConfetti(
       particles.forEach((p) => p.remove());
       layer.remove();
       window.clearTimeout(cleanupTimer);
-      if (prev === 'static') el.style.position = '';
+      restorePosition?.();
     },
   };
 }

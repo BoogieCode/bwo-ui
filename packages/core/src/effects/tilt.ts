@@ -18,6 +18,21 @@ export interface TiltOptions {
   reverse?: boolean;
   /** Optional inner selector that receives a counter-tilt to feel "afloat". */
   glareSelector?: string;
+  /**
+   * Auto-inject a glare overlay with zero markup. Default: `false`. When `true`
+   * (and no `glareSelector` is given) an absolutely-positioned,
+   * `pointer-events:none` div with a soft highlight is appended to the target
+   * and driven exactly like the `glareSelector` path. An explicit
+   * `glareSelector` always wins over auto-injection.
+   *
+   * Requires `overflow:hidden` on the target so the highlight is clipped to its
+   * bounds — this is set automatically and restored on `destroy()`.
+   */
+  glare?: boolean;
+  /** Highlight color for the auto-injected glare. Default: `'rgba(255,255,255,0.25)'`. */
+  glareColor?: string;
+  /** Opacity ceiling (0-1) for the auto-injected glare. Default: `0.4`. */
+  maxGlare?: number;
 }
 
 const DEFAULTS = {
@@ -27,6 +42,9 @@ const DEFAULTS = {
   duration: 0.4,
   ease: 'power3.out',
   reverse: false,
+  glare: false,
+  glareColor: 'rgba(255,255,255,0.25)',
+  maxGlare: 0.4,
 };
 
 /**
@@ -53,9 +71,31 @@ export function createTilt(target: Target, options: TiltOptions = {}): MotionIns
   el.style.perspective = `${opts.perspective}px`;
   el.style.transformStyle = 'preserve-3d';
 
-  const glareEl = opts.glareSelector
+  // Explicit selector wins; otherwise auto-inject a zero-markup overlay.
+  let glareEl = opts.glareSelector
     ? el.querySelector<HTMLElement>(opts.glareSelector)
     : null;
+
+  // Track injected state so destroy() only removes what we created/changed.
+  let injectedGlareEl: HTMLElement | null = null;
+  let previousOverflow: string | null = null;
+
+  if (!glareEl && opts.glare) {
+    previousOverflow = el.style.overflow;
+    el.style.overflow = 'hidden';
+
+    injectedGlareEl = document.createElement('div');
+    injectedGlareEl.style.position = 'absolute';
+    injectedGlareEl.style.inset = '0';
+    injectedGlareEl.style.pointerEvents = 'none';
+    injectedGlareEl.style.opacity = '0';
+    injectedGlareEl.style.backgroundImage = `radial-gradient(circle at 50% 50%, ${opts.glareColor} 0%, transparent 60%)`;
+    injectedGlareEl.style.backgroundRepeat = 'no-repeat';
+    injectedGlareEl.style.backgroundSize = '200% 200%';
+    injectedGlareEl.style.backgroundPosition = '50% 50%';
+    el.appendChild(injectedGlareEl);
+    glareEl = injectedGlareEl;
+  }
 
   const quickRX = gsap.quickTo(el, 'rotationX', { duration: opts.duration, ease: opts.ease });
   const quickRY = gsap.quickTo(el, 'rotationY', { duration: opts.duration, ease: opts.ease });
@@ -80,11 +120,29 @@ export function createTilt(target: Target, options: TiltOptions = {}): MotionIns
     }
   };
 
-  const onEnter = () => quickScale(opts.scale);
+  const onEnter = () => {
+    quickScale(opts.scale);
+    if (injectedGlareEl) {
+      gsap.to(injectedGlareEl, {
+        opacity: opts.maxGlare,
+        duration: opts.duration,
+        ease: opts.ease,
+        overwrite: 'auto',
+      });
+    }
+  };
   const onLeave = () => {
     quickRX(0);
     quickRY(0);
     quickScale(1);
+    if (injectedGlareEl) {
+      gsap.to(injectedGlareEl, {
+        opacity: 0,
+        duration: opts.duration,
+        ease: opts.ease,
+        overwrite: 'auto',
+      });
+    }
   };
 
   el.addEventListener('pointerenter', onEnter);
@@ -99,6 +157,16 @@ export function createTilt(target: Target, options: TiltOptions = {}): MotionIns
       gsap.set(el, { clearProps: 'rotationX,rotationY,scale,transform' });
       el.style.perspective = previousPerspective;
       el.style.transformStyle = previousTransformStyle;
+      if (injectedGlareEl) {
+        gsap.killTweensOf(injectedGlareEl);
+        injectedGlareEl.remove();
+        injectedGlareEl = null;
+        if (previousOverflow !== null) el.style.overflow = previousOverflow;
+      } else if (glareEl) {
+        // User-provided glare element: stop the dangling backgroundPosition tween
+        // we kept firing in onMove so it doesn't keep animating after destroy.
+        gsap.killTweensOf(glareEl);
+      }
     },
   };
 }

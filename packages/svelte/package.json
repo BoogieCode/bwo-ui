@@ -1,6 +1,6 @@
 {
   "name": "@bwo-ui/svelte",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Svelte 4 / Svelte 5 adapter for the bwo-ui kit — 15 GSAP-backed motion actions (splitReveal, magnetic, marquee, flipList, parallax, scrambleText, magneticCursor, tilt, spotlight, scrollProgress, stagger, gradientText, ripple, blur, pin) you compose with use:, plus the class-based UI library (bwo-btn, bwo-input, bwo-card, bwo-badge, etc.) you apply directly to your Svelte markup — no wrapper components needed. Native Svelte stateful components (Dialog, Popover, Select, Combobox, etc.) are on the roadmap. Zero runtime dependencies (GSAP is a peer). Live demos at https://ui.boogie.ro.",
   "license": "MIT",
   "author": "BOOGIE WOOGIE S.R.L. <contact@boogie.ro>",

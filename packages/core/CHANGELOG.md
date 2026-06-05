@@ -1,5 +1,13 @@
 # @bwo-ui/core
 
+## 0.7.1
+
+### Patch Changes
+
+- Add admin/app dashboard primitives: **Sidebar** suite (`SidebarLayout`, `Sidebar`, `SidebarHeader`/`Nav`/`NavSection`/`NavItem`/`Footer`, `SidebarTrigger`, `SidebarCollapseToggle`, `useSidebar`) — a router-agnostic 2-column app frame with a collapsible icon-rail and a responsive off-canvas drawer; **PageHeader** (breadcrumb + eyebrow + title + subtitle + actions); and **Toolbar** (`Toolbar`, `ToolbarGroup`, `ToolbarSpacer`, `ToolbarSearch`, `ToolbarSelection`) for list/table screens with a contextual bulk-action bar.
+
+  New `--bwo-sidebar-*` tokens (bg/fg/muted/border/hover/active/width) are declared in the token block and only consumed by `.bwo-sidebar*`, so the whole rail re-themes from a single inline override on the `.bwo` wrapper without hitting the `:root, .bwo` cascade-shadow.
+
 ## 0.5.0
 
 ### Minor Changes
